@@ -387,3 +387,86 @@ blockquote cite { display: block; margin-top: 0.8rem; font-style: normal; font-s
   .hero-copy > *, .hero-photo { animation: none; }
   .badge { animation: none; }
 }
+
+/* ---------- Coursebook section ---------- */
+.book-section { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.book-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.book-visual { display: flex; justify-content: center; }
+.book-spine {
+  width: 190px; aspect-ratio: 3 / 4;
+  background: linear-gradient(160deg, var(--verde) 0%, var(--verde-deep) 100%);
+  border-radius: 6px 14px 14px 6px;
+  border-left: 10px solid var(--rosso);
+  box-shadow: 14px 14px 0 var(--verde-tint), 14px 14px 0 1px var(--line);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 1.4rem 1.2rem;
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+}
+.book-spine:hover { transform: rotate(0deg) scale(1.02); }
+.book-title-line {
+  font-family: var(--font-display); font-weight: 640; font-size: 1.5rem;
+  line-height: 1.15; color: var(--paper); letter-spacing: 0.04em;
+}
+.book-level {
+  font-family: var(--font-body); font-weight: 700; font-size: 0.85rem;
+  color: #F4C8BE; letter-spacing: 0.12em;
+}
+.book-grid h2 .accent-italic { font-style: italic; color: var(--verde); }
+.book-grid p { color: var(--muted); max-width: 560px; }
+.book-grid p + p { margin-top: 0.8rem; }
+.book-note {
+  border-left: 3px solid var(--rosso);
+  padding-left: 1rem;
+  font-size: 0.95rem;
+}
+.book-grid .btn { margin-top: 1.4rem; }
+
+@media (max-width: 760px) {
+  .book-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+  .book-spine { width: 160px; }
+}
+
+/* ---------- Mobile polish ---------- */
+@media (max-width: 480px) {
+  body { font-size: 1rem; }
+  .container { padding: 0 1.1rem; }
+
+  /* Hero: tighter, full-width CTAs with comfortable tap targets */
+  .hero { padding: 2.2rem 0 2.8rem; }
+  h1 { font-size: 2.05rem; }
+  .lead { font-size: 1.05rem; margin: 1rem 0 1.4rem; }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { text-align: center; padding: 0.95rem 1.4rem; }
+  .hero-trust { gap: 0.4rem 1rem; font-size: 0.85rem; }
+  .hero-photo img { box-shadow: 8px 8px 0 var(--verde-tint), 8px 8px 0 1px var(--line); }
+  .photo-caption { text-align: center; }
+
+  .section { padding: 2.6rem 0; }
+  h2 { font-size: 1.65rem; }
+  .section-intro { margin-bottom: 1.8rem; }
+
+  /* Cards & pricing: comfortable single column */
+  .card, .price-card { padding: 1.4rem 1.3rem; }
+  .price { font-size: 2rem; }
+  .currency-toggle { position: sticky; top: 64px; z-index: 5; background: var(--paper); padding: 0.5rem 0; }
+  .currency-btn { flex: 1; text-align: center; padding: 0.6rem 0.5rem; }
+
+  .badge { font-size: 0.7rem; }
+  .course-pricing-line { font-size: 1rem; }
+  .course-pricing-line .btn { width: 100%; text-align: center; }
+
+  .book-actions .btn-big { display: block; text-align: center; }
+  blockquote p { font-size: 1.02rem; }
+  .faq-item summary { font-size: 1.02rem; }
+
+  .footer-grid { gap: 1.3rem; }
+}
+
+/* Prevent any horizontal scroll on small screens */
+html, body { overflow-x: hidden; }
