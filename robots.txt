@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://REPLACE-WITH-YOUR-URL.github.io/italian-with-lucia/sitemap.xml
