@@ -9,7 +9,7 @@ Sito statico, pronto per GitHub Pages. Nessun framework, nessuna build: solo HTM
 | `index.html` | La pagina (testi, SEO, dati strutturati) |
 | `style.css` | Tutto lo stile |
 | `script.js` | Selettore valuta, menu mobile, animazioni |
-| `assets/` | Qui vanno le foto di Lucia |
+| `lucia-hero.jpg`, `lucia-square.jpg` | Le foto di Lucia (già ottimizzate) |
 | `robots.txt`, `sitemap.xml` | File per i motori di ricerca |
 
 ---
@@ -17,9 +17,7 @@ Sito statico, pronto per GitHub Pages. Nessun framework, nessuna build: solo HTM
 ## ✅ Da fare prima di pubblicare (checklist)
 
 ### 1. Foto di Lucia — ✅ GIÀ FATTO
-Le foto sono già dentro la cartella `assets/` di questo pacchetto (`lucia-hero.jpg` e `lucia-square.jpg`), già ritagliate e ottimizzate.
-
-**Nota su GitHub:** la cartella `assets` non esiste finché non la carichi tu — su GitHub le cartelle si creano caricando i file. Il modo più semplice: nella pagina del repository clicca **"Add file" → "Upload files"** e **trascina l'intera cartella del sito** (con dentro `assets/`) nella finestra: GitHub manterrà la struttura. In alternativa, per aggiungere un file dentro assets: **"Add file" → "Create new file"** e nel nome scrivi `assets/nomefile` — la barra `/` crea la cartella.
+Le foto (`lucia-hero.jpg` e `lucia-square.jpg`) sono direttamente nella cartella principale, accanto a `index.html`: **niente sottocartelle**. Quando carichi su GitHub, seleziona TUTTI i file insieme e trascinali — devono finire tutti allo stesso livello.
 
 ### 2. Video di presentazione — ✅ GIÀ FATTO
 Il video YouTube (`Bb2mI4j_BoE`) è già incorporato nella sezione "Meet Lucia".
