@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://https://gabryrko9.github.io/Italian-with-lucia/sitemap.xml
+Sitemap: https://gabryrko9.github.io/Italian-with-lucia/sitemap.xml
