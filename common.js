@@ -38,6 +38,32 @@
     return '<span class="dots" role="img" aria-label="' + b.used + " taken, " + b.booked + " booked, " + b.left + ' left">' + h + "</span>";
   };
 
+
+  /* Calendar file (.ics) so a student can put a lesson in their own calendar. */
+  App.ics = (o) => {
+    const z = (d) => new Date(d).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    const esc = (t) => String(t || "").replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/,/g, "\\,").replace(/;/g, "\\;");
+    const end = new Date(new Date(o.start).getTime() + o.minutes * 60000);
+    const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Italian with Lucia//EN", "CALSCALE:GREGORIAN", "BEGIN:VEVENT",
+      "UID:" + (o.uid || z(o.start)) + "@italianwithlucia", "DTSTAMP:" + z(new Date()), "DTSTART:" + z(o.start), "DTEND:" + z(end),
+      "SUMMARY:" + esc(o.title), "DESCRIPTION:" + esc(o.description), "LOCATION:" + esc(o.location),
+      "BEGIN:VALARM", "TRIGGER:-PT1H", "ACTION:DISPLAY", "DESCRIPTION:Italian lesson in one hour", "END:VALARM", "END:VEVENT", "END:VCALENDAR"];
+    return "data:text/calendar;charset=utf-8," + encodeURIComponent(lines.join("\r\n"));
+  };
+  App.icsFor = (l) => App.ics({
+    uid: l.id, start: l.starts_at, minutes: l.duration_min,
+    title: (l.kind === "trial" ? "Free trial: " : "") + "Italian lesson with Lucia",
+    description: l.mode === "online" ? "Online lesson. Lucia sends you the video link by email." : "In-person lesson in Prague. Lucia confirms the place by email.",
+    location: l.mode === "online" ? "Online" : "Prague"
+  });
+
+  /* Supabase client without a signed-in user, for the public booking page. */
+  App.anon = () => {
+    if (!P.url || !P.key || !window.supabase) return null;
+    return (App.sb = window.supabase.createClient(P.url, P.key, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false } }));
+  };
+  App.pragueToday = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague" }).format(new Date());
+
   let toastTimer;
   App.toast = (msg, bad) => {
     const t = $("toast");

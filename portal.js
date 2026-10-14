@@ -4,8 +4,8 @@
   const root = document.getElementById("view-app");
   const P = window.PORTAL || {};
 
-  const bookHref = P.booking || "mailto:" + A.LUCIA + "?subject=" + encodeURIComponent("Book my next lesson");
-  const bookAttrs = P.booking ? ' target="_blank" rel="noopener"' : "";
+  let info = { private_min: 60, horizon_days: 42 };
+  let lastLessons = [];
   const writeHref = (l) => "mailto:" + A.LUCIA + "?subject=" + encodeURIComponent("Lesson on " + A.day(l.starts_at) + " " + A.time(l.starts_at));
 
   async function render(user) {
@@ -29,7 +29,14 @@
     }
 
     const lessons = ls.data, packages = pk.data;
+    lastLessons = lessons;
     const now = Date.now();
+    const bi = await sb.rpc("booking_info");
+    if (bi.data) info = bi.data;
+    const credit = packages.reduce((n, p) => n + Math.max(A.balance(p, lessons).left, 0), 0);
+    const bookBtn = (cls) => credit > 0
+      ? '<button class="btn ' + (cls || "btn-ink") + '" data-open-book type="button">Book a lesson</button>'
+      : '<span class="note">You have no lessons left to book. <a href="mailto:' + A.LUCIA + '?subject=' + encodeURIComponent("New lesson package") + '"><b>Write to Lucia</b></a> for a new package.</span>';
     const upcoming = lessons.filter((l) => l.status === "scheduled" && new Date(l.starts_at).getTime() + l.duration_min * 60000 > now);
     const history = lessons.filter((l) => upcoming.indexOf(l) < 0).reverse();
     const first = esc((student.full_name || "").split(" ")[0]);
@@ -41,15 +48,17 @@
       let action = "";
       if (withCancel) {
         action = canCancel
-          ? '<button class="btn btn-quiet btn-sm" data-ask="' + l.id + '" type="button">Cancel lesson</button>'
+          ? (l.kind !== "group" ? '<button class="btn btn-quiet btn-sm" data-move="' + l.id + '" type="button">Move</button> ' : "") +
+            '<button class="btn btn-quiet btn-sm" data-ask="' + l.id + '" type="button">Cancel lesson</button>'
           : '<span class="pill pill-warn">Less than 24h away</span> <a href="' + writeHref(l) + '">Write to Lucia</a>';
       }
       return (
         '<article class="item" id="l-' + l.id + '"><div class="ln"><div>' +
         '<div class="l-when">' + when + "</div>" +
         '<div class="l-meta">' + [A.KIND[l.kind], A.MODE[l.mode], l.duration_min + " min", pkTitle(l.package_id)].filter(Boolean).map(esc).join(" · ") + "</div></div>" +
-        '<div class="btns">' + (withCancel ? action : '<span class="pill pill-' + l.status + '">' + (l.status === "scheduled" ? "Awaiting confirmation" : A.STATUS[l.status]) + "</span>") + "</div></div>" +
+        '<div class="btns">' + (withCancel ? '<a class="btn btn-quiet btn-sm" download="italian-lesson.ics" href="' + A.icsFor(l) + '">Calendar</a> ' + action : '<span class="pill pill-' + l.status + '">' + (l.status === "scheduled" ? "Awaiting confirmation" : A.STATUS[l.status]) + "</span>") + "</div></div>" +
         (l.notes ? '<div class="l-notes"><b>From Lucia</b>' + esc(l.notes) + "</div>" : "") +
+        (withCancel ? '<div class="picker picker-card" id="mv-' + l.id + '" hidden></div>' : "") +
         "</article>"
       );
     };
@@ -64,8 +73,8 @@
       h += '<div class="card-next"><div class="meta">Your next lesson</div><div class="when">' + A.dayLong(n.starts_at) + " at " + A.time(n.starts_at) + "</div>" +
         '<div class="meta">' + [A.KIND[n.kind], A.MODE[n.mode], n.duration_min + " min"].map(esc).join(" · ") + "</div></div>";
     } else {
-      h += '<div class="empty"><b>No lesson booked yet.</b><p style="margin-top:.4rem">Book your next lesson and it shows up here.</p>' +
-        '<p style="margin-top:1rem"><a class="btn btn-ink" href="' + esc(bookHref) + '"' + bookAttrs + ">Book a lesson</a></p></div>";
+      h += '<div class="empty"><b>No lesson booked yet.</b><p style="margin-top:.4rem">' + (credit > 0 ? "Pick a time and it shows up here." : "After your free trial, Lucia adds your package here. Then you can book your lessons yourself.") + '</p>' +
+        '<p style="margin-top:1rem">' + bookBtn() + "</p></div>";
     }
     h += "</section>";
 
@@ -93,12 +102,12 @@
     h += '<section class="wrap ap-sec"><h2>Upcoming <small>' + upcoming.length + "</small></h2>";
     if (upcoming.length) {
       h += '<div class="list">' + upcoming.map((l) => lessonCard(l, true)).join("") + "</div>" +
-        '<p class="note">You can cancel up to 24 hours before a lesson. After that the lesson counts as taken. To change a lesson that is less than 24 hours away, write to Lucia.</p>' +
-        '<p style="margin-top:1rem"><a class="btn btn-ink btn-sm" href="' + esc(bookHref) + '"' + bookAttrs + ">Book another lesson</a></p>";
+        '<p class="note">You can move or cancel a lesson up to 24 hours before it starts. After that the lesson counts as taken. To change a lesson that is less than 24 hours away, write to Lucia.</p>' +
+        '<p style="margin-top:1rem">' + bookBtn("btn-ink btn-sm") + "</p>";
     } else {
       h += '<div class="empty">Nothing booked at the moment.</div>';
     }
-    h += "</section>";
+    h += '<div class="picker" id="book-panel" hidden></div></section>';
 
     // history
     h += '<section class="wrap ap-sec"><h2>Past lessons <small>' + history.length + "</small></h2>";
@@ -109,6 +118,43 @@
 
     root.innerHTML = h;
   }
+
+  /* picker with a confirm button under it, used for new bookings and for moving a lesson */
+  function openPicker(host, o) {
+    host.hidden = false;
+    host.innerHTML = '<h3 style="margin-bottom:.4rem">' + esc(o.title) + '</h3><div data-pk></div><div class="bk-summary" data-sum hidden></div>' +
+      '<div class="btns" style="margin-top:.9rem"><button class="btn btn-ink" data-go type="button" hidden>' + esc(o.cta) + '</button><button class="btn btn-quiet" data-x type="button">Close</button></div>';
+    const sum = host.querySelector("[data-sum]"), go = host.querySelector("[data-go]");
+    let sel = null;
+    A.Booking.mount(host.querySelector("[data-pk]"), {
+      sb: A.sb, minutes: o.minutes, modes: o.modes, horizon: info.horizon_days,
+      onSelect(s) { sel = s; sum.hidden = go.hidden = !s; if (s) sum.textContent = A.dayLong(s.iso) + " at " + A.time(s.iso) + (o.modes.length > 1 ? ", " + (s.mode === "prague" ? "in Prague" : "online") : "") + "."; }
+    });
+    host.querySelector("[data-x]").addEventListener("click", () => { host.hidden = true; host.innerHTML = ""; });
+    go.addEventListener("click", async () => {
+      go.disabled = true;
+      const { error } = await o.run(sel);
+      if (error) { A.toast(A.errText(error), true); go.disabled = false; return; }
+      A.toast(o.done);
+      A.reload();
+    });
+    host.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+  root.addEventListener("click", (e) => {
+    const ob = e.target.closest("[data-open-book]"), mv = e.target.closest("[data-move]");
+    if (ob) {
+      openPicker(document.getElementById("book-panel"), {
+        title: "Choose a time", cta: "Book this time", minutes: info.private_min, modes: ["online", "prague"], done: "Lesson booked.",
+        run: (s) => A.sb.rpc("book_my_lesson", { p_start: s.iso, p_mode: s.mode })
+      });
+    } else if (mv) {
+      const id = mv.dataset.move, l = lastLessons.find((x) => x.id === id);
+      openPicker(document.getElementById("mv-" + id), {
+        title: "Move this lesson to…", cta: "Move to this time", minutes: l.duration_min, modes: [l.mode], done: "Lesson moved.",
+        run: (s) => A.sb.rpc("reschedule_my_lesson", { p_lesson_id: id, p_start: s.iso })
+      });
+    }
+  });
 
   // two-step cancel, no pop-up needed
   root.addEventListener("click", async (e) => {

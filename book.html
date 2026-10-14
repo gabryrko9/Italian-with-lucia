@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book your free trial lesson | Italian with Lucia</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#0E1240">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="app">
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="mark" href="./" aria-label="Italian with Lucia, home page">
+      <svg class="mark-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 4h22a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H15l-7 6v-6H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" fill="currentColor"/></svg>
+      Italian with Lucia
+    </a>
+    <div class="bar-right">
+      <button class="signout" id="signout" type="button" hidden>Sign out</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section id="view-setup" hidden>
+    <div class="wrap ap-top">
+      <h1>Book your free trial</h1>
+      <p>Online booking is not switched on yet. Please email Lucia and she replies within 24 hours: <a href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson">lucia.scollo2000@gmail.com</a></p>
+    </div>
+  </section>
+
+  <div id="view-app" hidden>
+    <div class="wrap ap-top">
+      <h1>Book your free trial</h1>
+      <p>30 minutes with Lucia, online or in Prague. Pick a time that suits you. No payment, no obligation.</p>
+    </div>
+    <section class="wrap ap-sec" id="step-pick">
+      <p class="note bad" id="pick-msg" role="alert"></p>
+      <div class="picker" id="picker"></div>
+      <form class="f bk-form card" id="bk-form" hidden novalidate>
+        <div class="bk-summary" id="bk-summary" role="status"></div>
+        <div class="f-row">
+          <label>Your name<input name="name" autocomplete="name" required maxlength="80"></label>
+          <label>Your email<input name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254"></label>
+        </div>
+        <label>Your level
+          <select name="level">
+            <option value="not sure">Not sure yet</option><option value="A1">Complete beginner (A1)</option><option value="A2">Elementary (A2)</option>
+            <option value="B1">Intermediate (B1)</option><option value="B2">Upper intermediate (B2)</option><option value="C1">Advanced (C1)</option>
+          </select>
+        </label>
+        <label>What do you want to use Italian for? <span style="font-weight:500">(optional)</span>
+          <textarea name="goal" maxlength="500" placeholder="Travel, work, family, moving to Italy, an exam…"></textarea>
+        </label>
+        <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <label class="bk-check"><input type="checkbox" name="consent" required>
+          <span>I agree that Lucia stores my name, email and the details above to organise my lessons. <a href="privacy.html" target="_blank" rel="noopener">Privacy</a></span></label>
+        <div><button class="btn btn-ink btn-lg" type="submit" id="bk-submit">Confirm my free trial</button></div>
+        <p class="note" id="bk-msg" role="alert"></p>
+      </form>
+    </section>
+    <p class="wrap note" style="padding-bottom:2rem">Prefer email? Write to <a href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson">lucia.scollo2000@gmail.com</a>. You can cancel or move a lesson up to 24 hours before it starts.</p>
+  </div>
+
+  <section id="view-done" hidden>
+    <div class="wrap ap-sec"><div class="bk-done" id="done-box" tabindex="-1"></div></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="foot-brand">Italian with Lucia</div>
+    <p>Questions? <a href="mailto:lucia.scollo2000@gmail.com">lucia.scollo2000@gmail.com</a></p>
+    <p class="foot-fine">Your data (name, email, lessons and notes) is only used to manage your lessons. Only you and Lucia can see it.</p>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="common.js"></script>
+<script src="booking.js"></script>
+<script src="book.js"></script>
+</body>
+</html>

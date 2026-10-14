@@ -5,7 +5,7 @@
   const root = document.getElementById("view-app");
   const dlg = document.getElementById("dlg");
   let isAdmin = false;
-  let S = { students: [], packages: [], lessons: [] };
+  let S = { students: [], packages: [], lessons: [], avail: [], off: [], settings: null };
 
   const PRESETS = [
     { t: "5 lessons", n: 5, p: 150 },
@@ -26,8 +26,12 @@
     }
   }
   async function load() {
-    const [students, packages, lessons] = await Promise.all([fetchAll("students", "full_name"), fetchAll("packages", "created_at"), fetchAll("lessons", "starts_at")]);
-    S = { students, packages, lessons };
+    const [students, packages, lessons, avail, off, set] = await Promise.all([
+      fetchAll("students", "full_name"), fetchAll("packages", "created_at"), fetchAll("lessons", "starts_at"),
+      A.sb.from("availability").select("*").order("start_time"), A.sb.from("time_off").select("*").order("starts_on"), A.sb.from("booking_settings").select("*")
+    ]);
+    // the booking tables arrive with the booking update; an older database simply has none yet
+    S = { students, packages, lessons, avail: avail.data || [], off: off.data || [], settings: (set.data || [])[0] || null, hasBooking: !avail.error };
   }
   const student = (id) => S.students.find((s) => s.id === id);
   const pkgsOf = (sid) => S.packages.filter((p) => p.student_id === sid);
@@ -45,7 +49,8 @@
   function shell(active, inner) {
     return '<div class="wrap"><nav class="tabs" aria-label="Sections">' +
       '<a href="#overview"' + (active === "overview" ? ' aria-current="page"' : "") + ">Overview</a>" +
-      '<a href="#students"' + (active === "students" ? ' aria-current="page"' : "") + ">Students</a></nav></div>" + inner;
+      '<a href="#students"' + (active === "students" ? ' aria-current="page"' : "") + ">Students</a>" +
+      '<a href="#availability"' + (active === "availability" ? ' aria-current="page"' : "") + ">My hours</a></nav></div>" + inner;
   }
 
   function lessonLine(l, opts) {
@@ -81,6 +86,20 @@
 
     let h = '<div class="wrap ap-top"><h1>Overview</h1><p>' + soon.length + " lessons in the next 30 days · " + today.length + " today · " + S.students.length + " students.</p>" +
       '<p class="tzhint">Times in ' + esc(A.tz) + "</p></div>";
+
+    const recent = S.lessons.filter((l) => l.booked_by && l.booked_by !== "lucia" && l.status === "scheduled" && new Date(l.created_at).getTime() > now - 7 * 24 * A.HOUR)
+      .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+    if (recent.length) {
+      h += '<section class="ap-sec"><div class="wrap"><h2>Booked online <small>' + recent.length + '</small></h2><p class="note" style="margin:-.4rem 0 .8rem">New bookings from the last 7 days, made by students and by new people on the website.</p><div class="list">' +
+        recent.map((l) => {
+          const st = student(l.student_id) || {};
+          return '<article class="item"><div class="ln"><div><div class="l-when">' + A.day(l.starts_at) + ", " + A.time(l.starts_at) + " · " +
+            '<a href="#student/' + l.student_id + '">' + esc(st.full_name || "?") + "</a> " + (l.kind === "trial" ? '<span class="pill pill-new">New trial</span>' : "") + "</div>" +
+            '<div class="l-meta">' + [A.KIND[l.kind], A.MODE[l.mode], l.duration_min + " min", st.level, st.tz, st.email].filter(Boolean).map(esc).join(" · ") + "</div>" +
+            (st.goal && l.kind === "trial" ? '<div class="l-meta">Goal: ' + esc(st.goal) + "</div>" : "") +
+            "</div></div></article>";
+        }).join("") + "</div></div></section>";
+    }
 
     if (toClose.length) {
       h += '<section class="ap-sec"><div class="wrap"><h2>To close <small>' + toClose.length + "</small></h2>" +
@@ -133,6 +152,48 @@
     return shell("students", h);
   }
 
+
+  const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const hhmm = (t) => String(t).slice(0, 5);
+  const WHERE = { both: "online or Prague", online: "online only", prague: "Prague only" };
+
+  function availabilityPage() {
+    if (!S.hasBooking || !S.settings) {
+      return shell("availability", '<div class="wrap ap-top"><h1>My hours</h1><p>The booking update is not in your database yet. Run the latest <b>supabase-setup.sql</b> (see GUIDA-AREA-STUDENTI.md).</p></div>');
+    }
+    const st = S.settings;
+    let h = '<div class="wrap ap-top"><h1>My hours</h1><p>Students can book only inside these windows. Times are Prague time (Europe/Prague).</p></div>';
+    h += '<section class="ap-sec"><div class="wrap"><h2>Weekly hours</h2><div class="card"><div class="wk">';
+    DAYS.forEach((d, i) => {
+      const ws = S.avail.filter((a) => a.weekday === i + 1).sort((a, b) => String(a.start_time).localeCompare(String(b.start_time)));
+      h += '<div class="wk-day"><b>' + d + '</b><div class="wk-wins">' + (ws.length ? ws.map((a) =>
+        '<span class="win">' + hhmm(a.start_time) + "–" + hhmm(a.end_time) + (a.mode !== "both" ? " <small>" + WHERE[a.mode] + "</small>" : "") +
+        '<button type="button" data-delwin="' + a.id + '" aria-label="Remove ' + d + " " + hhmm(a.start_time) + '">×</button></span>').join("") : '<span class="l-meta" style="padding-top:.45rem">Not available</span>') + "</div></div>";
+    });
+    h += '</div></div>' +
+      '<details class="add" style="margin-top:1rem"><summary>Add a window</summary><form class="f" id="f-win"><div class="f-row">' +
+      '<label>Day<select name="weekday">' + DAYS.map((d, i) => '<option value="' + (i + 1) + '">' + d + "</option>").join("") + "</select></label>" +
+      '<label>From<input name="from" type="time" step="900" required value="09:00"></label><label>To<input name="to" type="time" step="900" required value="12:00"></label>' +
+      '<label>Where<select name="mode"><option value="both">Online or Prague</option><option value="online">Online only</option><option value="prague">Prague only</option></select></label></div>' +
+      '<div><button class="btn btn-ink" type="submit">Add window</button></div></form></details></div></section>';
+
+    h += '<section class="ap-sec"><div class="wrap"><h2>Days off <small>' + S.off.length + "</small></h2>" +
+      (S.off.length ? '<div class="list" style="margin-bottom:1rem">' + S.off.map((o) => '<article class="item"><div class="ln"><div><div class="l-when">' + A.dayYear(o.starts_on + "T12:00:00") + (o.ends_on !== o.starts_on ? " to " + A.dayYear(o.ends_on + "T12:00:00") : "") + '</div><div class="l-meta">' + esc(o.note || "") + '</div></div><div class="btns"><button class="btn btn-quiet btn-sm" data-deloff="' + o.id + '" type="button">Remove</button></div></div></article>').join("") + "</div>" : '<div class="empty" style="margin-bottom:1rem">No days off. Add holidays here and nobody can book those days.</div>') +
+      '<details class="add"><summary>Add days off</summary><form class="f" id="f-off"><div class="f-row"><label>From<input name="from" type="date" required></label><label>To (same day if one day)<input name="to" type="date"></label>' +
+      '<label>Note<input name="note" maxlength="80" placeholder="Holiday, exam…"></label></div><div><button class="btn btn-ink" type="submit">Add days off</button></div></form></details></div></section>';
+
+    h += '<section class="ap-sec"><div class="wrap"><h2>Booking rules</h2><form class="f card" id="f-set" style="max-width:44rem"><div class="f-row">' +
+      '<label>Minimum notice (hours)<input name="min_notice_hours" type="number" min="0" max="168" value="' + st.min_notice_hours + '"></label>' +
+      '<label>How far ahead (days)<input name="horizon_days" type="number" min="1" max="180" value="' + st.horizon_days + '"></label>' +
+      '<label>Start times every<select name="step_min">' + [15, 30, 60].map((n) => '<option value="' + n + '"' + (st.step_min === n ? " selected" : "") + ">" + n + " min</option>").join("") + "</select></label></div>" +
+      '<div class="f-row"><label>Lesson length (min)<input name="private_min" type="number" min="15" max="240" value="' + st.private_min + '"></label>' +
+      '<label>Free trial length (min)<input name="trial_min" type="number" min="15" max="120" value="' + st.trial_min + '"></label>' +
+      '<label>Break between lessons (min)<input name="buffer_min" type="number" min="0" max="120" value="' + st.buffer_min + '"></label></div>' +
+      '<label>Max free-trial bookings per hour (protects against spam)<input name="trial_limit_per_hour" type="number" min="1" max="100" value="' + st.trial_limit_per_hour + '"></label>' +
+      '<div class="btns"><button class="btn btn-ink" type="submit">Save rules</button><a class="btn btn-quiet" href="book.html" target="_blank" rel="noopener">See what visitors see</a></div></form></div></section>';
+    return shell("availability", h);
+  }
+
   function lessonFormFields(l, pkgs) {
     l = l || {};
     return '<div class="f-row"><label>Date and time<input name="starts" type="datetime-local" required value="' + (l.starts_at ? A.toInput(l.starts_at) : "") + '"></label>' +
@@ -150,7 +211,8 @@
     const s = student(id);
     if (!s) return shell("students", '<div class="wrap ap-top"><h1>Not found</h1><p><a href="#students">Back to students</a></p></div>');
     const ps = pkgsOf(id), ls = lessonsOf(id).slice().reverse();
-    let h = '<div class="wrap ap-top"><a class="back" href="#students">← All students</a><h1>' + esc(s.full_name) + "</h1><p>" + esc(s.email) + (s.level ? " · " + esc(s.level) : "") + "</p></div>";
+    let h = '<div class="wrap ap-top"><a class="back" href="#students">← All students</a><h1>' + esc(s.full_name) + "</h1><p>" + esc(s.email) + (s.level ? " · " + esc(s.level) : "") + (s.tz ? " · " + esc(s.tz) : "") + (s.source === "site" ? " · from the website" : "") + "</p>" +
+      (s.goal ? '<p class="note"><b>Goal:</b> ' + esc(s.goal) + "</p>" : "") + "</div>";
 
     // packages
     h += '<section class="ap-sec"><div class="wrap"><h2>Packages</h2>' +
@@ -200,7 +262,7 @@
   function route() {
     const hash = location.hash.replace(/^#/, "") || "overview";
     const m = hash.match(/^student\/(.+)$/);
-    root.innerHTML = m ? studentPage(m[1]) : hash === "students" ? studentsPage() : overview();
+    root.innerHTML = m ? studentPage(m[1]) : hash === "students" ? studentsPage() : hash === "availability" ? availabilityPage() : overview();
     bindForms(m && m[1]);
     window.scrollTo(0, 0);
   }
@@ -251,6 +313,24 @@
         if (await run(A.sb.from("packages").insert(row), "Package added.")) await refresh();
       });
     }
+    if ($("f-win")) $("f-win").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target;
+      if (f.to.value <= f.from.value) { A.toast("The end time must be after the start time.", true); return; }
+      if (await run(A.sb.from("availability").insert({ weekday: parseInt(f.weekday.value, 10), start_time: f.from.value, end_time: f.to.value, mode: f.mode.value }), "Window added.")) await refresh();
+    });
+    if ($("f-off")) $("f-off").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target, to = f.to.value || f.from.value;
+      if (to < f.from.value) { A.toast("The last day must not be before the first day.", true); return; }
+      if (await run(A.sb.from("time_off").insert({ starts_on: f.from.value, ends_on: to, note: f.note.value.trim() || null }), "Days off added.")) await refresh();
+    });
+    if ($("f-set")) $("f-set").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target, n = (k) => parseInt(f[k].value, 10);
+      const row = { min_notice_hours: n("min_notice_hours"), horizon_days: n("horizon_days"), step_min: n("step_min"), private_min: n("private_min"), trial_min: n("trial_min"), buffer_min: n("buffer_min"), trial_limit_per_hour: n("trial_limit_per_hour") };
+      if (await run(A.sb.from("booking_settings").update(row).eq("id", true), "Rules saved.")) await refresh();
+    });
     if ($("f-lesson")) $("f-lesson").addEventListener("submit", async (e) => {
       e.preventDefault();
       const fd = new FormData(e.target), base = lessonPayload(fd, sid), n = Math.min(20, Math.max(1, parseInt(fd.get("repeat"), 10) || 1));
@@ -265,6 +345,9 @@
 
   /* ---------- clicks: status buttons, paid, package delete, edit dialog ---------- */
   root.addEventListener("click", async (e) => {
+    const dw = e.target.closest("[data-delwin]"), dof = e.target.closest("[data-deloff]");
+    if (dw) { if (await run(A.sb.from("availability").delete().eq("id", dw.dataset.delwin), "Window removed.")) await refresh(); return; }
+    if (dof) { if (await run(A.sb.from("time_off").delete().eq("id", dof.dataset.deloff), "Removed.")) await refresh(); return; }
     const set = e.target.closest("[data-set]"), paid = e.target.closest("[data-paid]"), dp = e.target.closest("[data-delpkg]"), ed = e.target.closest("[data-edit]");
     if (set) { set.disabled = true; if (await run(A.sb.from("lessons").update({ status: set.dataset.set }).eq("id", set.dataset.id), "Marked " + A.STATUS[set.dataset.set].toLowerCase() + ".")) await refresh(); else set.disabled = false; }
     else if (paid) { const p = S.packages.find((x) => x.id === paid.dataset.paid); if (await run(A.sb.from("packages").update({ paid: !p.paid }).eq("id", p.id), "Updated.")) await refresh(); }

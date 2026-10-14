@@ -94,3 +94,38 @@ dialog h3 { margin-bottom: 1rem; }
 
 /* link from the public site, only shown when the student area is configured */
 .bar-nav .portal-link { font-weight: 700; }
+
+/* ---------- booking: slot picker ---------- */
+.seg { display: inline-flex; border: 2px solid var(--ink); border-radius: 999px; overflow: hidden; background: #fff; }
+.seg button { min-height: 2.9rem; padding: .4rem 1.3rem; font-weight: 700; background: transparent; border: 0; color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.days { display: flex; gap: .5rem; overflow-x: auto; padding: .9rem .2rem .6rem; margin-inline: -.2rem; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
+.day { flex: 0 0 auto; scroll-snap-align: start; min-width: 4.5rem; min-height: 5rem; border: 2px solid var(--ink); border-radius: 1.2rem; background: #fff; color: var(--ink); text-align: center; padding: .35rem .5rem; cursor: pointer; line-height: 1.1; }
+.day small { display: block; font-weight: 600; opacity: .75; font-size: .82rem; }
+.day b { display: block; font-size: 1.5rem; font-weight: 800; }
+.day[aria-pressed="true"] { background: var(--cobalt); border-color: var(--cobalt); color: #fff; }
+.slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(5.3rem, 1fr)); gap: .5rem; margin-top: .7rem; }
+.slot { min-height: 3rem; border: 2px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); font-weight: 700; font-size: 1.02rem; cursor: pointer; }
+.slot:hover { background: var(--paper); }
+.slot[aria-pressed="true"] { background: var(--lemon); box-shadow: 0 3px 0 var(--ink); }
+.picker { background: var(--white); border-radius: var(--bubble); padding: 1.2rem 1.3rem 1.4rem; max-width: 44rem; }
+.picker-card { margin-top: .8rem; }
+.bk-summary { margin-top: 1.1rem; padding: .9rem 1.1rem; background: var(--lemon); border-radius: 1.1rem 1.1rem 1.1rem .3rem; font-weight: 700; }
+.bk-form { margin-top: 1rem; }
+.bk-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.bk-check { grid-template-columns: auto 1fr !important; align-items: start; gap: .7rem !important; font-weight: 500 !important; }
+.bk-check input { width: 1.4rem !important; min-height: 1.4rem !important; margin-top: .15rem; }
+.bk-done { background: #d8f5e2; border: 2px solid #0a7a3e; border-radius: var(--bubble); padding: 1.4rem 1.5rem; max-width: 44rem; }
+.bk-done h2 { font-size: clamp(1.7rem, 5vw, 2.4rem); }
+.bk-done .when { font-size: 1.3rem; font-weight: 800; margin: .7rem 0; }
+.bk-done ul { margin: .8rem 0 0 1.2rem; list-style: disc; display: grid; gap: .35rem; }
+.wk { display: grid; gap: .5rem; }
+.wk-day { display: grid; gap: .3rem .8rem; grid-template-columns: 6.5rem 1fr; align-items: start; padding: .6rem 0; border-bottom: 1px solid rgba(14,18,64,.12); }
+.wk-day:last-child { border-bottom: 0; }
+.wk-day > b { padding-top: .35rem; }
+.wk-wins { display: flex; flex-wrap: wrap; gap: .5rem; }
+.win { display: inline-flex; align-items: center; gap: .4rem; background: var(--paper); border: 2px solid var(--ink); border-radius: 999px; padding: .15rem .35rem .15rem .9rem; font-weight: 700; }
+.win button { background: transparent; border: 0; width: 2.3rem; height: 2.3rem; border-radius: 50%; font-size: 1.2rem; line-height: 1; cursor: pointer; color: var(--ink); }
+.win button:hover { background: var(--tomato); color: #fff; }
+.win small { font-weight: 600; opacity: .7; }
+.pill-new { background: var(--lemon); }

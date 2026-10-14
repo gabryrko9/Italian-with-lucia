@@ -2,13 +2,32 @@
    Italian with Lucia: script.js
    ========================================================== */
 
-/* ---------- 0. Lesson booking link ----------
-   After the free trial, students book each lesson in Lucia's Google
-   Calendar appointment page. Its link goes in config.js ("booking").
-   While it is empty, the button opens a pre-filled email to Lucia. */
+/* ---------- 0. Booking ----------
+   Online booking (needs config.js url + key):
+     * new people book their free trial on book.html, no account needed;
+     * students book and move lessons in their student area.
+   Without it, buttons fall back to Lucia's Google Calendar page ("booking" in config.js)
+   or to a pre-filled email, so nothing is ever broken. */
+const PORTAL_ON = !!(window.PORTAL && window.PORTAL.url && window.PORTAL.key);
 const BOOKING_URL = (window.PORTAL && window.PORTAL.booking) || "";
 const lessonBtn = document.getElementById("lesson-book");
-if (BOOKING_URL && lessonBtn) {
+if (PORTAL_ON) {
+  document.querySelectorAll('a[href^="mailto:"][href*="subject=Free%20trial"]').forEach(function (a) {
+    a.href = "book.html";
+    a.removeAttribute("target");
+    var t = a.textContent.trim();
+    if (/email lucia for a free trial/i.test(t)) a.textContent = "Book your free trial";
+    else if (/^free trial$/i.test(t)) a.textContent = "Free trial";
+    else if (/email lucia/i.test(t)) a.textContent = "Book your free trial";
+  });
+  if (lessonBtn) {
+    lessonBtn.href = "portal.html";
+    lessonBtn.removeAttribute("target");
+    lessonBtn.textContent = "Choose your next lesson";
+    document.getElementById("booknow-text").textContent =
+      "Sign in to your student area, pick a free time and your lesson is booked. You can see your package, move a lesson or cancel it up to 24 hours before.";
+  }
+} else if (BOOKING_URL && lessonBtn) {
   lessonBtn.href = BOOKING_URL;
   lessonBtn.target = "_blank";
   lessonBtn.rel = "noopener";
@@ -215,4 +234,53 @@ if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
     if (url) a.href = url; else a.hidden = true;
   });
   box.hidden = false;
+})();
+
+/* ---------- 9. Mobile menu, bottom dock, plan dots ---------- */
+(function () {
+  const btn = document.getElementById("menu-btn"), menu = document.getElementById("menu");
+  if (btn && menu) {
+    const set = function (open) {
+      menu.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      document.body.classList.toggle("menu-open", open);
+    };
+    btn.addEventListener("click", function () { set(menu.hidden); });
+    menu.addEventListener("click", function (e) { if (e.target.closest("a")) set(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) { set(false); btn.focus(); } });
+    window.matchMedia("(min-width: 880px)").addEventListener("change", function (e) { if (e.matches) set(false); });
+  }
+
+  const dock = document.getElementById("dock");
+  if (dock) {
+    let past = false, atEnd = false;
+    const update = function () { dock.classList.toggle("show", past && !atEnd); };
+    window.addEventListener("scroll", function () { past = window.scrollY > 520; update(); }, { passive: true });
+    if ("IntersectionObserver" in window) {
+      const seen = new Set();
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) seen.add(en.target); else seen.delete(en.target); });
+        atEnd = seen.size > 0; update();
+      });
+      document.querySelectorAll("#book, .foot").forEach(function (el) { io.observe(el); });
+    }
+  }
+
+  const plans = document.querySelector(".plans");
+  if (plans) {
+    const cards = plans.querySelectorAll(".plan");
+    const dots = document.createElement("div");
+    dots.className = "plans-dots";
+    dots.setAttribute("aria-hidden", "true");
+    dots.innerHTML = Array.prototype.map.call(cards, function () { return "<i></i>"; }).join("") + "<span>Swipe to compare</span>";
+    plans.insertAdjacentElement("afterend", dots);
+    const mark = function () {
+      const w = cards[0].getBoundingClientRect().width + 14;
+      const i = Math.min(cards.length - 1, Math.round(plans.scrollLeft / w));
+      dots.querySelectorAll("i").forEach(function (d, k) { d.classList.toggle("on", k === i); });
+    };
+    plans.addEventListener("scroll", mark, { passive: true });
+    mark();
+  }
 })();
