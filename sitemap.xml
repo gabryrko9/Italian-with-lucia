@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://gabryrko9.github.io/Italian-with-lucia/</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://gabryrko9.github.io/Italian-with-lucia/lucia-portrait.jpg</image:loc><image:title>Lucia, Italian teacher in Prague</image:title></image:image>
+    <image:image><image:loc>https://gabryrko9.github.io/Italian-with-lucia/logo.png</image:loc><image:title>Italian with Lucia logo</image:title></image:image>
   </url>
 </urlset>

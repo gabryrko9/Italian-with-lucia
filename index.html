@@ -9,6 +9,9 @@
   <link rel="canonical" href="https://gabryrko9.github.io/Italian-with-lucia/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#0E1240">
+  <meta name="geo.region" content="CZ-10">
+  <meta name="geo.placename" content="Prague">
+  <link rel="apple-touch-icon" href="logo.png">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Italian with Lucia">
@@ -35,19 +38,30 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "ProfessionalService",
+        "@type": ["ProfessionalService", "EducationalOrganization"],
         "@id": "https://gabryrko9.github.io/Italian-with-lucia/#business",
         "name": "Italian with Lucia",
-        "description": "Private Italian lessons and small group courses for English speakers, online worldwide and in person in Prague.",
+        "alternateName": "Italian lessons in Prague with Lucia",
+        "description": "Private Italian lessons and small group courses for English speakers, online worldwide and in person in Prague 1, 2 and 3.",
         "url": "https://gabryrko9.github.io/Italian-with-lucia/",
-        "image": "https://gabryrko9.github.io/Italian-with-lucia/og.jpg",
+        "logo": "https://gabryrko9.github.io/Italian-with-lucia/logo.png",
+        "image": ["https://gabryrko9.github.io/Italian-with-lucia/og.jpg", "https://gabryrko9.github.io/Italian-with-lucia/lucia-portrait.jpg", "https://gabryrko9.github.io/Italian-with-lucia/lucia-bubble.jpg"],
         "email": "lucia.scollo2000@gmail.com",
+        "priceRange": "€€",
+        "currenciesAccepted": "EUR",
+        "paymentAccepted": "Revolut, bank transfer",
         "address": { "@type": "PostalAddress", "addressLocality": "Prague", "addressCountry": "CZ" },
         "areaServed": [
-          { "@type": "City", "name": "Prague" },
-          { "@type": "AdministrativeArea", "name": "Online, worldwide" }
+          { "@type": "City", "name": "Prague", "sameAs": "https://en.wikipedia.org/wiki/Prague" },
+          { "@type": "AdministrativeArea", "name": "Prague 1" },
+          { "@type": "AdministrativeArea", "name": "Prague 2" },
+          { "@type": "AdministrativeArea", "name": "Prague 3" },
+          { "@type": "Place", "name": "Online, worldwide" }
         ],
         "knowsLanguage": ["it", "en"],
+        "knowsAbout": ["Italian language", "Italian grammar", "Italian conversation", "Italian pronunciation"],
+        "employee": { "@type": "Person", "name": "Lucia", "jobTitle": "Italian teacher" },
+        "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "email": "lucia.scollo2000@gmail.com", "availableLanguage": ["English", "Italian"] },
         "makesOffer": [
           { "@type": "Offer", "name": "Free 30-minute trial lesson", "price": "0", "priceCurrency": "EUR" },
           { "@type": "Offer", "name": "5 private Italian lessons", "price": "150", "priceCurrency": "EUR" },
@@ -75,6 +89,8 @@
         "mainEntity": [
           { "@type": "Question", "name": "Do I need to know any Italian already?", "acceptedAnswer": { "@type": "Answer", "text": "No. Lessons are adapted to your level, from complete beginner to advanced." } },
           { "@type": "Question", "name": "Are the lessons online or in person?", "acceptedAnswer": { "@type": "Answer", "text": "Both. Learn online from anywhere in the world, or meet in person in Prague 1, 2 and 3." } },
+          { "@type": "Question", "name": "Where do the in-person lessons in Prague take place?", "acceptedAnswer": { "@type": "Answer", "text": "In Prague 1, 2 and 3, in cafés or other meeting places we agree on. Lucia confirms the exact place when you book. If you prefer, every lesson also works online." } },
+          { "@type": "Question", "name": "Do you teach Italian to expats in Prague?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Lessons are made for English speakers, including people who live in Prague or are moving here. If you travel or work from home, you can switch to online lessons at any time." } },
           { "@type": "Question", "name": "How do I book the free trial lesson?", "acceptedAnswer": { "@type": "Answer", "text": "Send Lucia a short email at lucia.scollo2000@gmail.com with your level and goals. She replies within 24 hours to agree a time. The trial lasts 30 minutes, with no obligation to continue." } },
           { "@type": "Question", "name": "How do the group courses work?", "acceptedAnswer": { "@type": "Answer", "text": "Group courses start in January: 12 weekly live lessons in a group of 3 to 5 students, at beginner, intermediate or advanced level." } },
           { "@type": "Question", "name": "Which coursebook do I need?", "acceptedAnswer": { "@type": "Answer", "text": "Lessons follow the Nuovo Espresso series. Wait for your free trial: Lucia will tell you which level to buy." } },
@@ -369,135 +385,147 @@
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="s s-tomato" id="voices">
-  <div class="wrap">
+<section class="s s-tomato s-reviews" id="voices">
+  <div class="wrap reel-head">
     <div class="head">
       <h2>What students say</h2>
-      <p>29 reviews from students who learn Italian with Lucia, newest first.</p>
+      <p>29 reviews from students who learn Italian with Lucia.</p>
     </div>
-    <div class="wall">
-        <figure class="rev rev-0">
-          <blockquote><p>Lucia made so many things clear to me that had confused me until now. She did it easily, clearly and with joy - while fully engaging with me at my level and supporting me wherever she could. I highly recommend working with her!</p></blockquote>
-          <figcaption>Meg <time datetime="2026-10-13">13 October 2026</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>I can only say good things about Lucia and her teaching style. She's so kind and patient, making learning fun and efficient at the same time. Genuinely the best tutor you'll ever find!!! (And she has lots of tips and tricks that make studying easier) ;)</p></blockquote>
-          <figcaption>Anna <time datetime="2026-08-06">6 August 2026</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>Lucia is very helpful and lovely to have lessons with. I have learnt Italian before, and have been talking Italian for 3 years now. Lucia is a fantastic tutor that helps me improve my language by having a tailored-type of lessons. Grazie mille per tutto!! :)</p></blockquote>
-          <figcaption>Sevilay <time datetime="2026-07-16">16 July 2026</time></figcaption>
-        </figure>
-        <figure class="rev rev-0">
-          <blockquote><p>Excellent teacher! She makes it fun and interesting.</p></blockquote>
-          <figcaption>Lynn <time datetime="2026-07-04">4 July 2026</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>Very kind and patient teacher, and the pacing is reasonable. Recommend you to book a trail lesson with Lucia~💗</p></blockquote>
-          <figcaption>Gia <time datetime="2026-07-01">1 July 2026</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>Lucia is so good in explaining Italian grammar! :) book her, she's so much fun!</p></blockquote>
-          <figcaption>Kavita <time datetime="2026-06-15">15 June 2026</time></figcaption>
-        </figure>
-        <figure class="rev rev-0">
-          <blockquote><p>Great Teacher! Fun and engaging. Very good at adapting to my level (absolute beginner)! Also after a short gap in my lessons very good at helping me get back in the rhythm of learning Italian!</p></blockquote>
-          <figcaption>David <time datetime="2026-06-09">9 June 2026</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>Learning Italian with Lucia is truly a pleasure. feels very warm and friendly, as if I were speaking with a close friend. She is always extremely kind, gentle, and courteous in every lesson</p></blockquote>
-          <figcaption>Eda <time datetime="2025-12-15">15 December 2025</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>Learning Italian with Lucia is fun and educational. She’s very professional and makes every lesson enjoyable. Highly recommended!</p></blockquote>
-          <figcaption>Bernat <time datetime="2025-11-07">7 November 2025</time></figcaption>
-        </figure>
+    <div class="reel-ctl" role="group" aria-label="Review controls">
+      <button type="button" class="reel-btn" id="reel-prev" aria-label="Previous reviews">&#8592;</button>
+      <button type="button" class="reel-btn reel-pause" id="reel-toggle" aria-pressed="false" aria-label="Pause the moving reviews"><span class="ic-pause" aria-hidden="true"></span></button>
+      <button type="button" class="reel-btn" id="reel-next" aria-label="Next reviews">&#8594;</button>
     </div>
-    <details class="more">
-      <summary class="btn btn-ink btn-lg"><span class="more-open">Show all 29 reviews</span><span class="more-close">Show fewer reviews</span></summary>
-      <div class="wall">
-        <figure class="rev rev-0">
-          <blockquote><p>She is great!! Very patient and clear explanation. I highly recommend!</p></blockquote>
-          <figcaption>Jianing <time datetime="2025-09-23">23 September 2025</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>Lucia is a fantastic tutor, she is friendly and encouraging. One of the things I really appreciate is how clearly she explains grammar or vocabulary that I’m confused about – she takes the time to break things down in a way that makes them easy to understand and remember. We're following a textbook, but she gave me the option of whether or not to use one, which I really liked because it made the learning feel more flexible.</p></blockquote>
-          <figcaption>Eva <time datetime="2025-05-27">27 May 2025</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>I recommend Lucia! Lucia is a fantastic teacher, very friendly, and always gives quick feedback. She explains all grammar and vocabulary topics very well. She focuses on the student's needs and adapts the lessons accordingly. She uses a lot of materials and also offers optional exercises to practice between lessons. She has a lot of positive energy, and her lessons are never boring!</p></blockquote>
-          <figcaption>Łukasz <time datetime="2025-01-29">29 January 2025</time></figcaption>
-        </figure>
-        <figure class="rev rev-0">
-          <blockquote><p>Lucia has a fun personality, leads a great conversation and provides very effective tuition. A true superstar. Optimal progress. Thank you very much!</p></blockquote>
-          <figcaption>Oliver <time datetime="2025-01-22">22 January 2025</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>Lucia is an excellent tutor! She has lesson plans ready for every type of lesson and uses study material to explain various grammar topics. Meanwhile, she is very capable in guiding you through an entire lesson of speaking which is great when the focus needs to be on having conversations in Italiano! After a month, I was able to have conversations with Italians in Italy!</p></blockquote>
-          <figcaption>Jelke <time datetime="2025-01-21">21 January 2025</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>Lucia is not only a very good teacher but also a wonderful person. Her intelligence, her kindness and, above all, her joyful personality and constant cheerful mood make the time spent with her delightful moments. She uses various tools, always innovates in the way she teaches Italian and makes you progress without pressure. Moreover, her contagious sense of humour makes her lessons efficient but relaxed at the same time. Learning Italian with Lucia is just a great pleasure. Don't hesitate to choose her to learn Italian. Grazie mille Lucia !!!</p></blockquote>
-          <figcaption>Julien <time datetime="2025-01-02">2 January 2025</time></figcaption>
-        </figure>
-        <figure class="rev rev-0">
-          <blockquote><p>Lucia is a great Italian teacher. Knowledgeable, fun and patient. I strongly recommend her to every level of Italian students!!!</p></blockquote>
-          <figcaption>Rafael <time datetime="2024-12-18">18 December 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>Lucia is the best teacher you can ever ask for. She is encouraging, making learning process look fun and it is always an amazing mood after each class</p></blockquote>
-          <figcaption>Sasha <time datetime="2024-11-25">25 November 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>I love the Italian lessons with Lucia. She's patient and does really cool exercises that help me a lot with learning the language. She also updates my vocabulary every week so I can learn them when I have time and I absolutely love that. I can only recommend her :)</p></blockquote>
-          <figcaption>Laura <time datetime="2024-10-25">25 October 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-0">
-          <blockquote><p>Lucia is very patient, always attentive, and adapts perfectly to your needs. Thanks to her, I have made enormous progress in a short time. If you are looking to learn or improve your Italian, this is the teacher for you !</p></blockquote>
-          <figcaption>Chris <time datetime="2024-09-30">30 September 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>It’s just fun with Lucia! She is great!</p></blockquote>
-          <figcaption>Uschi <time datetime="2024-09-11">11 September 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>Lucia is a very good teacher! Her lessons are very fun and she always tries to use new tools. I am very happy 😊</p></blockquote>
-          <figcaption>Wang <time datetime="2024-09-07">7 September 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-0">
-          <blockquote><p>wonderful</p></blockquote>
-          <figcaption>Hisashi <time datetime="2024-09-03">3 September 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>It is always a great pleasure for me to study with Lucia.</p></blockquote>
-          <figcaption>Willem <time datetime="2024-08-30">30 August 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>Lucia is truly a breath of fresh air as an Italian tutor. 💚🤍❤️ Her joyful personality is contagious, and she never fails to make me laugh during our lessons. I am learning so much from her, and it’s all thanks to her fantastic teaching style. Lucia is not only incredibly intelligent but also uses a variety of innovative tools that make learning Italian both easy and enjoyable. Her approach is relaxed, with absolutely no pressure, which makes every session something to look forward to. Stop looking—you’ve just found the best tutor on this learning journey! Lucia is simply the best. 🎉 GRAZIE MILLE 😉</p></blockquote>
-          <figcaption>Sandy <time datetime="2024-08-22">22 August 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-0">
-          <blockquote><p>Lucia is a great tutor and person! Lessons with her are never boring, and she’s very helpful and patient, I don’t feel pressured learning Italian with her. Best tutor I’ve ever had! 🤩🤩🤩</p></blockquote>
-          <figcaption>Anonymous <time datetime="2024-08-19">19 August 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>she is a great teacher, in the last few weeks I have made significant progress, she has many learning resources and I am very excited to continue learning the Italian language with her.</p></blockquote>
-          <figcaption>Yun <time datetime="2024-08-16">16 August 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-2">
-          <blockquote><p>Lucia has a very fun way of teaching, I enjoyed the lesson.</p></blockquote>
-          <figcaption>Ondřej <time datetime="2024-08-05">5 August 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-0">
-          <blockquote><p>Amazing tutor, always ready and proactive, provide different tools to explain. She understands the learning obstacles for new learner and provide the ways of tackling the issues . She is perfetto, Grazie mille Lucia</p></blockquote>
-          <figcaption>Mo <time datetime="2024-07-31">31 July 2024</time></figcaption>
-        </figure>
-        <figure class="rev rev-1">
-          <blockquote><p>Had a great experience with her:) calm a kind teacher!</p></blockquote>
-          <figcaption>Marco <time datetime="2024-07-28">28 July 2024</time></figcaption>
-        </figure>
+  </div>
+  <div class="reel">
+      <div class="reel-row" tabindex="0" role="group" aria-label="Student reviews, row 1: scroll sideways">
+        <div class="reel-track">
+          <figure class="rv rv-0 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">M</span><span class="rv-who"><b>Meg</b><time datetime="2026-10-13">13 October 2026</time></span></figcaption>
+            <blockquote><p>Lucia made so many things clear to me that had confused me until now. She did it easily, clearly and with joy - while fully engaging with me at my level and supporting me wherever she could. I highly recommend working with her!</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">A</span><span class="rv-who"><b>Anna</b><time datetime="2026-08-06">6 August 2026</time></span></figcaption>
+            <blockquote><p>I can only say good things about Lucia and her teaching style. She's so kind and patient, making learning fun and efficient at the same time. Genuinely the best tutor you'll ever find!!! (And she has lots of tips and tricks that make studying easier) ;)</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">S</span><span class="rv-who"><b>Sevilay</b><time datetime="2026-07-16">16 July 2026</time></span></figcaption>
+            <blockquote><p>Lucia is very helpful and lovely to have lessons with. I have learnt Italian before, and have been talking Italian for 3 years now. Lucia is a fantastic tutor that helps me improve my language by having a tailored-type of lessons. Grazie mille per tutto!! :)</p></blockquote>
+          </figure>
+          <figure class="rv rv-0 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">D</span><span class="rv-who"><b>David</b><time datetime="2026-06-09">9 June 2026</time></span></figcaption>
+            <blockquote><p>Great Teacher! Fun and engaging. Very good at adapting to my level (absolute beginner)! Also after a short gap in my lessons very good at helping me get back in the rhythm of learning Italian!</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">E</span><span class="rv-who"><b>Eda</b><time datetime="2025-12-15">15 December 2025</time></span></figcaption>
+            <blockquote><p>Learning Italian with Lucia is truly a pleasure. feels very warm and friendly, as if I were speaking with a close friend. She is always extremely kind, gentle, and courteous in every lesson</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">S</span><span class="rv-who"><b>Sasha</b><time datetime="2024-11-25">25 November 2024</time></span></figcaption>
+            <blockquote><p>Lucia is the best teacher you can ever ask for. She is encouraging, making learning process look fun and it is always an amazing mood after each class</p></blockquote>
+          </figure>
+          <figure class="rv rv-0 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">L</span><span class="rv-who"><b>Laura</b><time datetime="2024-10-25">25 October 2024</time></span></figcaption>
+            <blockquote><p>I love the Italian lessons with Lucia. She's patient and does really cool exercises that help me a lot with learning the language. She also updates my vocabulary every week so I can learn them when I have time and I absolutely love that. I can only recommend her :)</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">C</span><span class="rv-who"><b>Chris</b><time datetime="2024-09-30">30 September 2024</time></span></figcaption>
+            <blockquote><p>Lucia is very patient, always attentive, and adapts perfectly to your needs. Thanks to her, I have made enormous progress in a short time. If you are looking to learn or improve your Italian, this is the teacher for you !</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">A</span><span class="rv-who"><b>Anonymous</b><time datetime="2024-08-19">19 August 2024</time></span></figcaption>
+            <blockquote><p>Lucia is a great tutor and person! Lessons with her are never boring, and she’s very helpful and patient, I don’t feel pressured learning Italian with her. Best tutor I’ve ever had! 🤩🤩🤩</p></blockquote>
+          </figure>
+          <figure class="rv rv-0 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">Y</span><span class="rv-who"><b>Yun</b><time datetime="2024-08-16">16 August 2024</time></span></figcaption>
+            <blockquote><p>she is a great teacher, in the last few weeks I have made significant progress, she has many learning resources and I am very excited to continue learning the Italian language with her.</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-wide">
+            <figcaption><span class="rv-av" aria-hidden="true">M</span><span class="rv-who"><b>Mo</b><time datetime="2024-07-31">31 July 2024</time></span></figcaption>
+            <blockquote><p>Amazing tutor, always ready and proactive, provide different tools to explain. She understands the learning obstacles for new learner and provide the ways of tackling the issues . She is perfetto, Grazie mille Lucia</p></blockquote>
+          </figure>
+        </div>
       </div>
-    </details>
+      <div class="reel-row" tabindex="0" role="group" aria-label="Student reviews, row 2: scroll sideways">
+        <div class="reel-track">
+          <figure class="rv rv-1 rv-xl">
+            <figcaption><span class="rv-av" aria-hidden="true">E</span><span class="rv-who"><b>Eva</b><time datetime="2025-05-27">27 May 2025</time></span></figcaption>
+            <blockquote><p>Lucia is a fantastic tutor, she is friendly and encouraging. One of the things I really appreciate is how clearly she explains grammar or vocabulary that I’m confused about – she takes the time to break things down in a way that makes them easy to understand and remember. We're following a textbook, but she gave me the option of whether or not to use one, which I really liked because it made the learning feel more flexible.</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-xl">
+            <figcaption><span class="rv-av" aria-hidden="true">Ł</span><span class="rv-who"><b>Łukasz</b><time datetime="2025-01-29">29 January 2025</time></span></figcaption>
+            <blockquote><p>I recommend Lucia! Lucia is a fantastic teacher, very friendly, and always gives quick feedback. She explains all grammar and vocabulary topics very well. She focuses on the student's needs and adapts the lessons accordingly. She uses a lot of materials and also offers optional exercises to practice between lessons. She has a lot of positive energy, and her lessons are never boring!</p></blockquote>
+          </figure>
+          <figure class="rv rv-0 rv-xl">
+            <figcaption><span class="rv-av" aria-hidden="true">J</span><span class="rv-who"><b>Jelke</b><time datetime="2025-01-21">21 January 2025</time></span></figcaption>
+            <blockquote><p>Lucia is an excellent tutor! She has lesson plans ready for every type of lesson and uses study material to explain various grammar topics. Meanwhile, she is very capable in guiding you through an entire lesson of speaking which is great when the focus needs to be on having conversations in Italiano! After a month, I was able to have conversations with Italians in Italy!</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-xl">
+            <figcaption><span class="rv-av" aria-hidden="true">J</span><span class="rv-who"><b>Julien</b><time datetime="2025-01-02">2 January 2025</time></span></figcaption>
+            <blockquote><p>Lucia is not only a very good teacher but also a wonderful person. Her intelligence, her kindness and, above all, her joyful personality and constant cheerful mood make the time spent with her delightful moments. She uses various tools, always innovates in the way she teaches Italian and makes you progress without pressure. Moreover, her contagious sense of humour makes her lessons efficient but relaxed at the same time. Learning Italian with Lucia is just a great pleasure. Don't hesitate to choose her to learn Italian. Grazie mille Lucia !!!</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-xl">
+            <figcaption><span class="rv-av" aria-hidden="true">S</span><span class="rv-who"><b>Sandy</b><time datetime="2024-08-22">22 August 2024</time></span></figcaption>
+            <blockquote><p>Lucia is truly a breath of fresh air as an Italian tutor. 💚🤍❤️ Her joyful personality is contagious, and she never fails to make me laugh during our lessons. I am learning so much from her, and it’s all thanks to her fantastic teaching style. Lucia is not only incredibly intelligent but also uses a variety of innovative tools that make learning Italian both easy and enjoyable. Her approach is relaxed, with absolutely no pressure, which makes every session something to look forward to. Stop looking—you’ve just found the best tutor on this learning journey! Lucia is simply the best. 🎉 GRAZIE MILLE 😉</p></blockquote>
+          </figure>
+        </div>
+      </div>
+      <div class="reel-row" tabindex="0" role="group" aria-label="Student reviews, row 3: scroll sideways">
+        <div class="reel-track">
+          <figure class="rv rv-2 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">L</span><span class="rv-who"><b>Lynn</b><time datetime="2026-07-04">4 July 2026</time></span></figcaption>
+            <blockquote><p>Excellent teacher! She makes it fun and interesting.</p></blockquote>
+          </figure>
+          <figure class="rv rv-0 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">G</span><span class="rv-who"><b>Gia</b><time datetime="2026-07-01">1 July 2026</time></span></figcaption>
+            <blockquote><p>Very kind and patient teacher, and the pacing is reasonable. Recommend you to book a trail lesson with Lucia~💗</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">K</span><span class="rv-who"><b>Kavita</b><time datetime="2026-06-15">15 June 2026</time></span></figcaption>
+            <blockquote><p>Lucia is so good in explaining Italian grammar! :) book her, she's so much fun!</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">B</span><span class="rv-who"><b>Bernat</b><time datetime="2025-11-07">7 November 2025</time></span></figcaption>
+            <blockquote><p>Learning Italian with Lucia is fun and educational. She’s very professional and makes every lesson enjoyable. Highly recommended!</p></blockquote>
+          </figure>
+          <figure class="rv rv-0 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">J</span><span class="rv-who"><b>Jianing</b><time datetime="2025-09-23">23 September 2025</time></span></figcaption>
+            <blockquote><p>She is great!! Very patient and clear explanation. I highly recommend!</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">O</span><span class="rv-who"><b>Oliver</b><time datetime="2025-01-22">22 January 2025</time></span></figcaption>
+            <blockquote><p>Lucia has a fun personality, leads a great conversation and provides very effective tuition. A true superstar. Optimal progress. Thank you very much!</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">R</span><span class="rv-who"><b>Rafael</b><time datetime="2024-12-18">18 December 2024</time></span></figcaption>
+            <blockquote><p>Lucia is a great Italian teacher. Knowledgeable, fun and patient. I strongly recommend her to every level of Italian students!!!</p></blockquote>
+          </figure>
+          <figure class="rv rv-0 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">U</span><span class="rv-who"><b>Uschi</b><time datetime="2024-09-11">11 September 2024</time></span></figcaption>
+            <blockquote><p>It’s just fun with Lucia! She is great!</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">W</span><span class="rv-who"><b>Wang</b><time datetime="2024-09-07">7 September 2024</time></span></figcaption>
+            <blockquote><p>Lucia is a very good teacher! Her lessons are very fun and she always tries to use new tools. I am very happy 😊</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">H</span><span class="rv-who"><b>Hisashi</b><time datetime="2024-09-03">3 September 2024</time></span></figcaption>
+            <blockquote><p>wonderful</p></blockquote>
+          </figure>
+          <figure class="rv rv-0 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">W</span><span class="rv-who"><b>Willem</b><time datetime="2024-08-30">30 August 2024</time></span></figcaption>
+            <blockquote><p>It is always a great pleasure for me to study with Lucia.</p></blockquote>
+          </figure>
+          <figure class="rv rv-1 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">O</span><span class="rv-who"><b>Ondřej</b><time datetime="2024-08-05">5 August 2024</time></span></figcaption>
+            <blockquote><p>Lucia has a very fun way of teaching, I enjoyed the lesson.</p></blockquote>
+          </figure>
+          <figure class="rv rv-2 rv-slim">
+            <figcaption><span class="rv-av" aria-hidden="true">M</span><span class="rv-who"><b>Marco</b><time datetime="2024-07-28">28 July 2024</time></span></figcaption>
+            <blockquote><p>Had a great experience with her:) calm a kind teacher!</p></blockquote>
+          </figure>
+        </div>
+      </div>
   </div>
 </section>
 
@@ -544,6 +572,13 @@
         <p>Live video lessons with a shared whiteboard and recorded materials, scheduled around your time zone. Most of Lucia's lessons happen here.</p>
       </div>
     </div>
+    <div class="gbp" data-gbp hidden>
+      <p><b>Find Italian with Lucia on Google</b>: read what other students say, or share your own experience.</p>
+      <div class="gbp-btns">
+        <a class="btn btn-ink btn-sm" data-gbp-link="profile" href="#" target="_blank" rel="noopener">See us on Google</a>
+        <a class="btn btn-lemon btn-sm" data-gbp-link="review" href="#" target="_blank" rel="noopener">Leave a Google review</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -554,7 +589,6 @@
       <h2>Lessons follow Nuovo Espresso</h2>
       <p>The lessons and courses are built around <em>Nuovo Espresso</em> (ALMA Edizioni), a coursebook series with one volume per level. It pairs clear grammar with practical conversation, so your progress is easy to follow.</p>
       <p>Not sure which volume you need? Wait for the free trial. Lucia will tell you which level to buy.</p>
-      <a class="btn btn-ink" href="https://www.almaedizioni.it/catalogo/nuovo-espresso/" target="_blank" rel="noopener">See the series at ALMA Edizioni</a>
     </div>
     <ul class="book-levels" aria-label="Levels covered by the series">
       <li>A1</li>
@@ -580,6 +614,14 @@
       <details>
         <summary>Are the lessons online or in person?</summary>
         <p>Both. Learn online from anywhere in the world, or meet Lucia in person in Prague 1, 2 and 3.</p>
+      </details>
+      <details>
+        <summary>Where do the in-person lessons in Prague take place?</summary>
+        <p>In Prague 1, 2 and 3, in cafés or other meeting places we agree on. Lucia confirms the exact place when you book. If you prefer, every lesson also works online.</p>
+      </details>
+      <details>
+        <summary>Do you teach Italian to expats in Prague?</summary>
+        <p>Yes. Lessons are made for English speakers, including people who live in Prague or are moving here. If you travel or work from home, you can switch to online lessons at any time.</p>
       </details>
       <details>
         <summary>How do I book the free trial?</summary>
@@ -630,7 +672,7 @@
 <footer class="foot">
   <div class="wrap foot-in">
     <p class="foot-brand">Italian with Lucia</p>
-    <p>Italian lessons for English speakers, online worldwide and in person in Prague 1, 2 and 3.</p>
+    <p>Italian lessons in Prague and online, for English speakers. Service area: Prague 1, 2 and 3, and online worldwide.</p>
     <p><a href="mailto:lucia.scollo2000@gmail.com">lucia.scollo2000@gmail.com</a></p>
     <p>Lessons can be cancelled up to 24 hours before they start.</p>
     <p data-portal hidden>Already a student? <a href="portal.html">See your lessons</a></p>

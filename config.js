@@ -11,5 +11,9 @@ window.PORTAL = {
   key: "",
   // Optional: Lucia's Google Calendar appointment page, e.g. "https://calendar.app.google/xxxx"
   // While empty, "book a lesson" opens an email to Lucia.
-  booking: ""
+  booking: "",
+  // Optional: your Google Business Profile links. While empty, the "Find us on Google" block stays hidden.
+  //   profile: the link of your Google Maps listing (Share > Copy link)
+  //   review:  the "Ask for reviews" link (Google Business Profile > Get more reviews)
+  google: { profile: "", review: "" }
 };

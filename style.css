@@ -311,22 +311,45 @@ p { text-wrap: pretty; max-width: 62ch; }
 .final-alt { font-size: 1rem !important; }
 .final-mail { font-size: 1.1rem !important; font-weight: 700; margin-top: -0.4rem; }
 
-/* ---------- Reviews wall ---------- */
-.wall { columns: 1; column-gap: 1.2rem; }
-.rev { break-inside: avoid; margin: 0 0 1.2rem; }
-.rev blockquote { padding: 1.1rem 1.3rem; background: var(--white); border-radius: var(--bubble); font-size: 1.02rem; line-height: 1.5; font-weight: 500; }
-.rev-1 blockquote { background: var(--lemon); border-radius: var(--bubble-r); }
-.rev figcaption { margin-top: 0.45rem; padding-inline: 0.5rem; font-weight: 700; font-size: 0.93rem; }
-.rev figcaption time { font-weight: 500; opacity: 0.8; }
-.rev figcaption time::before { content: "\00b7\00a0"; }
-.rev-1 figcaption { text-align: right; }
-@media (min-width: 700px) { .wall { columns: 2; } }
-@media (min-width: 1000px) { .wall { columns: 3; } }
-.more { margin-top: 0.6rem; }
-.more > summary { list-style: none; display: flex; width: fit-content; margin: 0 auto 1.8rem; cursor: pointer; }
-.more > summary::-webkit-details-marker { display: none; }
-.more .more-close, .more[open] .more-open { display: none; }
-.more[open] .more-close { display: inline; }
+/* ---------- Reviews reel: two rows that drift in opposite directions ---------- */
+.s-reviews { overflow: hidden; }
+.reel-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.2rem; flex-wrap: wrap; }
+.reel-head .head { margin-bottom: 1.6rem; }
+.reel-ctl { display: flex; gap: 0.5rem; margin-bottom: 1.6rem; }
+.reel-btn { width: 3rem; height: 3rem; border-radius: 50%; border: 2px solid var(--ink); background: var(--white); color: var(--ink); font-size: 1.4rem; line-height: 1; display: grid; place-items: center; transition: transform 0.15s ease, background-color 0.15s ease; }
+.reel-btn:hover { background: var(--lemon); transform: translateY(-2px); }
+.ic-pause { width: 0.95rem; height: 1rem; border-inline: 0.3rem solid currentColor; }
+.reel-btn[aria-pressed="true"] .ic-pause { width: 0; height: 0; border-inline: 0; border-block: 0.55rem solid transparent; border-left: 0.9rem solid currentColor; border-right: 0; margin-left: 0.15rem; }
+.reel { display: grid; gap: 0.2rem; }
+.reel-row {
+  overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; padding: 0.3rem var(--gutter) 0.6rem;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+}
+.reel-row::-webkit-scrollbar { display: none; }
+.reel-row:focus-visible { outline-offset: -3px; }
+.reel-track { display: flex; align-items: flex-start; width: max-content; }
+.rv { flex: none; display: flex; flex-direction: column; gap: 0.7rem; margin: 0 1.1rem 0 0; padding: 1.2rem 1.3rem 1.3rem; border-radius: var(--bubble); background: var(--white); color: var(--ink); }
+.rv-xl { width: min(88vw, 29rem); }
+.rv-wide { width: min(80vw, 22rem); }
+.rv-slim { width: min(70vw, 17.5rem); }
+.rv-1 { background: var(--lemon); border-radius: var(--bubble-r); }
+.rv-2 { background: var(--ink); color: var(--white); }
+.rv figcaption { display: flex; align-items: center; gap: 0.7rem; }
+.rv-av { flex: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 1.1rem; background: var(--cobalt); color: var(--white); }
+.rv-1 .rv-av { background: var(--ink); color: var(--lemon); }
+.rv-2 .rv-av { background: var(--lemon); color: var(--ink); }
+.rv-who { display: grid; line-height: 1.2; }
+.rv-who b { font-weight: 800; }
+.rv-who time { font-size: 0.85rem; opacity: 0.75; }
+.rv blockquote p { font-size: 1.02rem; line-height: 1.5; font-weight: 500; max-width: none; }
+@media (min-width: 900px) { .reel { gap: 0.4rem; } .rv-xl { width: 31rem; } .rv-wide { width: 23rem; } .rv-slim { width: 18.5rem; } .rv blockquote p { font-size: 1.06rem; } }
+@media (prefers-reduced-motion: reduce) { .reel-pause { display: none; } }
+
+/* Google block in the "where" section */
+.gbp { margin-top: 1.4rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.4rem; background: var(--white); border-radius: var(--bubble); }
+.gbp[hidden] { display: none; }
+.gbp-btns { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
 /* ---------- Footer ---------- */
 .foot { background: var(--ink); color: var(--white); padding-block: 2.6rem; }

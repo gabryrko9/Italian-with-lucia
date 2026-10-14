@@ -30,3 +30,7 @@ Gia fatto: titolo e descrizione, Open Graph, dati strutturati (attivita, corso, 
 ## Area studenti e pannello di Lucia (opzionale)
 Segui `GUIDA-AREA-STUDENTI.md`. Finche in `config.js` `url` e `key` sono vuoti, il sito pubblico nasconde tutto e funziona come prima.
 File nuovi da caricare nella root del repo: `config.js`, `common.js`, `app.css`, `portal.html`, `portal.js`, `admin.html`, `admin.js` (oltre a `index.html`, `script.js`, `style.css` aggiornati).
+
+## Google Business Profile
+Guida e testi pronti: `GOOGLE-BUSINESS.md`. Immagini pronte nella cartella `immagini-google-business`.
+Quando il profilo e attivo, incolla i link in `config.js` (`google: { profile: "...", review: "..." }`): compare il blocco "Find us on Google" nella sezione In Prague or online.

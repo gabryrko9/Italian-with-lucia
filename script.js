@@ -110,3 +110,109 @@ if (copyBtn) {
 if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
   document.querySelectorAll("[data-portal]").forEach(function (el) { el.hidden = false; });
 }
+
+/* ---------- 7. Reviews reel ----------
+   Two rows drift sideways on their own, one to the left and one to the right.
+   They stop while someone hovers, touches, scrolls, focuses or presses pause,
+   and they never move for people who asked for reduced motion. Without
+   JavaScript the rows are simply swipeable. */
+(function () {
+  const reel = document.querySelector(".reel");
+  if (!reel) return;
+  const SPEED = 34; // pixels per second
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const rows = Array.prototype.slice.call(reel.querySelectorAll(".reel-row"));
+  const toggle = document.getElementById("reel-toggle");
+  let userPaused = false, hovering = false, focused = false, inView = true, last = 0;
+
+  const state = rows.map(function (row, i) {
+    const track = row.querySelector(".reel-track");
+    if (!reduce) {
+      Array.prototype.slice.call(track.children).forEach(function (c) {
+        const n = c.cloneNode(true);
+        n.setAttribute("aria-hidden", "true");
+        n.setAttribute("inert", "");
+        track.appendChild(n);
+      });
+    }
+    return { row: row, track: track, dir: i % 2 === 0 ? 1 : -1, pos: 0, hold: 0, half: 0 };
+  });
+
+  function half(s) { return reduce ? Infinity : s.track.scrollWidth / 2; }
+  function measure() {
+    state.forEach(function (s) {
+      s.half = half(s);
+      if (!reduce) { s.pos = s.half * (s.dir > 0 ? 0.02 : 0.55); s.row.scrollLeft = s.pos; }
+    });
+  }
+  function wrap(s) {
+    if (reduce) return;
+    if (s.pos >= s.half) s.pos -= s.half;
+    if (s.pos <= 0) s.pos += s.half;
+  }
+  const holdFor = function (s, ms) { s.hold = performance.now() + ms; };
+
+  state.forEach(function (s) {
+    const grab = function () { holdFor(s, 3500); };
+    ["pointerdown", "touchstart", "wheel", "keydown"].forEach(function (ev) { s.row.addEventListener(ev, grab, { passive: true }); });
+    s.row.addEventListener("scroll", function () {
+      if (performance.now() < s.hold) { s.pos = s.row.scrollLeft; if (!reduce && (s.pos >= s.half || s.pos <= 0)) { wrap(s); s.row.scrollLeft = s.pos; } }
+    }, { passive: true });
+  });
+
+  function nudge(sign) {
+    state.forEach(function (s) {
+      holdFor(s, 3500);
+      const card = s.track.firstElementChild;
+      const step = (card ? card.getBoundingClientRect().width + 18 : 300) * 2 * sign;
+      s.row.scrollBy({ left: step, behavior: reduce ? "auto" : "smooth" });
+    });
+  }
+  document.getElementById("reel-prev").addEventListener("click", function () { nudge(-1); });
+  document.getElementById("reel-next").addEventListener("click", function () { nudge(1); });
+  if (toggle) toggle.addEventListener("click", function () {
+    userPaused = !userPaused;
+    toggle.setAttribute("aria-pressed", String(userPaused));
+    toggle.setAttribute("aria-label", userPaused ? "Play the moving reviews" : "Pause the moving reviews");
+  });
+
+  if (window.matchMedia("(hover: hover)").matches) {
+    reel.addEventListener("mouseenter", function () { hovering = true; });
+    reel.addEventListener("mouseleave", function () { hovering = false; });
+  }
+  reel.addEventListener("focusin", function () { focused = true; });
+  reel.addEventListener("focusout", function () { focused = false; });
+
+  if (reduce) return;
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (e) { inView = e[0].isIntersecting; }).observe(reel);
+  }
+  function tick(t) {
+    requestAnimationFrame(tick);
+    const dt = Math.min(64, t - (last || t)) / 1000;
+    last = t;
+    if (!inView || userPaused || hovering || focused || document.hidden) return;
+    state.forEach(function (s) {
+      if (performance.now() < s.hold) return;
+      s.pos += s.dir * SPEED * dt;
+      wrap(s);
+      s.row.scrollLeft = s.pos;
+    });
+  }
+  const go = function () { measure(); requestAnimationFrame(tick); };
+  if (document.readyState === "complete") go(); else window.addEventListener("load", go);
+  window.addEventListener("resize", function () { state.forEach(function (s) { s.half = half(s); }); });
+})();
+
+/* ---------- 8. Google Business Profile links (shown only when set in config.js) ---------- */
+(function () {
+  const g = (window.PORTAL && window.PORTAL.google) || {};
+  if (!g.profile && !g.review) return;
+  const box = document.querySelector("[data-gbp]");
+  if (!box) return;
+  box.querySelectorAll("[data-gbp-link]").forEach(function (a) {
+    const url = g[a.dataset.gbpLink];
+    if (url) a.href = url; else a.hidden = true;
+  });
+  box.hidden = false;
+})();
