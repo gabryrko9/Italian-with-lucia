@@ -311,6 +311,23 @@ p { text-wrap: pretty; max-width: 62ch; }
 .final-alt { font-size: 1rem !important; }
 .final-mail { font-size: 1.1rem !important; font-weight: 700; margin-top: -0.4rem; }
 
+/* ---------- Reviews wall ---------- */
+.wall { columns: 1; column-gap: 1.2rem; }
+.rev { break-inside: avoid; margin: 0 0 1.2rem; }
+.rev blockquote { padding: 1.1rem 1.3rem; background: var(--white); border-radius: var(--bubble); font-size: 1.02rem; line-height: 1.5; font-weight: 500; }
+.rev-1 blockquote { background: var(--lemon); border-radius: var(--bubble-r); }
+.rev figcaption { margin-top: 0.45rem; padding-inline: 0.5rem; font-weight: 700; font-size: 0.93rem; }
+.rev figcaption time { font-weight: 500; opacity: 0.8; }
+.rev figcaption time::before { content: "\00b7\00a0"; }
+.rev-1 figcaption { text-align: right; }
+@media (min-width: 700px) { .wall { columns: 2; } }
+@media (min-width: 1000px) { .wall { columns: 3; } }
+.more { margin-top: 0.6rem; }
+.more > summary { list-style: none; display: flex; width: fit-content; margin: 0 auto 1.8rem; cursor: pointer; }
+.more > summary::-webkit-details-marker { display: none; }
+.more .more-close, .more[open] .more-open { display: none; }
+.more[open] .more-close { display: inline; }
+
 /* ---------- Footer ---------- */
 .foot { background: var(--ink); color: var(--white); padding-block: 2.6rem; }
 .foot-in { display: grid; gap: 0.6rem; font-size: 0.97rem; }
