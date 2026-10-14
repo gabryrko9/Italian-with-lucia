@@ -19,7 +19,7 @@ Le lezioni si cancellano scrivendo a Lucia fino a 24 ore prima dell'inizio; dopo
 
 ## Dove si modificano le cose
 - Prezzi: in `index.html` cerca `data-eur="..."` (numero in EUR; CZK e USD si calcolano da soli). Cambia anche i prezzi nel blocco JSON-LD in cima, per la SEO.
-  Ora: 5 lezioni a 30 EUR, 10 a 27 EUR, 20 a 25 EUR; corso di gruppo 16 EUR a lezione (192 EUR).
+  Ora: 5 lezioni a 30 EUR, 10 a 27 EUR, 20 a 25 EUR; corso di gruppo 18 EUR a persona a lezione (216 EUR per 12 lezioni).
 - Cambio EUR/CZK/USD: in `script.js`, oggetto `CURRENCIES`.
 - Date del corso di gruppo: ora c'e scritto "January". Quando decidi data e orario, cerca "January" in `index.html` e in `script.js`.
 - Foto: `lucia-bubble.jpg` (hero), `lucia-portrait.jpg` (sezione About), `og.jpg` (anteprima social). Le vecchie `lucia-hero.jpg` e `lucia-square.jpg` non servono piu: puoi cancellarle dal repository.

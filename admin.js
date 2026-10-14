@@ -11,7 +11,7 @@
     { t: "5 lessons", n: 5, p: 150 },
     { t: "10 lessons", n: 10, p: 270 },
     { t: "20 lessons", n: 20, p: 500 },
-    { t: "Group course (12 lessons)", n: 12, p: 192 },
+    { t: "Group course (12 lessons)", n: 12, p: 216 },
     { t: "Single lesson", n: 1, p: 30 }
   ];
 
