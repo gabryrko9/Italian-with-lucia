@@ -15,5 +15,5 @@ window.PORTAL = {
   // Optional: your Google Business Profile links. While empty, the "Find us on Google" block stays hidden.
   //   profile: the link of your Google Maps listing (Share > Copy link)
   //   review:  the "Ask for reviews" link (Google Business Profile > Get more reviews)
-  google: { profile: "", review: "" }
+  google: { profile: "https://maps.app.goo.gl/mP7VrprirfnPiXVZ7", review: "https://g.page/r/CW8qh9uZ9dPwEBM/review" }
 };
