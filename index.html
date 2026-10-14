@@ -1,374 +1,534 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parla Italiano Studio | Impara l'italiano con Lucia a Praga e Online</title>
-    <meta name="description" content="Speak Italian with confidence. Private lessons and small group courses with Lucia, qualified Italian teacher in Prague.">
-    <!-- Ottimizzazione SEO Locale -->
-    <meta name="keywords" content="Italian teacher Prague, learn Italian, Italian lessons online, Nuovo Espresso, Italian tutor, Parla Italiano Studio">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Lato', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    colors: {
-                        brand: {
-                            green: '#4A5D23', 
-                            lightgreen: '#F4F7EC', 
-                            orange: '#D35400', 
-                            light: '#FDFBF7'   
-                        }
-                    }
-                }
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Italian Lessons in Prague &amp; Online | Italian with Lucia</title>
+  <meta name="description" content="Learn Italian with Lucia: private lessons and small group courses, online worldwide or in person in Prague. Master's degree in teaching Italian, 1,000+ hours of experience. Book a free 30-minute trial.">
+  <link rel="canonical" href="https://gabryrko9.github.io/Italian-with-lucia/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0E1240">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Italian with Lucia">
+  <meta property="og:title" content="Italian Lessons in Prague &amp; Online | Italian with Lucia">
+  <meta property="og:description" content="Private lessons and small group courses with a qualified Italian teacher. Free 30-minute trial, online or in Prague.">
+  <meta property="og:url" content="https://gabryrko9.github.io/Italian-with-lucia/">
+  <meta property="og:image" content="https://gabryrko9.github.io/Italian-with-lucia/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Italian Lessons in Prague &amp; Online | Italian with Lucia">
+  <meta name="twitter:description" content="Private lessons and small group courses with a qualified Italian teacher. Free 30-minute trial.">
+  <meta name="twitter:image" content="https://gabryrko9.github.io/Italian-with-lucia/og.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&amp;display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="lucia-bubble.jpg" fetchpriority="high">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232438D6'/%3E%3Cpath d='M14 14h36a4 4 0 0 1 4 4v22a4 4 0 0 1-4 4H28l-11 9v-9h-3a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z' fill='%23FFD43B'/%3E%3C/svg%3E">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://gabryrko9.github.io/Italian-with-lucia/#business",
+        "name": "Italian with Lucia",
+        "description": "Private Italian lessons and small group courses for English speakers, online worldwide and in person in Prague.",
+        "url": "https://gabryrko9.github.io/Italian-with-lucia/",
+        "image": "https://gabryrko9.github.io/Italian-with-lucia/og.jpg",
+        "email": "lucia.scollo2000@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Prague", "addressCountry": "CZ" },
+        "areaServed": [
+          { "@type": "City", "name": "Prague" },
+          { "@type": "AdministrativeArea", "name": "Online, worldwide" }
+        ],
+        "knowsLanguage": ["it", "en"],
+        "makesOffer": [
+          { "@type": "Offer", "name": "Free 30-minute trial lesson", "price": "0", "priceCurrency": "EUR" },
+          { "@type": "Offer", "name": "5 private Italian lessons", "price": "150", "priceCurrency": "EUR" },
+          { "@type": "Offer", "name": "10 private Italian lessons", "price": "270", "priceCurrency": "EUR" },
+          { "@type": "Offer", "name": "20 private Italian lessons", "price": "500", "priceCurrency": "EUR" }
+        ]
+      },
+      {
+        "@type": "Course",
+        "name": "Italian group course (beginner, intermediate, advanced)",
+        "description": "Twelve weekly live Italian lessons in a small group of 3 to 5 students, at beginner, intermediate or advanced level.",
+        "provider": { "@id": "https://gabryrko9.github.io/Italian-with-lucia/#business" },
+        "inLanguage": "en",
+        "teaches": "Italian",
+        "offers": { "@type": "Offer", "price": "192", "priceCurrency": "EUR", "category": "Paid" },
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "online",
+          "startDate": "2027-01",
+          "courseWorkload": "PT12H"
         }
-    </script>
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Do I need to know any Italian already?", "acceptedAnswer": { "@type": "Answer", "text": "No. Lessons are adapted to your level, from complete beginner to advanced." } },
+          { "@type": "Question", "name": "Are the lessons online or in person?", "acceptedAnswer": { "@type": "Answer", "text": "Both. Learn online from anywhere in the world, or meet in person in Prague 1, 2 and 3." } },
+          { "@type": "Question", "name": "How do I book the free trial lesson?", "acceptedAnswer": { "@type": "Answer", "text": "Send Lucia a short email at lucia.scollo2000@gmail.com with your level and goals. She replies within 24 hours to agree a time. The trial lasts 30 minutes, with no obligation to continue." } },
+          { "@type": "Question", "name": "How do the group courses work?", "acceptedAnswer": { "@type": "Answer", "text": "Group courses start in January: 12 weekly live lessons in a group of 3 to 5 students, at beginner, intermediate or advanced level." } },
+          { "@type": "Question", "name": "Which coursebook do I need?", "acceptedAnswer": { "@type": "Answer", "text": "Lessons follow the Nuovo Espresso series. Wait for your free trial: Lucia will tell you which level to buy." } },
+          { "@type": "Question", "name": "Can lessons focus on my own goals?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Private lessons can be shaped around work, travel or exam goals." } },
+          { "@type": "Question", "name": "How do I book my lessons and see them afterwards?", "acceptedAnswer": { "@type": "Answer", "text": "After your free trial, you book each lesson with Lucia and receive a confirmation for every booking. Lucia keeps all bookings in her calendar. Group lesson times are confirmed by Lucia when you reserve a place." } },
+          { "@type": "Question", "name": "Can I cancel a lesson?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, up to 24 hours before the lesson starts: write to Lucia by email. After that the lesson cannot be cancelled and counts as taken. The same rule applies to private and group lessons." } },
+          { "@type": "Question", "name": "How do I pay?", "acceptedAnswer": { "@type": "Answer", "text": "Payment is preferred via Revolut; bank transfer also works. You can choose a 5, 10 or 20-lesson package, or a group course." } }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
-<body class="bg-brand-light font-sans text-gray-800 antialiased">
+<body>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-serif font-bold text-brand-green flex flex-col leading-none">
-                Parla Italiano <span class="font-sans font-light text-gray-500 text-xs mt-1 tracking-widest">STUDIO</span>
-            </a>
-            <div class="hidden md:flex space-x-8 items-center text-sm font-semibold text-gray-700">
-                <a href="#about" class="hover:text-brand-orange transition">Meet Lucia</a>
-                <a href="#private" class="hover:text-brand-orange transition">Private Lessons</a>
-                <a href="#courses" class="text-brand-orange hover:text-orange-700 transition">Group Courses</a>
-                <a href="#pricing" class="hover:text-brand-orange transition">Pricing</a>
-                <a href="#faq" class="hover:text-brand-orange transition">FAQ</a>
-                <a href="https://calendar.app.google/REPLACE-WITH-LUCIA-BOOKING-LINK" target="_blank" class="bg-brand-orange text-white px-6 py-2.5 rounded-full hover:bg-orange-700 transition shadow-md">Book Trial</a>
-            </div>
-        </div>
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <clipPath id="bubble" clipPathUnits="objectBoundingBox">
+      <path d="M0.14,0 H0.86 C0.94,0 1,0.06 1,0.14 V0.70 C1,0.78 0.94,0.84 0.86,0.84 H0.38 L0.12,1 L0.20,0.84 H0.14 C0.06,0.84 0,0.78 0,0.70 V0.14 C0,0.06 0.06,0 0.14,0 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<a class="skip" href="#lessons">Skip to the lessons</a>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="mark" href="#top" aria-label="Italian with Lucia, home">
+      <svg class="mark-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 4h22a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H15l-7 6v-6H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" fill="currentColor"/></svg>
+      Italian with Lucia
+    </a>
+    <nav class="bar-nav" aria-label="Main">
+      <a href="#lessons">Private lessons</a>
+      <a href="#group">Group course</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a class="portal-link" href="portal.html" data-portal hidden>My lessons</a>
     </nav>
+    <a class="btn btn-lemon btn-sm" href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20book%20the%20free%2030-minute%20trial.%0A%0AMy%20level%20(beginner%20%2F%20intermediate%20%2F%20advanced)%3A%20%0AOnline%20or%20in%20Prague%3A%20%0AMy%20time%20zone%3A%20%0A%0AThanks!">Free trial</a>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2 text-left z-10">
-                <p class="text-brand-orange font-semibold tracking-wider uppercase text-sm mb-4">Ciao! — you just read your first Italian word</p>
-                <h1 class="text-5xl lg:text-6xl font-serif font-bold text-brand-green mb-6 leading-tight">
-                    Speak Italian with confidence, in Prague or online.
-                </h1>
-                <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                    Private lessons and small group courses with Lucia: a qualified Italian teacher with a Master's degree from the University for Foreigners of Perugia and over 1,000 hours in the classroom.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <!-- LINK DA SOSTITUIRE CON GOOGLE CALENDAR -->
-                    <a href="https://calendar.app.google/REPLACE-WITH-LUCIA-BOOKING-LINK" target="_blank" class="bg-brand-orange text-white text-center px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-700 transition shadow-lg">
-                        Book a free 30-min trial
-                    </a>
-                    <a href="#courses" class="border-2 border-brand-green text-brand-green text-center px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-lightgreen transition">
-                        See January Courses &rarr;
-                    </a>
-                </div>
-                <ul class="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm text-gray-500 font-medium">
-                    <li class="flex items-center">✓ MA, Univ. of Perugia</li>
-                    <li class="flex items-center">✓ 1,000+ hours taught</li>
-                    <li class="flex items-center">✓ Prague & Online</li>
-                </ul>
-            </div>
-            <div class="md:w-1/2 relative">
-                <div class="absolute inset-0 bg-brand-green rounded-full blur-3xl opacity-10 transform translate-x-10 translate-y-10"></div>
-                <img src="lucia-hero.jpg" alt="Lucia, Italian language teacher in Prague" class="relative z-10 w-full h-auto rounded-3xl shadow-2xl border-4 border-white object-cover aspect-[4/5]">
-            </div>
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>Italian lessons in Prague and online, with Lucia.</h1>
+      <p class="hero-lead">Private lessons and small group classes for English speakers. You speak from the first lesson, and the grammar finally makes sense.</p>
+      <div class="hero-cta">
+        <a class="btn btn-lemon btn-lg" href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20book%20the%20free%2030-minute%20trial.%0A%0AMy%20level%20(beginner%20%2F%20intermediate%20%2F%20advanced)%3A%20%0AOnline%20or%20in%20Prague%3A%20%0AMy%20time%20zone%3A%20%0A%0AThanks!">Email Lucia for a free trial</a>
+        <a class="btn btn-line btn-lg" href="#group">See the January group course</a>
+      </div>
+      <p class="hero-note">Free, 30 minutes, no obligation. Lucia replies within 24 hours.</p>
+      <ul class="hero-proof">
+        <li>Master's degree, University for Foreigners of Perugia</li>
+        <li>1,000+ hours of teaching</li>
+        <li>Online worldwide, or in person in Prague</li>
+      </ul>
+    </div>
+
+    <div class="hero-art">
+      <div class="bubble-wrap">
+        <img src="lucia-bubble.jpg" width="900" height="900" fetchpriority="high" alt="Lucia, Italian teacher in Prague, smiling at the camera">
+      </div>
+      <button class="phrase phrase-1" type="button" title="Tap for the English"><span class="it" lang="it">Piacere!</span><span class="en">Nice to meet you!</span></button>
+      <button class="phrase phrase-2" type="button" title="Tap for the English"><span class="it" lang="it">Come va?</span><span class="en">How's it going?</span></button>
+      <button class="phrase phrase-3" type="button" title="Tap for the English"><span class="it" lang="it">Parli italiano!</span><span class="en">You speak Italian!</span></button>
+      <p class="hero-hint">Tap a bubble for the English</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="s s-paper" id="video">
+  <div class="wrap">
+    <div class="head">
+      <h2>Meet Lucia</h2>
+      <p>Hear her voice and her way of teaching before you book anything.</p>
+    </div>
+    <div class="video" id="video-box" data-id="Bb2mI4j_BoE">
+      <img class="video-poster" src="https://i.ytimg.com/vi/Bb2mI4j_BoE/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Bb2mI4j_BoE/hqdefault.jpg'">
+      <button class="video-play" type="button" aria-label="Play the video: Lucia introduces herself">
+        <span class="video-play-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+        <span class="video-play-text">Play the introduction</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="s s-lemon" id="how">
+  <div class="wrap">
+    <div class="head">
+      <h2>Start in three steps</h2>
+    </div>
+    <ol class="steps">
+      <li>
+        <h3>Send a quick email</h3>
+        <p>Tell Lucia your level, your goals and whether you prefer online or Prague. She replies within 24 hours to agree a time.</p>
+      </li>
+      <li>
+        <h3>Have your free trial</h3>
+        <p>Thirty minutes to meet, check your level and get a plan: format, pace and the right coursebook volume. No obligation.</p>
+      </li>
+      <li>
+        <h3>Start speaking</h3>
+        <p>Weekly lessons online or in Prague, with materials and homework between classes. You can cancel a lesson up to 24 hours before it starts.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- PRIVATE LESSONS -->
+<section class="s s-white" id="lessons">
+  <div class="wrap">
+    <div class="head head-split">
+      <div>
+        <h2>Private lessons</h2>
+        <p>One-to-one, built around your level and your goals. Every lesson lasts 60 minutes, online or in person in Prague. Lessons come in packages so you build real momentum, and the more you book, the less each lesson costs.</p>
+      </div>
+      <div class="currency" role="group" aria-label="Choose currency">
+        <button type="button" class="cur is-on" data-currency="EUR" aria-pressed="true">EUR €</button>
+        <button type="button" class="cur" data-currency="CZK" aria-pressed="false">CZK Kč</button>
+        <button type="button" class="cur" data-currency="USD" aria-pressed="false">USD $</button>
+      </div>
+    </div>
+
+    <div class="plans">
+      <article class="plan plan-trial">
+        <h3>Free trial</h3>
+        <p class="plan-price">Free</p>
+        <p class="plan-sub">30 minutes, no obligation</p>
+        <ul>
+          <li>Meet Lucia and ask anything</li>
+          <li>Honest check of your level</li>
+          <li>A plan for what comes next</li>
+        </ul>
+        <a class="btn btn-ink" href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20book%20the%20free%2030-minute%20trial.%0A%0AMy%20level%20(beginner%20%2F%20intermediate%20%2F%20advanced)%3A%20%0AOnline%20or%20in%20Prague%3A%20%0AMy%20time%20zone%3A%20%0A%0AThanks!">Email for free trial</a>
+      </article>
+
+      <article class="plan plan-five">
+        <h3>5 lessons</h3>
+        <p class="plan-price"><span class="money" data-eur="30">€30</span> <small>per lesson</small></p>
+        <p class="plan-sub"><span class="money" data-eur="150">€150</span> for the package</p>
+        <ul>
+          <li>One-to-one, 60 minutes</li>
+          <li>Online or in Prague</li>
+          <li>Materials and homework included</li>
+        </ul>
+        <a class="btn btn-ink" href="mailto:lucia.scollo2000@gmail.com?subject=5-lesson%20package&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20start%20with%20the%205-lesson%20package.%0A%0AMy%20level%3A%20%0AOnline%20or%20in%20Prague%3A%20%0A%0AThanks!">Choose 5 lessons</a>
+      </article>
+
+      <article class="plan plan-ten">
+        <h3>10 lessons</h3>
+        <p class="plan-price"><span class="money" data-eur="27">€27</span> <small>per lesson</small></p>
+        <p class="plan-sub"><span class="money" data-eur="270">€270</span> for the package</p>
+        <ul>
+          <li>One-to-one, 60 minutes</li>
+          <li>Online or in Prague</li>
+          <li>Materials and homework included</li>
+          <li class="plan-save">Save <span class="money" data-eur="30">€30</span> vs. the 5-lesson rate</li>
+        </ul>
+        <a class="btn btn-lemon" href="mailto:lucia.scollo2000@gmail.com?subject=10-lesson%20package&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20start%20with%20the%2010-lesson%20package.%0A%0AMy%20level%3A%20%0AOnline%20or%20in%20Prague%3A%20%0A%0AThanks!">Choose 10 lessons</a>
+      </article>
+
+      <article class="plan plan-twenty">
+        <p class="plan-flag">Best value</p>
+        <h3>20 lessons</h3>
+        <p class="plan-price"><span class="money" data-eur="25">€25</span> <small>per lesson</small></p>
+        <p class="plan-sub"><span class="money" data-eur="500">€500</span> for the package</p>
+        <ul>
+          <li>One-to-one, 60 minutes</li>
+          <li>Online or in Prague</li>
+          <li>Materials and homework included</li>
+          <li class="plan-save">Save <span class="money" data-eur="100">€100</span> vs. the 5-lesson rate</li>
+        </ul>
+        <a class="btn btn-lemon" href="mailto:lucia.scollo2000@gmail.com?subject=20-lesson%20package&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20start%20with%20the%2020-lesson%20package.%0A%0AMy%20level%3A%20%0AOnline%20or%20in%20Prague%3A%20%0A%0AThanks!">Choose 20 lessons</a>
+      </article>
+
+    </div>
+    <div class="after-plans">
+      <aside class="booknow" id="book-lesson" aria-labelledby="booknow-title">
+        <h3 id="booknow-title">Already taking lessons?</h3>
+        <p id="booknow-text">Email Lucia your preferred days and times and she confirms your next lesson. Keep her confirmation as your booking record.</p>
+        <a class="btn btn-ink" id="lesson-book" href="mailto:lucia.scollo2000@gmail.com?subject=Lesson%20booking&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20book%20my%20next%20lesson.%0A%0APreferred%20days%20and%20times%3A%20%0A%0AThanks!">Email Lucia to book a lesson</a>
+      </aside>
+      <aside class="policy" id="cancellation" aria-labelledby="cancel-title">
+        <svg class="policy-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="4"/><path d="M24 12v13l9 5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h3 id="cancel-title">Cancel up to 24 hours before the lesson</h3>
+          <p>Lessons can be cancelled by email up to 24 hours before they start. After that they cannot be cancelled and count as taken. This applies to private lessons and group lessons.</p>
         </div>
-    </section>
+      </aside>
+    </div>
+    <p class="fine">Not sure yet? Start with the free trial. Prices in CZK and USD are indicative conversions. Payment via Revolut or bank transfer.</p>
+  </div>
+</section>
 
-    <!-- Video & About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <p class="text-brand-orange italic font-serif text-xl mb-2">Piacere! — nice to meet you</p>
-                <h2 class="text-4xl font-serif font-bold text-brand-green">Meet Lucia</h2>
-            </div>
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <!-- Video Placeholder -->
-                <div class="lg:w-1/2 w-full">
-                    <div class="aspect-video bg-gray-100 rounded-3xl shadow-lg border-4 border-brand-lightgreen flex items-center justify-center relative overflow-hidden group cursor-pointer">
-                        <!-- Sostituire questo div con un iframe di YouTube/Vimeo quando il video sarà pronto -->
-                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"></div>
-                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-xl z-10 group-hover:scale-110 transition transform">
-                            <div class="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-brand-orange border-b-[12px] border-b-transparent ml-2"></div>
-                        </div>
-                        <img src="lucia-square.jpg" alt="Video cover" class="absolute inset-0 w-full h-full object-cover opacity-60">
-                    </div>
-                </div>
-                <!-- Bio -->
-                <div class="lg:w-1/2 text-gray-600 space-y-6 text-lg leading-relaxed">
-                    <p>Lucia bridges the gap between structured learning and natural fluency. Her approach is built for English speakers who want clarity without losing the joy of the language: precise pronunciation, grammar that finally makes sense, and the confidence to express yourself naturally.</p>
-                    <p>Every mistake is a step toward your new Italian voice — lessons are rigorous in content, warm in tone.</p>
-                    <p class="font-bold text-brand-green">Two minutes to hear her voice, her accent, and her way of teaching — before you even book.</p>
-                </div>
-            </div>
+<!-- GROUP COURSE -->
+<section class="s s-ink" id="group">
+  <div class="wrap group-grid">
+    <div class="group-intro">
+      <h2>Group course starts in January</h2>
+      <p>Twelve weekly live lessons in a group of three to five. You get regular speaking time, a steady weekly rhythm and a lower price per lesson than private tuition.</p>
+
+      <div class="group-price">
+        <p class="group-price-big"><span class="money" data-eur="16">€16</span> <small>per lesson</small></p>
+        <p><span class="money" data-eur="192">€192</span> for the 12-week course</p>
+      </div>
+
+      <div class="currency currency-dark" role="group" aria-label="Choose currency">
+        <button type="button" class="cur is-on" data-currency="EUR" aria-pressed="true">EUR €</button>
+        <button type="button" class="cur" data-currency="CZK" aria-pressed="false">CZK Kč</button>
+        <button type="button" class="cur" data-currency="USD" aria-pressed="false">USD $</button>
+      </div>
+
+      <p class="group-note">Online, 60 minutes a week. Places are limited to five per group. Reserve by email and Lucia confirms the day and time with you. Group lessons follow the same <a href="#cancellation">24-hour cancellation rule</a>.</p>
+    </div>
+
+    <ul class="levels">
+      <li>
+        <div>
+          <h3>Beginner <span class="lvl">A1–A2</span></h3>
+          <p>Start from zero. By the end you handle introductions, ordering, directions and everyday small talk, with good pronunciation from day one.</p>
         </div>
-    </section>
-
-    <!-- Private Lessons -->
-    <section id="private" class="py-20 bg-brand-light">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <p class="text-brand-orange italic font-serif text-xl mb-2">Le lezioni — the lessons</p>
-                <h2 class="text-4xl font-serif font-bold text-brand-green">An Italian journey tailored to you</h2>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">One-to-one lessons shaped around your level, your goals and your schedule — online or face to face in Prague.</p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold text-brand-green mb-3">Absolute beginners</h3>
-                    <p class="text-gray-600 text-sm">Build a strong foundation from your very first word. Essential vocabulary and clear grammar to get you speaking right away.</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold text-brand-green mb-3">Grammar & Pronunciation</h3>
-                    <p class="text-gray-600 text-sm">Master Italian phonetics and structure to sound more natural — and be understood the first time, every time.</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold text-brand-green mb-3">Conversation & Fluency</h3>
-                    <p class="text-gray-600 text-sm">High-level speaking practice, cultural nuance and real-life scenarios for intermediate and advanced learners.</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 class="text-xl font-bold text-brand-green mb-3">Italian for Work & Travel</h3>
-                    <p class="text-gray-600 text-sm">Specialised lessons for professionals and travellers: business etiquette, industry vocabulary, real situations.</p>
-                </div>
-            </div>
+        <a class="btn btn-lemon btn-sm" href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20Beginner&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20reserve%20a%20place%20in%20the%20January%20Beginner%20group.%0A%0AMy%20time%20zone%3A%20%0APreferred%20days%20and%20times%3A%20%0A%0AThanks!">Reserve a place</a>
+      </li>
+      <li>
+        <div>
+          <h3>Intermediate <span class="lvl">B1</span></h3>
+          <p>Get past the plateau. Past tenses that finally click, a wider vocabulary and guided conversation on real topics every week.</p>
         </div>
-    </section>
-
-    <!-- Group Courses -->
-    <section id="courses" class="py-24 bg-brand-green text-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="bg-brand-orange text-white px-4 py-1.5 rounded-full text-sm font-bold tracking-wider uppercase mb-4 inline-block">Starting January 2027</span>
-                <h2 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-6">Winter Group Courses</h2>
-                <p class="text-xl text-brand-lightgreen max-w-2xl mx-auto">Twelve weeks (January &rarr; March), one live lesson per week, never more than five students. Learn together and stay accountable.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Course A1 -->
-                <div class="bg-white text-gray-800 p-8 rounded-2xl shadow-xl flex flex-col h-full">
-                    <div class="bg-brand-lightgreen text-brand-green font-bold px-3 py-1 rounded w-max mb-4">A1–A2</div>
-                    <h3 class="text-2xl font-bold text-brand-green mb-3">Beginner</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">Start from zero. By March you'll handle introductions, ordering, directions and everyday small talk.</p>
-                    <ul class="space-y-2 mb-8 text-sm text-gray-600 border-t border-gray-100 pt-4">
-                        <li class="flex items-center">✓ 12 live lessons (1x week)</li>
-                        <li class="flex items-center">✓ 60 minutes via Zoom</li>
-                        <li class="flex items-center font-bold text-brand-orange">✓ Max 3–5 students</li>
-                    </ul>
-                    <a href="mailto:lucia.scollo2000@gmail.com?subject=Enrolment:%20Beginner%20Course" class="block text-center w-full bg-brand-green text-white py-4 rounded-xl font-bold hover:bg-green-900 transition">Enrol for €192</a>
-                </div>
-
-                <!-- Course B1 -->
-                <div class="bg-white text-gray-800 p-8 rounded-2xl shadow-xl flex flex-col h-full border-4 border-brand-orange relative transform md:-translate-y-4">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-orange text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Most Popular</div>
-                    <div class="bg-orange-100 text-brand-orange font-bold px-3 py-1 rounded w-max mb-4">B1</div>
-                    <h3 class="text-2xl font-bold text-brand-green mb-3">Intermediate</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">Break out of the plateau. Past tenses that finally click, richer vocabulary, and guided conversation every week.</p>
-                    <ul class="space-y-2 mb-8 text-sm text-gray-600 border-t border-gray-100 pt-4">
-                        <li class="flex items-center">✓ 12 live lessons (1x week)</li>
-                        <li class="flex items-center">✓ 60 minutes via Zoom</li>
-                        <li class="flex items-center font-bold text-brand-orange">✓ Max 3–5 students</li>
-                    </ul>
-                    <a href="mailto:lucia.scollo2000@gmail.com?subject=Enrolment:%20Intermediate%20Course" class="block text-center w-full bg-brand-orange text-white py-4 rounded-xl font-bold hover:bg-orange-700 transition">Enrol for €192</a>
-                </div>
-
-                <!-- Course B2-C1 -->
-                <div class="bg-white text-gray-800 p-8 rounded-2xl shadow-xl flex flex-col h-full">
-                    <div class="bg-gray-100 text-gray-600 font-bold px-3 py-1 rounded w-max mb-4">B2–C1</div>
-                    <h3 class="text-2xl font-bold text-brand-green mb-3">Advanced</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">Refine nuance, idioms and register. Debate, tell stories and argue your point in Italian.</p>
-                    <ul class="space-y-2 mb-8 text-sm text-gray-600 border-t border-gray-100 pt-4">
-                        <li class="flex items-center">✓ 12 live lessons (1x week)</li>
-                        <li class="flex items-center">✓ 60 minutes via Zoom</li>
-                        <li class="flex items-center font-bold text-brand-orange">✓ Max 3–5 students</li>
-                    </ul>
-                    <a href="mailto:lucia.scollo2000@gmail.com?subject=Enrolment:%20Advanced%20Course" class="block text-center w-full border-2 border-brand-green text-brand-green py-3.5 rounded-xl font-bold hover:bg-brand-lightgreen transition">Enrol for €192</a>
-                </div>
-            </div>
-            <p class="text-center mt-12 text-sm text-brand-lightgreen opacity-80">* Early bird pricing: €169 if you enrol by December 20th.</p>
+        <a class="btn btn-lemon btn-sm" href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20Intermediate&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20reserve%20a%20place%20in%20the%20January%20Intermediate%20group.%0A%0AMy%20time%20zone%3A%20%0APreferred%20days%20and%20times%3A%20%0A%0AThanks!">Reserve a place</a>
+      </li>
+      <li>
+        <div>
+          <h3>Advanced <span class="lvl">B2–C1</span></h3>
+          <p>Sharpen nuance, idioms and register. Tell stories, debate and argue your point in Italian, with precise feedback.</p>
         </div>
-    </section>
+        <a class="btn btn-lemon btn-sm" href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20Advanced&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20reserve%20a%20place%20in%20the%20January%20Advanced%20group.%0A%0AMy%20time%20zone%3A%20%0APreferred%20days%20and%20times%3A%20%0A%0AThanks!">Reserve a place</a>
+      </li>
+    </ul>
+  </div>
+</section>
 
-    <!-- Method & Location -->
-    <section class="py-20 bg-brand-light">
-        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12">
-            <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
-                <p class="text-brand-orange italic font-serif mb-2">Il libro — the coursebook</p>
-                <h3 class="text-3xl font-serif font-bold text-brand-green mb-4">Nuovo Espresso</h3>
-                <p class="text-gray-600 mb-6">All lessons and courses follow <strong>Nuovo Espresso</strong> (ALMA Edizioni), the gold standard for learning Italian. It combines clear grammar with real communicative practice.</p>
-                <div class="bg-brand-lightgreen p-4 rounded-lg mb-6 text-sm text-brand-green border border-green-200">
-                    <strong>Note:</strong> Not sure which level you need? Lucia will evaluate you during the free trial. You don't need to buy anything before that!
-                </div>
-                <a href="https://www.almaedizioni.it/catalogo/nuovo-espresso/" target="_blank" class="text-brand-orange font-bold hover:underline">Explore the books &rarr;</a>
-            </div>
-            <div class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
-                <p class="text-brand-orange italic font-serif mb-2">Dove? — where?</p>
-                <h3 class="text-3xl font-serif font-bold text-brand-green mb-4">Prague & Online</h3>
-                <div class="space-y-6">
-                    <div>
-                        <h4 class="font-bold text-gray-800 text-lg">📍 In person (Prague)</h4>
-                        <p class="text-gray-600 mt-1">Available in <strong>Prague 1, 2, and 3</strong>. We meet in quiet central cafés or agreed meeting points, creating a relaxed environment for conversation.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-gray-800 text-lg">💻 Online (Worldwide)</h4>
-                        <p class="text-gray-600 mt-1">Live over Zoom with a shared whiteboard and flexible scheduling. The exact same structure and warmth, straight from your sofa.</p>
-                    </div>
-                </div>
-            </div>
+<!-- LEVEL FINDER -->
+<section class="s s-white" id="level">
+  <div class="wrap level-grid">
+    <div class="level-intro">
+      <h2>Not sure which level you are?</h2>
+      <p>Pick the sentence that sounds most like you. Lucia confirms your level in the free trial.</p>
+    </div>
+    <div class="finder">
+      <fieldset>
+        <legend class="sr-only">Which sentence sounds most like you?</legend>
+        <label class="opt"><input type="radio" name="lvl" value="beginner"><span>I'm starting from zero, or I know a few words.</span></label>
+        <label class="opt"><input type="radio" name="lvl" value="beginner"><span>I can say simple sentences, but real conversation is hard.</span></label>
+        <label class="opt"><input type="radio" name="lvl" value="intermediate"><span>I can talk about everyday things, but past tenses and longer sentences trip me up.</span></label>
+        <label class="opt"><input type="radio" name="lvl" value="advanced"><span>I speak fluently, but I want to sound more natural and precise.</span></label>
+      </fieldset>
+      <div class="result" id="level-result" hidden>
+        <h3 id="level-title"></h3>
+        <p id="level-text"></p>
+        <div class="result-cta">
+          <a class="btn btn-ink" id="level-reserve" href="mailto:lucia.scollo2000@gmail.com">Reserve a place in this group</a>
+          <a class="btn btn-line" href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20book%20the%20free%2030-minute%20trial.%0A%0AMy%20level%20(beginner%20%2F%20intermediate%20%2F%20advanced)%3A%20%0AOnline%20or%20in%20Prague%3A%20%0AMy%20time%20zone%3A%20%0A%0AThanks!">Confirm it in a free trial</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Pricing -->
-    <section id="pricing" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <p class="text-brand-orange italic font-serif text-xl mb-2">I prezzi — the prices</p>
-                <h2 class="text-4xl font-serif font-bold text-brand-green">Simple, honest pricing</h2>
-                <p class="mt-4 text-gray-500">Payments via Revolut or bank transfer. <span class="font-semibold text-gray-700">EUR / CZK / USD</span> accepted.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Trial -->
-                <div class="border border-gray-200 p-8 rounded-2xl bg-gray-50 flex flex-col">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Trial Lesson</h3>
-                    <div class="text-4xl font-bold text-brand-green mb-4">Free</div>
-                    <p class="text-sm text-gray-500 mb-6 flex-grow">30 minutes · no obligation to continue.</p>
-                    <a href="https://calendar.app.google/REPLACE-WITH-LUCIA-BOOKING-LINK" target="_blank" class="w-full text-center border-2 border-brand-green text-brand-green py-3 rounded-lg font-bold hover:bg-brand-green hover:text-white transition">Book Trial</a>
-                </div>
-                <!-- 5 Pack -->
-                <div class="border border-gray-200 p-8 rounded-2xl bg-white flex flex-col">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">5-Lesson Pack</h3>
-                    <div class="text-4xl font-bold text-gray-800 mb-4">€115</div>
-                    <p class="text-sm text-gray-500 mb-6 flex-grow">Private 1:1 lessons<br><span class="font-bold text-gray-700">€23</span> per 60-min lesson.</p>
-                    <a href="mailto:lucia.scollo2000@gmail.com" class="w-full text-center bg-gray-100 text-gray-800 py-3 rounded-lg font-bold hover:bg-gray-200 transition">Contact Lucia</a>
-                </div>
-                <!-- 10 Pack -->
-                <div class="border-2 border-brand-green p-8 rounded-2xl bg-brand-lightgreen flex flex-col relative">
-                    <div class="absolute -top-3 right-4 bg-brand-green text-white text-xs px-3 py-1 rounded font-bold tracking-wide">BEST VALUE</div>
-                    <h3 class="text-xl font-bold text-brand-green mb-2">10-Lesson Pack</h3>
-                    <div class="text-4xl font-bold text-brand-green mb-4">€200</div>
-                    <p class="text-sm text-gray-500 mb-6 flex-grow">Private 1:1 lessons<br><span class="font-bold text-gray-700">€20</span> per 60-min lesson.</p>
-                    <a href="mailto:lucia.scollo2000@gmail.com" class="w-full text-center bg-brand-green text-white py-3 rounded-lg font-bold hover:bg-green-800 transition">Contact Lucia</a>
-                </div>
-                <!-- Group -->
-                <div class="border border-brand-orange p-8 rounded-2xl bg-orange-50 flex flex-col">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Group Course</h3>
-                    <div class="text-4xl font-bold text-brand-orange mb-4">€192</div>
-                    <p class="text-sm text-gray-500 mb-6 flex-grow">12 weekly lessons<br><span class="font-bold text-gray-700">€16</span> per 60-min lesson.<br>Max 5 students.</p>
-                    <a href="#courses" class="w-full text-center bg-brand-orange text-white py-3 rounded-lg font-bold hover:bg-orange-700 transition">See Schedule</a>
-                </div>
-            </div>
-            <p class="text-center mt-8 text-sm text-gray-400">Note: Single private lessons are not available. The minimum commitment after the trial is a 5-lesson package to ensure tangible progress.</p>
-        </div>
-    </section>
+<!-- ABOUT -->
+<section class="s s-paper" id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo">
+      <img src="lucia-portrait.jpg" width="800" height="1000" loading="lazy" alt="Portrait of Lucia, your Italian teacher">
+    </div>
+    <div class="about-copy">
+      <h2>Rigorous in content, warm in tone</h2>
+      <p>Lucia teaches Italian to English speakers who want to speak, not just study. Her lessons connect structured learning with natural fluency: precise pronunciation, grammar that makes sense and the confidence to express yourself.</p>
+      <p>Every mistake is a step towards your new Italian voice.</p>
+      <ul class="creds">
+        <li>Master's degree, University for Foreigners of Perugia</li>
+        <li>More than 1,000 hours of classroom experience</li>
+        <li>Lessons for complete beginners up to advanced learners</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <!-- Testimonials -->
-    <section class="py-20 bg-brand-light">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <p class="text-brand-orange italic font-serif text-xl mb-2">Le voci — the voices</p>
-                <h2 class="text-4xl font-serif font-bold text-brand-green">What students say</h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm relative">
-                    <span class="text-6xl text-brand-lightgreen absolute top-4 left-4 font-serif">"</span>
-                    <p class="text-gray-600 relative z-10 italic mb-6">Excellent pronunciation help. I finally feel confident speaking Italian in Prague and beyond.</p>
-                    <p class="font-bold text-brand-green">— Sarah M. (Expat in Prague)</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm relative">
-                    <span class="text-6xl text-brand-lightgreen absolute top-4 left-4 font-serif">"</span>
-                    <p class="text-gray-600 relative z-10 italic mb-6">Strong grammar explanations. After years of struggling, Italian finally makes sense and feels natural.</p>
-                    <p class="font-bold text-brand-green">— Emma S. (Online learner)</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm relative">
-                    <span class="text-6xl text-brand-lightgreen absolute top-4 left-4 font-serif">"</span>
-                    <p class="text-gray-600 relative z-10 italic mb-6">Warm teaching style and a supportive atmosphere. I actually look forward to every lesson.</p>
-                    <p class="font-bold text-brand-green">— Mark T. (Beginner)</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- TESTIMONIALS -->
+<section class="s s-tomato" id="voices">
+  <div class="wrap">
+    <div class="head">
+      <h2>What students say</h2>
+    </div>
+    <div class="chat">
+      <figure class="msg msg-l">
+        <blockquote><p>Excellent pronunciation help. I finally feel confident speaking Italian in Prague and beyond.</p></blockquote>
+        <figcaption>Sarah M., expat in Prague</figcaption>
+      </figure>
+      <figure class="msg msg-r">
+        <blockquote><p>Strong grammar explanations. After years of struggling, Italian finally makes sense and feels natural.</p></blockquote>
+        <figcaption>Emma S., language learner</figcaption>
+      </figure>
+      <figure class="msg msg-l">
+        <blockquote><p>Warm teaching style and a supportive atmosphere.</p></blockquote>
+        <figcaption>Mark T., beginner student</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-20 bg-white">
-        <div class="max-w-3xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <p class="text-brand-orange italic font-serif text-xl mb-2">Le domande — the questions</p>
-                <h2 class="text-4xl font-serif font-bold text-brand-green">Frequently Asked Questions</h2>
-            </div>
-            <div class="space-y-4">
-                <details class="bg-brand-light p-6 rounded-xl cursor-pointer group">
-                    <summary class="font-bold text-lg text-gray-800 outline-none flex justify-between items-center">
-                        Do I need to already speak Italian?
-                        <span class="text-brand-orange group-open:rotate-45 transition transform text-2xl">+</span>
-                    </summary>
-                    <p class="mt-4 text-gray-600">No. Lessons adapt to your level, from complete beginner to advanced. We build a strong foundation — and confidence — from the very first lesson.</p>
-                </details>
-                <details class="bg-brand-light p-6 rounded-xl cursor-pointer group">
-                    <summary class="font-bold text-lg text-gray-800 outline-none flex justify-between items-center">
-                        How does the free trial work?
-                        <span class="text-brand-orange group-open:rotate-45 transition transform text-2xl">+</span>
-                    </summary>
-                    <p class="mt-4 text-gray-600">It's a relaxed 30-minute session: you meet Lucia, she evaluates your current level, and together you discuss your goals. No obligation to continue.</p>
-                </details>
-                <details class="bg-brand-light p-6 rounded-xl cursor-pointer group">
-                    <summary class="font-bold text-lg text-gray-800 outline-none flex justify-between items-center">
-                        How do the winter group courses work?
-                        <span class="text-brand-orange group-open:rotate-45 transition transform text-2xl">+</span>
-                    </summary>
-                    <p class="mt-4 text-gray-600">Each course runs from January to March: 12 weekly live lessons in a small group of 3–5 students, at beginner, intermediate or advanced level. You'll get the exact weekly time slot before enrolling.</p>
-                </details>
-                <details class="bg-brand-light p-6 rounded-xl cursor-pointer group">
-                    <summary class="font-bold text-lg text-gray-800 outline-none flex justify-between items-center">
-                        How do payments work?
-                        <span class="text-brand-orange group-open:rotate-45 transition transform text-2xl">+</span>
-                    </summary>
-                    <p class="mt-4 text-gray-600">Via Revolut or bank transfer. You can pay in EUR, CZK, or USD based on current exchange rates. Choose a 5-lesson or 10-lesson private package, or enrol in a group course.</p>
-                </details>
-            </div>
-        </div>
-    </section>
+<!-- WHAT YOU CAN WORK ON -->
+<section class="s s-white" id="focus">
+  <div class="wrap">
+    <div class="head">
+      <h2>What you can work on</h2>
+    </div>
+    <dl class="rows">
+      <div class="row">
+        <dt>Absolute beginners</dt>
+        <dd>A solid base from your first word: essential vocabulary, clear grammar and speaking right away.</dd>
+      </div>
+      <div class="row">
+        <dt>Grammar and pronunciation</dt>
+        <dd>Italian sounds and structure, so you are understood the first time you say it.</dd>
+      </div>
+      <div class="row">
+        <dt>Conversation and fluency</dt>
+        <dd>Speaking practice, cultural nuance and real-life situations for intermediate and advanced learners.</dd>
+      </div>
+      <div class="row">
+        <dt>Italian for work and travel</dt>
+        <dd>Formal etiquette, industry vocabulary and the situations you will actually face.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
 
-    <!-- Final CTA & Footer -->
-    <footer class="bg-gray-900 text-white pt-20 border-t-8 border-brand-green">
-        <div class="max-w-6xl mx-auto px-4 text-center mb-16">
-            <h2 class="text-4xl font-serif font-bold mb-6">Ready to start?</h2>
-            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Pick a time that suits you for a free 30-minute trial, or write me an email directly.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://calendar.app.google/REPLACE-WITH-LUCIA-BOOKING-LINK" target="_blank" class="bg-brand-orange text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-700 transition">Book Free Trial</a>
-                <a href="mailto:lucia.scollo2000@gmail.com" class="border border-gray-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition">Email Lucia</a>
-            </div>
-        </div>
+<!-- WHERE -->
+<section class="s s-paper" id="where">
+  <div class="wrap">
+    <div class="head">
+      <h2>In Prague or online</h2>
+    </div>
+    <div class="where">
+      <div class="where-card where-prague">
+        <h3>In person in Prague</h3>
+        <p>Lessons in Prague 1, 2 and 3, in cafés or other meeting places we agree on. Good if you live in the city and learn best face to face.</p>
+      </div>
+      <div class="where-card where-online">
+        <h3>Online, anywhere</h3>
+        <p>Live video lessons with a shared whiteboard and recorded materials, scheduled around your time zone. Most of Lucia's lessons happen here.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-12 pb-12 border-t border-gray-800 pt-12">
-            <div>
-                <h3 class="text-2xl font-serif font-bold text-brand-lightgreen mb-4">Parla Italiano Studio</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">Italian lessons for English speakers — structured, warm, and built around real conversation.</p>
-            </div>
-            <div>
-                <h4 class="text-lg font-bold text-white mb-4">Location (Service Area)</h4>
-                <ul class="space-y-2 text-gray-400 text-sm">
-                    <li>📍 In-person: Prague 1, 2, 3 (Cafés & meeting points)</li>
-                    <li>💻 Online: Worldwide via Zoom</li>
-                    <li class="mt-4 italic text-gray-500">Note: Private home studio address is not open to walk-ins. Meetings by appointment only.</li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-lg font-bold text-white mb-4">Contact</h4>
-                <ul class="space-y-2 text-gray-400 text-sm">
-                    <li><a href="mailto:lucia.scollo2000@gmail.com" class="hover:text-white transition">lucia.scollo2000@gmail.com</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="bg-black py-4 text-center text-gray-600 text-xs">
-            <p>© 2026 Parla Italiano Studio. All rights reserved.</p>
-        </div>
-    </footer>
+<!-- COURSEBOOK -->
+<section class="s s-lemon" id="coursebook">
+  <div class="wrap book">
+    <div class="book-copy">
+      <h2>Lessons follow Nuovo Espresso</h2>
+      <p>The lessons and courses are built around <em>Nuovo Espresso</em> (ALMA Edizioni), a coursebook series with one volume per level. It pairs clear grammar with practical conversation, so your progress is easy to follow.</p>
+      <p>Not sure which volume you need? Wait for the free trial. Lucia will tell you which level to buy.</p>
+      <a class="btn btn-ink" href="https://www.almaedizioni.it/catalogo/nuovo-espresso/" target="_blank" rel="noopener">See the series at ALMA Edizioni</a>
+    </div>
+    <ul class="book-levels" aria-label="Levels covered by the series">
+      <li>A1</li>
+      <li>A2</li>
+      <li>B1</li>
+      <li>B2</li>
+      <li>C1</li>
+    </ul>
+  </div>
+</section>
 
+<!-- FAQ -->
+<section class="s s-white" id="faq">
+  <div class="wrap faq-wrap">
+    <div class="head">
+      <h2>Questions</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Do I need to know any Italian already?</summary>
+        <p>No. Lessons are adapted to your level, from complete beginner to advanced. You build a strong foundation and your confidence from the first lesson.</p>
+      </details>
+      <details>
+        <summary>Are the lessons online or in person?</summary>
+        <p>Both. Learn online from anywhere in the world, or meet Lucia in person in Prague 1, 2 and 3.</p>
+      </details>
+      <details>
+        <summary>How do I book the free trial?</summary>
+        <p>Send Lucia a short email with your level and goals. She replies within 24 hours to agree a time. The trial lasts 30 minutes: you meet, she checks your level and you talk about your plan. There is no obligation to continue.</p>
+      </details>
+      <details>
+        <summary>How do the group courses work?</summary>
+        <p>Courses start in January: 12 weekly live lessons in a group of 3 to 5 students, at beginner, intermediate or advanced level. Reserve a place by email and Lucia confirms the day and time.</p>
+      </details>
+      <details>
+        <summary>Which coursebook do I need?</summary>
+        <p>Lessons follow the Nuovo Espresso series. Wait for your free trial and Lucia will tell you which level to buy.</p>
+      </details>
+      <details>
+        <summary>Can lessons focus on my own goals?</summary>
+        <p>Yes. Private lessons can be shaped around work, travel or exam goals.</p>
+      </details>
+      <details>
+        <summary>How do I book my lessons and see them afterwards?</summary>
+        <p>After your free trial, you book each lesson with Lucia and receive a confirmation for every booking: keep it as your record. Lucia keeps all bookings in her calendar. Group lesson times are confirmed by Lucia when you reserve a place.</p>
+      </details>
+      <details>
+        <summary>Can I cancel a lesson?</summary>
+        <p>Yes, up to 24 hours before the lesson starts: write to Lucia by email. After that the lesson cannot be cancelled and counts as taken. The same rule applies to private and group lessons.</p>
+      </details>
+      <details>
+        <summary>How do I pay?</summary>
+        <p>Revolut is preferred, and bank transfer works too. You can choose a 5, 10 or 20-lesson package, or a group course.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="s s-cobalt final" id="book">
+  <div class="wrap final-in">
+    <h2>Your first lesson is free.</h2>
+    <p>Thirty minutes with Lucia, online or in Prague. Send a short email and she replies within 24 hours to agree a time.</p>
+    <a class="btn btn-lemon btn-lg" href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20book%20the%20free%2030-minute%20trial.%0A%0AMy%20level%20(beginner%20%2F%20intermediate%20%2F%20advanced)%3A%20%0AOnline%20or%20in%20Prague%3A%20%0AMy%20time%20zone%3A%20%0A%0AThanks!">Email Lucia for your free trial</a>
+    <p class="final-alt">No email app on this device? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Copy the address</button> or <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Free%20trial%20lesson" target="_blank" rel="noopener">write in Gmail</a>.</p>
+    <p class="final-mail">lucia.scollo2000@gmail.com</p>
+    <span class="sr-only" id="copy-status" role="status"></span>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand">Italian with Lucia</p>
+    <p>Italian lessons for English speakers, online worldwide and in person in Prague 1, 2 and 3.</p>
+    <p><a href="mailto:lucia.scollo2000@gmail.com">lucia.scollo2000@gmail.com</a></p>
+    <p>Lessons can be cancelled up to 24 hours before they start.</p>
+    <p data-portal hidden>Already a student? <a href="portal.html">See your lessons</a></p>
+    <p class="foot-fine">© 2026 Italian with Lucia, Prague</p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

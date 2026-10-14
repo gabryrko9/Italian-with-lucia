@@ -1,0 +1,96 @@
+/* Student area + admin panel (loads after style.css, reuses its colours) */
+[hidden] { display: none !important; }
+body.app { background: var(--paper); min-height: 100vh; display: flex; flex-direction: column; }
+body.app main { flex: 1; }
+.ap-top { padding-block: clamp(2rem, 6vw, 3.5rem) 1rem; }
+.ap-top h1 { font-size: clamp(2.4rem, 8vw, 4.2rem); }
+.ap-top p { margin-top: .6rem; font-size: 1.1rem; }
+.ap-sec { padding-block: 1.6rem; }
+.ap-sec > .wrap > h2 { font-size: clamp(1.7rem, 5vw, 2.4rem); margin-bottom: 1.3rem; }
+.ap-sec h2 small { font-size: .5em; font-weight: 600; letter-spacing: 0; opacity: .6; font-stretch: 100%; margin-left: .4rem; }
+
+.note { font-size: .98rem; margin-top: .7rem; }
+.note.ok { color: #0a7a3e; font-weight: 600; }
+.note.bad { color: #b3200c; font-weight: 600; }
+.empty { background: var(--white); border: 2px dashed rgba(14,18,64,.25); border-radius: var(--bubble); padding: 1.4rem 1.5rem; max-width: 40rem; }
+
+/* cards */
+.card { background: var(--white); border-radius: var(--bubble); padding: 1.2rem 1.4rem; box-shadow: 0 2px 0 rgba(14,18,64,.08); }
+.card + .card { margin-top: .8rem; }
+.grid { display: grid; gap: .9rem; }
+@media (min-width: 760px) { .grid-2 { grid-template-columns: 1fr 1fr; } .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+.card-next { background: var(--lemon); border-radius: var(--bubble); padding: 1.5rem 1.6rem; max-width: 40rem; }
+.card-next .when { font-size: clamp(1.7rem, 6vw, 2.5rem); font-weight: 800; font-stretch: 75%; line-height: 1; letter-spacing: -.02em; }
+.card-next .meta { margin-top: .5rem; font-weight: 600; }
+
+.ln { display: flex; gap: .8rem 1.2rem; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.l-when { font-weight: 800; font-size: 1.12rem; }
+.l-meta { font-size: .95rem; opacity: .75; }
+.l-notes { margin-top: .6rem; padding: .7rem .95rem; background: var(--paper); border-radius: 1rem 1rem 1rem .25rem; white-space: pre-wrap; font-size: .98rem; }
+.l-notes b { display: block; font-size: .85rem; margin-bottom: .15rem; }
+.pill { display: inline-block; padding: .12rem .7rem; border-radius: 999px; font-size: .85rem; font-weight: 700; background: var(--paper); border: 2px solid var(--ink); white-space: nowrap; }
+.pill-scheduled { background: var(--cobalt); border-color: var(--cobalt); color: #fff; }
+.pill-done { background: #d8f5e2; border-color: #0a7a3e; color: #07562b; }
+.pill-cancelled { opacity: .6; text-decoration: line-through; }
+.pill-missed { background: #ffe0da; border-color: #b3200c; color: #8b1808; }
+.pill-warn { background: var(--lemon); }
+
+/* package dots */
+.dots { display: inline-flex; flex-wrap: wrap; gap: .3rem; }
+.dots i { width: 1.05rem; height: 1.05rem; border-radius: 50%; border: 2px solid var(--ink); display: block; }
+.dots .d-used { background: var(--ink); }
+.dots .d-booked { background: var(--cobalt); border-color: var(--cobalt); }
+.pk-nums { margin-top: .5rem; font-size: .98rem; }
+.pk-left { font-size: 2.6rem; font-weight: 800; font-stretch: 75%; line-height: 1; letter-spacing: -.02em; }
+
+/* buttons that fit the app */
+.btn-quiet { background: transparent; border-color: var(--ink); color: var(--ink); }
+.btn-quiet:hover { background: var(--ink); color: #fff; }
+.btn-danger { background: var(--tomato); color: #fff; }
+.btn-ok { background: #0a7a3e; color: #fff; }
+.btns { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+button:disabled { opacity: .55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.linklike { background: none; border: 0; padding: 0; text-decoration: underline; font-weight: 700; cursor: pointer; }
+
+/* forms */
+.f { display: grid; gap: .8rem; }
+.f label { display: grid; gap: .25rem; font-weight: 700; font-size: .95rem; }
+.f input, .f select, .f textarea, .search {
+  font: inherit; font-weight: 500; padding: .65rem .85rem; border: 2px solid var(--ink); border-radius: .9rem;
+  background: #fff; color: var(--ink); width: 100%; min-height: 3rem;
+}
+.f textarea { min-height: 5.5rem; resize: vertical; }
+.f-row { display: grid; gap: .8rem; }
+@media (min-width: 640px) { .f-row { grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); } }
+.login { max-width: 30rem; background: var(--white); padding: 1.6rem; border-radius: var(--bubble); }
+.login .f { margin-top: 1rem; }
+
+/* lists */
+.list { display: grid; gap: .6rem; }
+.item { background: var(--white); border-radius: 1.1rem 1.1rem 1.1rem .3rem; padding: .85rem 1.1rem; }
+.item.is-link { display: block; text-decoration: none; }
+.item.is-link:hover { box-shadow: 0 4px 0 rgba(14,18,64,.18); }
+.daygroup { font-weight: 800; margin: 1.1rem 0 .4rem; font-size: 1.05rem; }
+.stat { background: var(--white); border-radius: var(--bubble); padding: 1rem 1.3rem; }
+.stat b { display: block; font-size: 2.4rem; line-height: 1; font-weight: 800; font-stretch: 75%; }
+.tabs { display: flex; gap: .4rem; flex-wrap: wrap; padding-block: .5rem 0; }
+.tabs a { text-decoration: none; font-weight: 700; padding: .5rem 1.1rem; border-radius: 999px; border: 2px solid var(--ink); }
+.tabs a[aria-current="page"] { background: var(--ink); color: #fff; }
+details.add { background: var(--white); border-radius: var(--bubble); padding: .4rem 1.2rem; margin-bottom: 1rem; }
+details.add summary { cursor: pointer; font-weight: 800; padding: .7rem 0; }
+details.add .f { padding-bottom: 1rem; }
+.back { display: inline-block; font-weight: 700; margin-bottom: .8rem; }
+
+dialog { border: 0; border-radius: var(--bubble); padding: 1.4rem; width: min(34rem, 94vw); color: var(--ink); }
+dialog::backdrop { background: rgba(14,18,64,.6); }
+dialog h3 { margin-bottom: 1rem; }
+
+.toast { visibility: hidden; position: fixed; left: 50%; bottom: 1.2rem; transform: translate(-50%, 200%); background: var(--ink); color: #fff; padding: .8rem 1.2rem; border-radius: 1.2rem 1.2rem 1.2rem .3rem; font-weight: 600; z-index: 200; max-width: 92vw; transition: transform .25s ease; }
+.toast.show { visibility: visible; transform: translate(-50%, 0); }
+.toast.bad { background: #b3200c; }
+.signout { background: transparent; border: 2px solid rgba(255,255,255,.6); color: #fff; border-radius: 999px; padding: .4rem 1rem; font-weight: 700; }
+.bar-right { display: flex; gap: .6rem; align-items: center; }
+.tzhint { font-size: .9rem; opacity: .7; margin-top: .5rem; }
+
+/* link from the public site, only shown when the student area is configured */
+.bar-nav .portal-link { font-weight: 700; }

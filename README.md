@@ -1,67 +1,32 @@
-# Italian with Lucia — Sito web
+# Italian with Lucia
 
-Sito statico, pronto per GitHub Pages. Nessun framework, nessuna build: solo HTML, CSS e JavaScript.
+Sito statico per GitHub Pages: nessuna build, nessuna cartella. Carica TUTTI i file insieme nella radice del repository (Add file > Upload files > Commit changes). I file con lo stesso nome vengono sovrascritti.
 
-## 📁 Contenuto
+## Come si prenota
+Chi vuole la prova gratuita scrive a Lucia: tutti i pulsanti aprono una email precompilata a lucia.scollo2000@gmail.com. Chi non ha un programma di posta puo copiare l'indirizzo o scrivere da Gmail (in fondo alla pagina). Nessuna configurazione necessaria.
 
-| File | Cosa fa |
-|---|---|
-| `index.html` | La pagina (testi, SEO, dati strutturati) |
-| `style.css` | Tutto lo stile |
-| `script.js` | Selettore valuta, menu mobile, animazioni |
-| `lucia-hero.jpg`, `lucia-square.jpg` | Le foto di Lucia (già ottimizzate) |
-| `robots.txt`, `sitemap.xml` | File per i motori di ricerca |
+## Prenotare le lezioni con Google Calendar (da fare una volta)
+La prova gratuita resta via email. Per le lezioni successive gli studenti scelgono l'orario nel calendario di Lucia:
+1. Lucia apre Google Calendar dal computer (non dall'app) > Crea > Programma di appuntamenti.
+2. Durata 60 minuti, disponibilita settimanali, e nelle impostazioni attiva conferme e promemoria per gli ospiti. Nel modulo di prenotazione aggiungi la domanda "Livello" e, se vuoi, la verifica email.
+3. Salva, poi Condividi e copia il link della pagina di prenotazione.
+4. Apri `config.js` su GitHub (matita) e incolla il link tra le virgolette di `booking: ""`. Commit changes.
+Finche il link e vuoto, il pulsante "Already taking lessons?" apre una email a Lucia.
+Chi prenota riceve email di conferma e promemoria; Lucia vede tutte le prenotazioni nel suo calendario. Google Calendar non permette di far rispettare la regola delle 24 ore: la cancellazione si chiede a Lucia per email.
 
----
+## Regola di cancellazione
+Le lezioni si cancellano scrivendo a Lucia fino a 24 ore prima dell'inizio; dopo, non si cancellano e contano come svolte. Il testo e in `index.html`: cerca "24 hours" (riquadro sotto i pacchetti, nota nel corso di gruppo, passi, domande frequenti, piede della pagina e dati strutturati).
 
-## ✅ Da fare prima di pubblicare (checklist)
+## Dove si modificano le cose
+- Prezzi: in `index.html` cerca `data-eur="..."` (numero in EUR; CZK e USD si calcolano da soli). Cambia anche i prezzi nel blocco JSON-LD in cima, per la SEO.
+  Ora: 5 lezioni a 30 EUR, 10 a 27 EUR, 20 a 25 EUR; corso di gruppo 16 EUR a lezione (192 EUR).
+- Cambio EUR/CZK/USD: in `script.js`, oggetto `CURRENCIES`.
+- Date del corso di gruppo: ora c'e scritto "January". Quando decidi data e orario, cerca "January" in `index.html` e in `script.js`.
+- Foto: `lucia-bubble.jpg` (hero), `lucia-portrait.jpg` (sezione About), `og.jpg` (anteprima social). Le vecchie `lucia-hero.jpg` e `lucia-square.jpg` non servono piu: puoi cancellarle dal repository.
 
-### 1. Foto di Lucia — ✅ GIÀ FATTO
-Le foto (`lucia-hero.jpg` e `lucia-square.jpg`) sono direttamente nella cartella principale, accanto a `index.html`: **niente sottocartelle**. Quando carichi su GitHub, seleziona TUTTI i file insieme e trascinali — devono finire tutti allo stesso livello.
+## SEO
+Gia fatto: titolo e descrizione, Open Graph, dati strutturati (attivita, corso, FAQ), sitemap, robots, canonical. `google60ce34d48c6ffaa9.html` e il file di verifica di Search Console: non cancellarlo.
 
-### 2. Video di presentazione — ✅ GIÀ FATTO
-Il video YouTube (`Bb2mI4j_BoE`) è già incorporato nella sezione "Meet Lucia".
-
-### 3. Link di prenotazione (Google Calendar)
-1. Lucia apre https://calendar.google.com → in alto a sinistra **Crea → Programma di appuntamenti**
-2. Crea un programma chiamato **"Free trial lesson — 30 min"**, durata 30 minuti, e imposta le sue disponibilità settimanali
-3. Salva → clicca **Condividi** → copia il **link alla pagina di prenotazione** (tipo `https://calendar.app.google/xxxxx`)
-4. In `index.html` cerca `REPLACE-WITH-LUCIA-BOOKING-LINK` (compare **3 volte**) e sostituisci ogni occorrenza con il link
-5. (Consigliato) Nel programma, attiva la verifica email e aggiungi una domanda tipo "What is your current Italian level?"
-
-### 4. URL del sito
-In `index.html` cerca `REPLACE-WITH-YOUR-URL` (compare 3 volte nei meta tag) e in `sitemap.xml` / `robots.txt`, e sostituisci con l'URL reale del sito (vedi sotto).
-
----
-
-## 🚀 Pubblicare su GitHub Pages
-
-1. Crea un account su https://github.com (se non ce l'hai)
-2. Crea un nuovo repository **pubblico**, chiamalo ad esempio `italian-with-lucia`
-3. Carica tutti i file di questa cartella (puoi trascinarli nella pagina del repo → "uploading an existing file")
-4. Vai su **Settings → Pages** → in "Source" scegli **Deploy from a branch** → branch `main`, cartella `/ (root)` → Save
-5. Dopo 1-2 minuti il sito sarà online su `https://TUO-USERNAME.github.io/italian-with-lucia/`
-
-### 💡 Dominio personalizzato (fortemente consigliato per la SEO)
-Un dominio tipo `italianwithlucia.com` costa ~10 €/anno (Namecheap, Cloudflare) e migliora molto credibilità e posizionamento su Google. Si collega a GitHub Pages da **Settings → Pages → Custom domain**.
-
----
-
-## 💶 Modificare prezzi, tassi di cambio e testi
-
-- **Prezzi**: in `index.html` cerca `data-eur="..."` — il numero è il prezzo in EUR. CZK e USD si calcolano da soli.
-- **Tassi di cambio**: in `script.js`, in cima al file, modifica i numeri in `RATES` (es. `CZK: { rate: 25, ... }`).
-- **Corso di gruppo**: 192 € totali (16 €/lezione), early bird 169 €. Per cambiarli cerca `data-eur="192"` e `data-eur="169"` in `index.html`.
-- **Giorni/orari dei corsi**: quando Lucia decide gli orari (es. "Martedì 18:00 CET"), aggiungili nelle card dei corsi nella lista `course-meta`.
-
----
-
-## 🔍 SEO — cosa è già fatto e cosa fare dopo
-
-Già incluso: meta tag completi, Open Graph, dati strutturati Schema.org (attività, offerte, FAQ — possono comparire direttamente nei risultati Google), HTML semantico, sito velocissimo, mobile-first, sitemap e robots.txt.
-
-Dopo la pubblicazione:
-1. Registra il sito su **Google Search Console** (https://search.google.com/search-console) e invia la sitemap
-2. Crea un **Profilo dell'attività su Google** (Google Business Profile) per "Italian with Lucia — Prague": è la cosa singola più efficace per le ricerche locali tipo "italian lessons prague"
-3. Chiedi agli studenti attuali una recensione Google
-4. Condividi il sito nei gruppi Facebook di expat a Praga (es. "Expats in Prague")
+## Area studenti e pannello di Lucia (opzionale)
+Segui `GUIDA-AREA-STUDENTI.md`. Finche in `config.js` `url` e `key` sono vuoti, il sito pubblico nasconde tutto e funziona come prima.
+File nuovi da caricare nella root del repo: `config.js`, `common.js`, `app.css`, `portal.html`, `portal.js`, `admin.html`, `admin.js` (oltre a `index.html`, `script.js`, `style.css` aggiornati).
