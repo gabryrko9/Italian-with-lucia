@@ -20,6 +20,6 @@ window.PORTAL = {
   waitlist: "",
   // Optional: Cloudflare Web Analytics token (Cloudflare > Web Analytics > the site > "Manage site":
   // copy only the value after "token" in the JS snippet). While empty, nothing is counted.
-  analytics: "",
+  analytics: "09a43be5a40b40cc85b7d73fa37d74a5",
   google: { profile: "https://maps.app.goo.gl/mP7VrprirfnPiXVZ7", review: "https://g.page/r/CW8qh9uZ9dPwEBM/review" }
 };
