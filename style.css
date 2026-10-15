@@ -488,3 +488,11 @@ body.menu-open .dock { transform: translateY(110%); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* group-course box inside guides */
+.prose .promo { margin-top: 2.6rem; padding: 1.4rem 1.5rem 1.5rem; background: var(--ink); color: var(--white); border-radius: var(--bubble); }
+.prose .promo p { margin-top: 0.6rem; }
+.prose .promo .promo-tag { margin-top: 0; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--lemon); }
+.prose .promo .promo-title { font-size: clamp(1.5rem, 4.6vw, 2rem); font-weight: 800; font-stretch: 75%; line-height: 1.05; }
+.prose .promo a.btn { color: var(--ink); text-decoration: none; margin-top: 0.4rem; }
+.prose .promo a.btn:hover { color: var(--ink); }

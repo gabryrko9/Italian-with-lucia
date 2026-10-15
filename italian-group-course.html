@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Italian Group Course Online | Small Groups, From January</title>
-  <meta name="description" content="Italian group course with Lucia: 12 weekly online lessons in small groups of 3 to 5 students. Beginner, intermediate and advanced. €18 per person per lesson.">
+  <meta name="description" content="Italian group course online with Lucia: 12 weekly live lessons in groups of 3 to 5. Beginner to advanced. €18 per lesson, pay only once your group is confirmed.">
   <link rel="canonical" href="https://italianwithlucia.com/italian-group-course.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#0E1240">
@@ -13,20 +13,21 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Italian with Lucia">
   <meta property="og:title" content="Italian Group Course Online | Small Groups, From January">
-  <meta property="og:description" content="Italian group course with Lucia: 12 weekly online lessons in small groups of 3 to 5 students. Beginner, intermediate and advanced. €18 per person per lesson.">
+  <meta property="og:description" content="Italian group course online with Lucia: 12 weekly live lessons in groups of 3 to 5. Beginner to advanced. €18 per lesson, pay only once your group is confirmed.">
   <meta property="og:url" content="https://italianwithlucia.com/italian-group-course.html">
   <meta property="og:image" content="https://italianwithlucia.com/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Italian Group Course Online | Small Groups, From January">
-  <meta name="twitter:description" content="Italian group course with Lucia: 12 weekly online lessons in small groups of 3 to 5 students. Beginner, intermediate and advanced. €18 per person per lesson.">
+  <meta name="twitter:description" content="Italian group course online with Lucia: 12 weekly live lessons in groups of 3 to 5. Beginner to advanced. €18 per lesson, pay only once your group is confirmed.">
   <meta name="twitter:image" content="https://italianwithlucia.com/og.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="logo.png">
   <script type="application/ld+json">
 {
@@ -51,24 +52,42 @@
     },
     {
       "@type": "Course",
+      "@id": "https://italianwithlucia.com/italian-group-course.html#course",
       "name": "Italian group course (beginner, intermediate, advanced)",
-      "description": "Italian group course with Lucia: 12 weekly online lessons in small groups of 3 to 5 students. Beginner, intermediate and advanced. €18 per person per lesson.",
+      "description": "Italian group course online with Lucia: 12 weekly live lessons in groups of 3 to 5. Beginner to advanced. €18 per lesson, pay only once your group is confirmed.",
+      "url": "https://italianwithlucia.com/italian-group-course.html",
       "provider": {
-        "@id": "https://italianwithlucia.com/#business"
+        "@type": "EducationalOrganization",
+        "@id": "https://italianwithlucia.com/#business",
+        "name": "Italian with Lucia",
+        "url": "https://italianwithlucia.com/"
       },
       "inLanguage": "en",
       "teaches": "Italian",
+      "educationalLevel": "Beginner (A1–A2), Intermediate (B1), Advanced (B2–C1)",
+      "image": "https://italianwithlucia.com/og.jpg",
       "offers": {
         "@type": "Offer",
         "price": "216",
         "priceCurrency": "EUR",
-        "category": "Paid"
+        "category": "Paid",
+        "url": "https://italianwithlucia.com/italian-group-course.html"
       },
       "hasCourseInstance": {
         "@type": "CourseInstance",
-        "courseMode": "online",
+        "courseMode": "Online",
         "startDate": "2027-01",
-        "courseWorkload": "PT12H"
+        "courseSchedule": {
+          "@type": "Schedule",
+          "repeatFrequency": "P1W",
+          "repeatCount": 12,
+          "duration": "PT1H"
+        },
+        "instructor": {
+          "@type": "Person",
+          "name": "Lucia",
+          "url": "https://italianwithlucia.com/about-lucia.html"
+        }
       }
     },
     {
@@ -100,10 +119,34 @@
         },
         {
           "@type": "Question",
+          "name": "When do I pay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only after Lucia confirms your group, its day and time. Reserving a place is free. Payment is by Revolut (preferred) or bank transfer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if not enough people join my level?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A group starts with at least three students. Since you pay only after your group is confirmed, you never pay for a group that does not start. If your level does not fill up, Lucia tells you and you decide together what to do next."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to buy a coursebook?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Nuovo Espresso coursebook is optional: Lucia provides the materials, and you can add the book if you like learning with one."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Is the group course online?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The lessons are live online, so you can join from anywhere."
+            "text": "Yes. The lessons are live online, so you can join from Prague or from anywhere."
           }
         },
         {
@@ -166,12 +209,12 @@
       <li aria-current="page">Italian group course</li>
     </ol></nav>
     <h1>Italian group course, starting in January</h1>
-    <p class="lead">Twelve weekly live lessons in a small group of three to five students. Beginner, intermediate and advanced levels, with a lower price per lesson than private tuition: €18 per person per lesson.</p>
+    <p class="lead">Twelve weekly live lessons online, in a small group of three to five students. Beginner, intermediate and advanced levels, with a lower price than private tuition: €18 per person per lesson.</p>
     <div class="hero-cta">
-      <a class="btn btn-lemon btn-lg" href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson&body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20book%20the%20free%2030-minute%20trial.%0A%0AMy%20level%3A%20%0AMy%20goals%3A%20%0AOnline%20or%20in%20Prague%3A%20%0AMy%20time%20zone%3A%20%0APreferred%20days%20and%20times%3A%20%0A%0AThanks%21">Email Lucia for a free trial</a>
-      <a class="btn btn-line btn-lg" href="./#lessons">See prices</a>
+      <a class="btn btn-lemon btn-lg" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20reservation&amp;body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20reserve%20a%20place%20in%20the%20January%20group%20course.%0A%0ALevel%20%28beginner%20%2F%20intermediate%20%2F%20advanced%20%2F%20not%20sure%29%3A%20%0AMy%20time%20zone%3A%20%0ADays%20and%20times%20that%20work%20for%20me%3A%20%0A%0AThanks%21">Reserve your place</a>
+      <a class="btn btn-line btn-lg" href="#levels">See what you learn</a>
     </div>
-    <p class="hero-note">Free, 30 minutes, no obligation. Lucia replies within 24 hours.</p>
+    <p class="hero-note">No payment now. You pay only once Lucia confirms your group. She replies within 24 hours.</p>
   </div>
 </section>
 <section class="s s-white" id="content">
@@ -186,31 +229,76 @@
     <tr><th scope="row">Start</th><td>January</td></tr>
     <tr><th scope="row">Length</th><td>12 weekly lessons, 60 minutes each</td></tr>
     <tr><th scope="row">Group size</th><td>3 to 5 students</td></tr>
-    <tr><th scope="row">Format</th><td>Live, online</td></tr>
+    <tr><th scope="row">Format</th><td>Live, online: join from Prague or from anywhere</td></tr>
+    <tr><th scope="row">Day and time</th><td>Set with the students who reserve a place in each group</td></tr>
     <tr><th scope="row">Levels</th><td>Beginner (A1–A2), Intermediate (B1), Advanced (B2–C1)</td></tr>
+    <tr><th scope="row">Materials</th><td>Lucia's materials and notes. The <em>Nuovo Espresso</em> coursebook is optional</td></tr>
     <tr><th scope="row">Price</th><td>€18 per person per lesson, €216 for the 12-week course</td></tr>
+    <tr><th scope="row">Payment</th><td>After Lucia confirms your group, by Revolut or bank transfer</td></tr>
     <tr><th scope="row">Teacher</th><td>Lucia, Master's degree in teaching Italian</td></tr>
   </tbody>
 </table></div>
 
-<h2>The three levels</h2>
+<h2 id="levels">What you learn in 12 weeks</h2>
+<p>Each level has a clear plan, and Lucia shapes it around the people in the group: if everyone needs more speaking, or more help with one topic, the lessons follow that.</p>
+
 <h3>Beginner (A1–A2)</h3>
-<p>Start from zero. By the end you can introduce yourself, order, ask for directions and handle everyday small talk, with good pronunciation from day one. New to Italian? Read <a href="italian-for-beginners.html">Italian for beginners</a>.</p>
+<p>Start from zero, or restart after a long break. Good pronunciation from day one.</p>
+<ul>
+  <li>Introduce yourself, talk about where you live, your work and your family.</li>
+  <li>Order in a café or restaurant, shop, ask for prices and directions.</li>
+  <li>Numbers, days, times and dates, so you can make plans.</li>
+  <li>The present tense, articles, gender and the most useful everyday verbs.</li>
+  <li>Your first steps into the past, to say what you did at the weekend.</li>
+</ul>
+<p>New to Italian? Read <a href="italian-for-beginners.html">Italian for beginners</a> and the <a href="italian-phrases-for-travellers.html">essential phrases for travel</a>.</p>
+
 <h3>Intermediate (B1)</h3>
-<p>Get past the plateau. Past tenses that finally click, a wider vocabulary and guided conversation on real topics every week. Our guide on <a href="passato-prossimo-vs-imperfetto.html">passato prossimo vs imperfetto</a> shows the kind of grammar you work on.</p>
+<p>Get past the plateau and speak with more confidence.</p>
+<ul>
+  <li>Past tenses that finally click: <a href="passato-prossimo-vs-imperfetto.html">passato prossimo vs imperfetto</a>.</li>
+  <li>Talk about plans, wishes and advice with the future and the conditional.</li>
+  <li>Pronouns, <em>ci</em> and <em>ne</em>, so your sentences sound natural.</li>
+  <li>Tell stories and give your opinion on real topics, every week.</li>
+</ul>
+
 <h3>Advanced (B2–C1)</h3>
-<p>Sharpen nuance, idioms and register. Tell stories, debate and argue your point in Italian, with precise feedback.</p>
+<p>Sharpen nuance, idioms and register.</p>
+<ul>
+  <li>The subjunctive where Italians actually use it.</li>
+  <li>Formal and informal Italian, for work, emails and everyday life.</li>
+  <li>Debate, argue your point and discuss articles, films and the news.</li>
+  <li>Precise feedback on the mistakes you still make.</li>
+</ul>
+
+<h2>How a group lesson works</h2>
+<ul>
+  <li>A live video lesson: you receive the link before each class.</li>
+  <li>A short warm-up conversation, then one clear focus for the day.</li>
+  <li>Speaking in pairs and as a group, with friendly corrections from Lucia.</li>
+  <li>Notes and optional homework after the lesson, so you keep going during the week.</li>
+</ul>
+<p>You do not have to buy a coursebook. Lessons can follow <em>Nuovo Espresso</em> (ALMA Edizioni) if you like having a book, but everything you need comes from Lucia.</p>
+
+<h2>Who it is for</h2>
+<ul>
+  <li>People in Prague who want a weekly Italian class without travelling across the city.</li>
+  <li>Learners anywhere in Europe: lessons follow Prague time (CET), with the time set together with the group.</li>
+  <li>Anyone preparing for a holiday, a move to Italy, or talking with an Italian partner, friends or family.</li>
+  <li>Friends or couples who want to learn together: reserve together and say so in your email.</li>
+</ul>
 
 <h2>Not sure which level you are?</h2>
-<p>The <a href="./#level">level finder on the homepage</a> takes ten seconds. Lucia also confirms your level before you join, so you end up in the right group.</p>
+<p>The <a href="./#level">level finder on the homepage</a> takes ten seconds. Lucia also confirms your level before you join, so you end up in the right group. If you prefer to talk first, book the <a href="./#book">free 30-minute trial</a>.</p>
 
 <h2>How to reserve your place</h2>
 <ol class="num">
-  <li><b>Email Lucia</b> with the level you want, your time zone and your preferred days and times.</li>
-  <li><b>Lucia confirms</b> the day and time of the group with you. Places are limited to five students per group.</li>
-  <li><b>Pay for the course</b> by Revolut (preferred) or bank transfer.</li>
+  <li><b>Email Lucia</b> with the level you want, your time zone and the days and times that suit you.</li>
+  <li><b>Lucia confirms</b> your level and the day and time of your group. Places are limited to five students per group.</li>
+  <li><b>Pay for the course</b> by Revolut (preferred) or bank transfer, only after your group is confirmed.</li>
 </ol>
 <p class="muted">Group lessons follow the same 24-hour cancellation rule as private lessons: you can cancel up to 24 hours before a lesson, after that it counts as taken.</p>
+<p><a class="btn btn-lemon" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20reservation&amp;body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20reserve%20a%20place%20in%20the%20January%20group%20course.%0A%0ALevel%20%28beginner%20%2F%20intermediate%20%2F%20advanced%20%2F%20not%20sure%29%3A%20%0AMy%20time%20zone%3A%20%0ADays%20and%20times%20that%20work%20for%20me%3A%20%0A%0AThanks%21">Reserve your place</a></p>
 
 <h2>Group or private?</h2>
 <p>Choose the group if you like learning with others, want a steady weekly rhythm and prefer the lower price. Choose <a href="./#lessons">private lessons</a> if you need your own pace, a specific goal such as work or an exam, or a flexible schedule. You can also combine both.</p>
@@ -234,8 +322,20 @@
         <p>€18 per person per lesson, which is €216 for the 12 weekly lessons.</p>
       </details>
       <details>
+        <summary>When do I pay?</summary>
+        <p>Only after Lucia confirms your group, its day and time. Reserving a place is free. Payment is by Revolut (preferred) or bank transfer.</p>
+      </details>
+      <details>
+        <summary>What happens if not enough people join my level?</summary>
+        <p>A group starts with at least three students. Since you pay only after your group is confirmed, you never pay for a group that does not start. If your level does not fill up, Lucia tells you and you decide together what to do next.</p>
+      </details>
+      <details>
+        <summary>Do I need to buy a coursebook?</summary>
+        <p>No. The <em>Nuovo Espresso</em> coursebook is optional: Lucia provides the materials, and you can add the book if you like learning with one.</p>
+      </details>
+      <details>
         <summary>Is the group course online?</summary>
-        <p>Yes. The lessons are live online, so you can join from anywhere.</p>
+        <p>Yes. The lessons are live online, so you can join from Prague or from anywhere.</p>
       </details>
       <details>
         <summary>What if I do not know my level?</summary>
@@ -256,10 +356,10 @@
 </section>
 <section class="s s-cobalt final" id="book">
   <div class="wrap final-in">
-    <h2>Your first lesson is free.</h2>
-    <p>Thirty minutes with Lucia, online or in Prague. Send a short email and she replies within 24 hours to agree a time.</p>
-    <a class="btn btn-lemon btn-lg" href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson&amp;body=Hi%20Lucia%2C%0A%0AI'd%20like%20to%20book%20the%20free%2030-minute%20trial.%0A%0AMy%20level%20(beginner%20%2F%20intermediate%20%2F%20advanced)%3A%20%0AOnline%20or%20in%20Prague%3A%20%0AMy%20time%20zone%3A%20%0A%0AThanks!">Email Lucia for your free trial</a>
-    <p class="final-alt">No email app on this device? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Copy the address</button> or <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Free%20trial%20lesson" target="_blank" rel="noopener">write in Gmail</a>.</p>
+    <h2>Reserve your place for January.</h2>
+    <p>Send a short email with your level and the times that suit you. Lucia replies within 24 hours. No payment until your group is confirmed.</p>
+    <a class="btn btn-lemon btn-lg" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20reservation&amp;body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20reserve%20a%20place%20in%20the%20January%20group%20course.%0A%0ALevel%20%28beginner%20%2F%20intermediate%20%2F%20advanced%20%2F%20not%20sure%29%3A%20%0AMy%20time%20zone%3A%20%0ADays%20and%20times%20that%20work%20for%20me%3A%20%0A%0AThanks%21">Reserve your place</a>
+    <p class="final-alt">No email app on this device? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Copy the address</button> or <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Group%20course%20-%20reservation" target="_blank" rel="noopener">write in Gmail</a>.</p>
     <p class="final-mail">lucia.scollo2000@gmail.com</p>
     <span class="sr-only" id="copy-status" role="status"></span>
   </div>
@@ -288,8 +388,8 @@
 </footer>
 
 <div class="dock" id="dock">
-  <a class="btn btn-lemon" href="mailto:lucia.scollo2000@gmail.com?subject=Free%20trial%20lesson&body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20book%20the%20free%2030-minute%20trial.%0A%0AMy%20level%3A%20%0AMy%20goals%3A%20%0AOnline%20or%20in%20Prague%3A%20%0AMy%20time%20zone%3A%20%0APreferred%20days%20and%20times%3A%20%0A%0AThanks%21">Free trial</a>
-  <a class="btn btn-line" href="./#lessons">Prices</a>
+  <a class="btn btn-lemon" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20reservation&amp;body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20reserve%20a%20place%20in%20the%20January%20group%20course.%0A%0ALevel%20%28beginner%20%2F%20intermediate%20%2F%20advanced%20%2F%20not%20sure%29%3A%20%0AMy%20time%20zone%3A%20%0ADays%20and%20times%20that%20work%20for%20me%3A%20%0A%0AThanks%21">Reserve a place</a>
+  <a class="btn btn-line" href="#levels">Levels</a>
 </div>
 
 <script src="config.js"></script>

@@ -36,6 +36,18 @@ if (PORTAL_ON) {
     "Choose your next lesson in Lucia's Google Calendar. You get a confirmation email and reminders, and Lucia sees every booking in her calendar.";
 }
 
+/* ---------- 0b. Group course: waiting-list form ----------
+   With "waitlist" in config.js, every "Reserve a place" button (data-group)
+   opens the Google Form instead of a pre-filled email. */
+const WAITLIST_URL = (window.PORTAL && window.PORTAL.waitlist) || "";
+if (WAITLIST_URL) {
+  document.querySelectorAll("a[data-group]").forEach(function (a) {
+    a.href = WAITLIST_URL;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+}
+
 /* ---------- 1. Currency switch ----------
    Prices are written once, in EUR, as data-eur="..." in index.html.
    Update the indicative exchange rates here when you want. */
@@ -100,7 +112,7 @@ document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
     document.getElementById("level-title").textContent = l.name;
     document.getElementById("level-text").textContent = l.text;
     const body = "Hi Lucia,\n\nI'd like to reserve a place in the January " + l.subject + " group.\n\nMy time zone: \nPreferred days and times: \n\nThanks!";
-    document.getElementById("level-reserve").href =
+    document.getElementById("level-reserve").href = WAITLIST_URL ||
       "mailto:lucia.scollo2000@gmail.com?subject=" + encodeURIComponent("Group course - " + l.subject) + "&body=" + encodeURIComponent(body);
     resultBox.hidden = false;
   });
@@ -283,4 +295,16 @@ if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
     plans.addEventListener("scroll", mark, { passive: true });
     mark();
   }
+})();
+
+/* ---------- 8. Visit statistics (Cloudflare Web Analytics) ----------
+   Cookie-free page counts, loaded only when "analytics" in config.js has a token. */
+(function () {
+  const token = window.PORTAL && window.PORTAL.analytics;
+  if (!token) return;
+  const s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", JSON.stringify({ token: token }));
+  document.head.appendChild(s);
 })();
