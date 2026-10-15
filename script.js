@@ -8,32 +8,38 @@
      * students book and move lessons in their student area.
    Without it, buttons fall back to Lucia's Google Calendar page ("booking" in config.js)
    or to a pre-filled email, so nothing is ever broken. */
+const CS = document.documentElement.lang === "cs";          // Czech pages live in /cs/
+const t = function (en, cs) { return CS ? cs : en; };
+const ROOT = CS ? "../" : "";
 const PORTAL_ON = !!(window.PORTAL && window.PORTAL.url && window.PORTAL.key);
 const BOOKING_URL = (window.PORTAL && window.PORTAL.booking) || "";
 const lessonBtn = document.getElementById("lesson-book");
 if (PORTAL_ON) {
-  document.querySelectorAll('a[href^="mailto:"][href*="subject=Free%20trial"]').forEach(function (a) {
-    a.href = "book.html";
+  document.querySelectorAll('a[href^="mailto:"][href*="subject=Free%20trial"], a[data-trial]').forEach(function (a) {
+    a.href = ROOT + "book.html";
     a.removeAttribute("target");
-    var t = a.textContent.trim();
-    if (/email lucia for a free trial/i.test(t)) a.textContent = "Book your free trial";
-    else if (/^free trial$/i.test(t)) a.textContent = "Free trial";
-    else if (/email lucia/i.test(t)) a.textContent = "Book your free trial";
+    var txt = a.textContent.trim();
+    if (CS) { if (!/^lekce zdarma$/i.test(txt)) a.textContent = "Rezervovat lekci zdarma"; }
+    else if (/email lucia for a free trial/i.test(txt)) a.textContent = "Book your free trial";
+    else if (/^free trial$/i.test(txt)) a.textContent = "Free trial";
+    else if (/email lucia/i.test(txt)) a.textContent = "Book your free trial";
   });
   if (lessonBtn) {
-    lessonBtn.href = "portal.html";
+    lessonBtn.href = ROOT + "portal.html";
     lessonBtn.removeAttribute("target");
-    lessonBtn.textContent = "Choose your next lesson";
-    document.getElementById("booknow-text").textContent =
-      "Sign in to your student area, pick a free time and your lesson is booked. You can see your package, move a lesson or cancel it up to 24 hours before.";
+    lessonBtn.textContent = t("Choose your next lesson", "Vybrat další lekci");
+    document.getElementById("booknow-text").textContent = t(
+      "Sign in to your student area, pick a free time and your lesson is booked. You can see your package, move a lesson or cancel it up to 24 hours before.",
+      "Přihlaste se do studentské sekce, vyberte volný termín a lekce je zarezervovaná. Uvidíte svůj balíček a lekci můžete přesunout nebo zrušit nejpozději 24 hodin předem.");
   }
 } else if (BOOKING_URL && lessonBtn) {
   lessonBtn.href = BOOKING_URL;
   lessonBtn.target = "_blank";
   lessonBtn.rel = "noopener";
-  lessonBtn.textContent = "Choose your next lesson";
-  document.getElementById("booknow-text").textContent =
-    "Choose your next lesson in Lucia's Google Calendar. You get a confirmation email and reminders, and Lucia sees every booking in her calendar.";
+  lessonBtn.textContent = t("Choose your next lesson", "Vybrat další lekci");
+  document.getElementById("booknow-text").textContent = t(
+    "Choose your next lesson in Lucia's Google Calendar. You get a confirmation email and reminders, and Lucia sees every booking in her calendar.",
+    "Další lekci si vyberete v Luciině Google kalendáři. Dostanete potvrzení e-mailem i připomínky a Lucia vidí každou rezervaci ve svém kalendáři.");
 }
 
 /* ---------- 0b. Group course: waiting-list form ----------
@@ -79,6 +85,7 @@ function setCurrency(code) {
 document.querySelectorAll(".cur").forEach(function (b) {
   b.addEventListener("click", function () { setCurrency(b.dataset.currency); });
 });
+if (CS && document.querySelector("[data-eur]")) setCurrency("CZK"); // Czech visitors see crowns first
 
 /* ---------- 2. Tap-to-translate bubbles ---------- */
 document.querySelectorAll(".phrase").forEach(function (b) {
@@ -92,7 +99,7 @@ if (box) {
   play.addEventListener("click", function () {
     const f = document.createElement("iframe");
     f.src = "https://www.youtube-nocookie.com/embed/" + box.dataset.id + "?autoplay=1&rel=0&modestbranding=1";
-    f.title = "Lucia introduces herself";
+    f.title = t("Lucia introduces herself", "Lucia se představuje");
     f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
     f.allowFullscreen = true;
     box.replaceChildren(f);
@@ -100,7 +107,11 @@ if (box) {
 }
 
 /* ---------- 4. Level finder ---------- */
-const LEVELS = {
+const LEVELS = CS ? {
+  beginner:     { name: "Začátečníci (A1–A2)", text: "Postavíte si základy a mluvit budete od první lekce. Hodí se skupina pro začátečníky i individuální lekce.", subject: "Beginner", cs: "začátečníky" },
+  intermediate: { name: "Mírně pokročilí (B1)", text: "Domluvíte se, takže se zaměříte na přesnost a rozsah: minulé časy, slovní zásobu a plynulou konverzaci.", subject: "Intermediate", cs: "mírně pokročilé" },
+  advanced:     { name: "Pokročilí (B2–C1)", text: "Mluvíte plynule, takže pracujete na nuancích, idiomech a stylu, s přesnou zpětnou vazbou.", subject: "Advanced", cs: "pokročilé" }
+} : {
   beginner:     { name: "Beginner (A1–A2)", text: "You build your base with plenty of speaking from day one. The Beginner group or private lessons both fit.", subject: "Beginner" },
   intermediate: { name: "Intermediate (B1)", text: "You can already talk, so the work is accuracy and range: past tenses, vocabulary and fluent conversation.", subject: "Intermediate" },
   advanced:     { name: "Advanced (B2–C1)", text: "You are fluent, so the work is nuance, idioms and register, with precise feedback.", subject: "Advanced" }
@@ -111,9 +122,11 @@ document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
     const l = LEVELS[r.value];
     document.getElementById("level-title").textContent = l.name;
     document.getElementById("level-text").textContent = l.text;
-    const body = "Hi Lucia,\n\nI'd like to reserve a place in the January " + l.subject + " group.\n\nMy time zone: \nPreferred days and times: \n\nThanks!";
+    const body = CS
+      ? "Dobrý den, Lucie,\n\nrád/a bych se přihlásil/a do lednové skupiny pro " + l.cs + ".\n\nČasové pásmo: \nVyhovující dny a časy: \n\nDěkuji!"
+      : "Hi Lucia,\n\nI'd like to reserve a place in the January " + l.subject + " group.\n\nMy time zone: \nPreferred days and times: \n\nThanks!";
     document.getElementById("level-reserve").href = WAITLIST_URL ||
-      "mailto:lucia.scollo2000@gmail.com?subject=" + encodeURIComponent("Group course - " + l.subject) + "&body=" + encodeURIComponent(body);
+      "mailto:lucia.scollo2000@gmail.com?subject=" + encodeURIComponent(t("Group course - ", "Skupinový kurz - ") + l.subject) + "&body=" + encodeURIComponent(body);
     resultBox.hidden = false;
   });
 });
@@ -125,14 +138,14 @@ if (copyBtn) {
     const email = copyBtn.dataset.email;
     const done = function () {
       const old = copyBtn.textContent;
-      copyBtn.textContent = "Copied!";
-      document.getElementById("copy-status").textContent = "Email address copied";
+      copyBtn.textContent = t("Copied!", "Zkopírováno!");
+      document.getElementById("copy-status").textContent = t("Email address copied", "E-mailová adresa zkopírována");
       setTimeout(function () { copyBtn.textContent = old; }, 2000);
     };
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email).then(done, function () { window.prompt("Copy this address:", email); });
+      navigator.clipboard.writeText(email).then(done, function () { window.prompt(t("Copy this address:", "Zkopírujte adresu:"), email); });
     } else {
-      window.prompt("Copy this address:", email);
+      window.prompt(t("Copy this address:", "Zkopírujte adresu:"), email);
     }
   });
 }
@@ -204,7 +217,7 @@ if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
   if (toggle) toggle.addEventListener("click", function () {
     userPaused = !userPaused;
     toggle.setAttribute("aria-pressed", String(userPaused));
-    toggle.setAttribute("aria-label", userPaused ? "Play the moving reviews" : "Pause the moving reviews");
+    toggle.setAttribute("aria-label", userPaused ? t("Play the moving reviews", "Spustit posouvání recenzí") : t("Pause the moving reviews", "Zastavit posouvání recenzí"));
   });
 
   if (window.matchMedia("(hover: hover)").matches) {
@@ -255,7 +268,7 @@ if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
     const set = function (open) {
       menu.hidden = !open;
       btn.setAttribute("aria-expanded", String(open));
-      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      btn.setAttribute("aria-label", open ? t("Close menu", "Zavřít menu") : t("Open menu", "Otevřít menu"));
       document.body.classList.toggle("menu-open", open);
     };
     btn.addEventListener("click", function () { set(menu.hidden); });
@@ -285,7 +298,7 @@ if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
     const dots = document.createElement("div");
     dots.className = "plans-dots";
     dots.setAttribute("aria-hidden", "true");
-    dots.innerHTML = Array.prototype.map.call(cards, function () { return "<i></i>"; }).join("") + "<span>Swipe to compare</span>";
+    dots.innerHTML = Array.prototype.map.call(cards, function () { return "<i></i>"; }).join("") + "<span>" + t("Swipe to compare", "Posuňte pro porovnání") + "</span>";
     plans.insertAdjacentElement("afterend", dots);
     const mark = function () {
       const w = cards[0].getBoundingClientRect().width + 14;
@@ -297,7 +310,7 @@ if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
   }
 })();
 
-/* ---------- 8. Visit statistics (Cloudflare Web Analytics) ----------
+/* ---------- 10. Visit statistics (Cloudflare Web Analytics) ----------
    Cookie-free page counts, loaded only when "analytics" in config.js has a token. */
 (function () {
   const token = window.PORTAL && window.PORTAL.analytics;

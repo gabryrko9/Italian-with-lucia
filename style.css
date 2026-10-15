@@ -496,3 +496,8 @@ body.menu-open .dock { transform: translateY(110%); }
 .prose .promo .promo-title { font-size: clamp(1.5rem, 4.6vw, 2rem); font-weight: 800; font-stretch: 75%; line-height: 1.05; }
 .prose .promo a.btn { color: var(--ink); text-decoration: none; margin-top: 0.4rem; }
 .prose .promo a.btn:hover { color: var(--ink); }
+
+/* language switch (EN / CZ) in the top bar */
+.lang { display: inline-flex; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; margin-left: auto; padding: 0 0.7rem; border: 2px solid rgba(255, 255, 255, 0.35); border-radius: 999px; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; text-decoration: none; }
+.lang:hover { border-color: var(--lemon); color: var(--lemon); }
+@media (min-width: 880px) { .lang { margin-left: 0; min-height: 2.4rem; } }
