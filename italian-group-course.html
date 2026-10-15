@@ -218,7 +218,7 @@
     <h1>Italian group course, starting in January</h1>
     <p class="lead">Twelve weekly live lessons online, in a small group of three to five students. Beginner, intermediate and advanced levels, with a lower price than private tuition: €18 per person per lesson.</p>
     <div class="hero-cta">
-      <a class="btn btn-lemon btn-lg" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20reservation&amp;body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20reserve%20a%20place%20in%20the%20January%20group%20course.%0A%0ALevel%20%28beginner%20%2F%20intermediate%20%2F%20advanced%20%2F%20not%20sure%29%3A%20%0AMy%20time%20zone%3A%20%0ADays%20and%20times%20that%20work%20for%20me%3A%20%0A%0AThanks%21">Reserve your place</a>
+      <a class="btn btn-lemon btn-lg" data-group href="#reserve">Reserve your place</a>
       <a class="btn btn-line btn-lg" href="#levels">See what you learn</a>
     </div>
     <p class="hero-note">No payment now. You pay only once Lucia confirms your group. She replies within 24 hours.</p>
@@ -300,16 +300,50 @@
 
 <h2>How to reserve your place</h2>
 <ol class="num">
-  <li><b>Email Lucia</b> with the level you want, your time zone and the days and times that suit you.</li>
+  <li><b><a href="#reserve">Fill in the short form</a></b> with the level you want, your time zone and the days and times that suit you, or email Lucia.</li>
   <li><b>Lucia confirms</b> your level and the day and time of your group. Places are limited to five students per group.</li>
   <li><b>Pay for the course</b> by Revolut (preferred) or bank transfer, only after your group is confirmed.</li>
 </ol>
 <p class="muted">Group lessons follow the same 24-hour cancellation rule as private lessons: you can cancel up to 24 hours before a lesson, after that it counts as taken.</p>
-<p><a class="btn btn-lemon" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20reservation&amp;body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20reserve%20a%20place%20in%20the%20January%20group%20course.%0A%0ALevel%20%28beginner%20%2F%20intermediate%20%2F%20advanced%20%2F%20not%20sure%29%3A%20%0AMy%20time%20zone%3A%20%0ADays%20and%20times%20that%20work%20for%20me%3A%20%0A%0AThanks%21">Reserve your place</a></p>
+<p><a class="btn btn-lemon" data-group href="#reserve">Reserve your place</a></p>
 
 <h2>Group or private?</h2>
 <p>Choose the group if you like learning with others, want a steady weekly rhythm and prefer the lower price. Choose <a href="./#lessons">private lessons</a> if you need your own pace, a specific goal such as work or an exam, or a flexible schedule. You can also combine both.</p>
 
+  </div>
+</section>
+<section class="s s-paper" id="reserve">
+  <div class="wrap reserve">
+    <div class="reserve-intro">
+      <h2>Reserve your place</h2>
+      <p>Fill in this short form. Lucia replies within 24 hours to confirm your level and the day and time of your group.</p>
+      <p>Reserving is free: you pay only once your group is confirmed.</p>
+      <p class="reserve-alt">Prefer email? Write to <a href="mailto:lucia.scollo2000@gmail.com">lucia.scollo2000@gmail.com</a>.</p>
+    </div>
+    <form class="reserve-form" id="reserve-form" action="https://formsubmit.co/lucia.scollo2000@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Group course reservation (website)">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://italianwithlucia.com/italian-group-course.html?sent=1#reserve">
+      <input type="hidden" name="language" value="English">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="fld"><span>Your name</span><input type="text" name="name" required autocomplete="name"></label>
+      <label class="fld"><span>E-mail</span><input type="email" name="email" required autocomplete="email"></label>
+      <label class="fld"><span>Level</span>
+        <select name="level" required>
+          <option value="">Choose a level</option>
+          <option value="Beginner (A1–A2)" data-level="beginner">Beginner (A1–A2)</option>
+          <option value="Intermediate (B1)" data-level="intermediate">Intermediate (B1)</option>
+          <option value="Advanced (B2–C1)" data-level="advanced">Advanced (B2–C1)</option>
+          <option value="Not sure yet" data-level="unsure">Not sure yet</option>
+        </select></label>
+      <label class="fld"><span>Your time zone</span><input type="text" name="time_zone" placeholder="e.g. Europe/Prague"></label>
+      <label class="fld fld-wide"><span>Days and times that work for you</span><textarea name="times" rows="3" required placeholder="e.g. Tuesday or Thursday after 6 pm"></textarea></label>
+      <label class="fld fld-wide"><span>Anything else? (optional)</span><textarea name="message" rows="3"></textarea></label>
+      <p class="fld-wide reserve-note">Lucia uses these details only to organise the groups and contact you about them. <a href="privacy.html">Privacy</a></p>
+      <button class="btn btn-lemon btn-lg" type="submit">Send my reservation</button>
+      <p class="reserve-status fld-wide" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 <section class="s s-paper" id="faq">
@@ -364,9 +398,9 @@
 <section class="s s-cobalt final" id="book">
   <div class="wrap final-in">
     <h2>Reserve your place for January.</h2>
-    <p>Send a short email with your level and the times that suit you. Lucia replies within 24 hours. No payment until your group is confirmed.</p>
-    <a class="btn btn-lemon btn-lg" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20reservation&amp;body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20reserve%20a%20place%20in%20the%20January%20group%20course.%0A%0ALevel%20%28beginner%20%2F%20intermediate%20%2F%20advanced%20%2F%20not%20sure%29%3A%20%0AMy%20time%20zone%3A%20%0ADays%20and%20times%20that%20work%20for%20me%3A%20%0A%0AThanks%21">Reserve your place</a>
-    <p class="final-alt">No email app on this device? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Copy the address</button> or <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Group%20course%20-%20reservation" target="_blank" rel="noopener">write in Gmail</a>.</p>
+    <p>Fill in the short form with your level and the times that suit you. Lucia replies within 24 hours. No payment until your group is confirmed.</p>
+    <a class="btn btn-lemon btn-lg" data-group href="#reserve">Reserve your place</a>
+    <p class="final-alt">Prefer email? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Copy the address</button> or <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Group%20course%20-%20reservation" target="_blank" rel="noopener">write in Gmail</a>.</p>
     <p class="final-mail">lucia.scollo2000@gmail.com</p>
     <span class="sr-only" id="copy-status" role="status"></span>
   </div>
@@ -395,7 +429,7 @@
 </footer>
 
 <div class="dock" id="dock">
-  <a class="btn btn-lemon" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Group%20course%20-%20reservation&amp;body=Hi%20Lucia%2C%0A%0AI%27d%20like%20to%20reserve%20a%20place%20in%20the%20January%20group%20course.%0A%0ALevel%20%28beginner%20%2F%20intermediate%20%2F%20advanced%20%2F%20not%20sure%29%3A%20%0AMy%20time%20zone%3A%20%0ADays%20and%20times%20that%20work%20for%20me%3A%20%0A%0AThanks%21">Reserve a place</a>
+  <a class="btn btn-lemon" data-group href="#reserve">Reserve a place</a>
   <a class="btn btn-line" href="#levels">Levels</a>
 </div>
 

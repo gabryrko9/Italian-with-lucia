@@ -15,9 +15,6 @@ window.PORTAL = {
   // Optional: your Google Business Profile links. While empty, the "Find us on Google" block stays hidden.
   //   profile: the link of your Google Maps listing (Share > Copy link)
   //   review:  the "Ask for reviews" link (Google Business Profile > Get more reviews)
-  // Optional: link to a Google Form for the group-course waiting list (Google Forms > Send > link).
-  // While empty, every "Reserve a place" button opens an email to Lucia.
-  waitlist: "",
   // Optional: Cloudflare Web Analytics token (Cloudflare > Web Analytics > the site > "Manage site":
   // copy only the value after "token" in the JS snippet). While empty, nothing is counted.
   analytics: "09a43be5a40b40cc85b7d73fa37d74a5",

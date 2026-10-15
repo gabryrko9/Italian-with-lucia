@@ -501,3 +501,25 @@ body.menu-open .dock { transform: translateY(110%); }
 .lang { display: inline-flex; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; margin-left: auto; padding: 0 0.7rem; border: 2px solid rgba(255, 255, 255, 0.35); border-radius: 999px; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; text-decoration: none; }
 .lang:hover { border-color: var(--lemon); color: var(--lemon); }
 @media (min-width: 880px) { .lang { margin-left: 0; min-height: 2.4rem; } }
+
+/* group course reservation form */
+.reserve { display: grid; gap: 1.6rem; }
+@media (min-width: 900px) { .reserve { grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start; } }
+.reserve-intro p { margin-top: 0.8rem; }
+.reserve-alt a { font-weight: 600; }
+.reserve-form { display: grid; gap: 1rem; padding: clamp(1.2rem, 4vw, 2rem); background: var(--white); border: 2px solid var(--ink); border-radius: var(--bubble); }
+@media (min-width: 640px) { .reserve-form { grid-template-columns: 1fr 1fr; } .reserve-form .fld-wide, .reserve-form > .btn { grid-column: 1 / -1; } }
+.fld { display: grid; gap: 0.35rem; font-weight: 700; font-size: 0.95rem; min-width: 0; }
+.fld input, .fld select, .fld textarea { width: 100%; min-height: 2.9rem; padding: 0.6rem 0.8rem; font: inherit; font-weight: 400; font-size: 1rem; color: var(--ink); background: var(--paper); border: 2px solid rgba(14, 18, 64, 0.25); border-radius: 0.8rem; }
+.fld textarea { resize: vertical; }
+.fld input:focus, .fld select:focus, .fld textarea:focus { outline: 3px solid var(--cobalt); outline-offset: 1px; border-color: var(--cobalt); }
+.reserve-form > .btn { justify-self: start; }
+.reserve-form > .btn[disabled] { opacity: 0.6; cursor: wait; }
+.reserve-note { margin: 0; font-size: 0.88rem; opacity: 0.8; }
+.reserve-status { margin: 0; font-weight: 600; }
+.reserve-status:empty { display: none; }
+.reserve-status a { font-weight: 700; }
+.reserve-done { grid-column: 1 / -1; }
+.reserve-done p { margin-top: 0.6rem; }
+.reserve-done .reserve-done-title { margin-top: 0; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 800; font-stretch: 75%; line-height: 1.1; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }

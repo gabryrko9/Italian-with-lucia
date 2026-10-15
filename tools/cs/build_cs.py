@@ -50,14 +50,6 @@ BYE = "\n\nDěkuji!"
 MAILS = {
     "TRIAL": mail("Zkušební lekce zdarma", HI + "rád/a bych si domluvil/a 30minutovou zkušební lekci zdarma.\n\n"
                   "Moje úroveň: \nMoje cíle: \nOnline, nebo v Praze: \nVyhovující dny a časy: " + BYE),
-    "GROUP": mail("Skupinový kurz - přihláška", HI + "rád/a bych se přihlásil/a do lednového skupinového kurzu.\n\n"
-                  "Úroveň (začátečník / mírně pokročilý / pokročilý / nevím): \nČasové pásmo: \nVyhovující dny a časy: " + BYE),
-    "GROUP_B": mail("Skupinový kurz - Beginner", HI + "rád/a bych se přihlásil/a do lednové skupiny pro začátečníky.\n\n"
-                    "Časové pásmo: \nVyhovující dny a časy: " + BYE),
-    "GROUP_I": mail("Skupinový kurz - Intermediate", HI + "rád/a bych se přihlásil/a do lednové skupiny pro mírně pokročilé.\n\n"
-                    "Časové pásmo: \nVyhovující dny a časy: " + BYE),
-    "GROUP_A": mail("Skupinový kurz - Advanced", HI + "rád/a bych se přihlásil/a do lednové skupiny pro pokročilé.\n\n"
-                    "Časové pásmo: \nVyhovující dny a časy: " + BYE),
     "PKG5": mail("Balíček 5 lekcí", HI + "rád/a bych začal/a s balíčkem 5 lekcí.\n\nMoje úroveň: \nOnline, nebo v Praze: " + BYE),
     "PKG10": mail("Balíček 10 lekcí", HI + "rád/a bych začal/a s balíčkem 10 lekcí.\n\nMoje úroveň: \nOnline, nebo v Praze: " + BYE),
     "PKG20": mail("Balíček 20 lekcí", HI + "rád/a bych začal/a s balíčkem 20 lekcí.\n\nMoje úroveň: \nOnline, nebo v Praze: " + BYE),
@@ -210,7 +202,7 @@ FINAL = """<section class="s s-cobalt final" id="book">
 </section>"""
 
 DOCK_TRIAL =f'  <a class="btn btn-lemon" data-trial href="{MAILS["TRIAL"]}">Lekce zdarma</a>\n  <a class="btn btn-line" href="./#lessons">Ceny</a>'
-DOCK_GROUP = f'  <a class="btn btn-lemon" data-group href="{MAILS["GROUP"]}">Přihlásit se</a>\n  <a class="btn btn-line" href="#levels">Úrovně</a>'
+DOCK_GROUP = f'  <a class="btn btn-lemon" data-group href="#reserve">Přihlásit se</a>\n  <a class="btn btn-line" href="#levels">Úrovně</a>'
 
 BIZ = {"@type": "EducationalOrganization", "@id": BASE + "#business", "name": "Italian with Lucia", "url": BASE}
 

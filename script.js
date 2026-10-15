@@ -42,18 +42,6 @@ if (PORTAL_ON) {
     "Další lekci si vyberete v Luciině Google kalendáři. Dostanete potvrzení e-mailem i připomínky a Lucia vidí každou rezervaci ve svém kalendáři.");
 }
 
-/* ---------- 0b. Group course: waiting-list form ----------
-   With "waitlist" in config.js, every "Reserve a place" button (data-group)
-   opens the Google Form instead of a pre-filled email. */
-const WAITLIST_URL = (window.PORTAL && window.PORTAL.waitlist) || "";
-if (WAITLIST_URL) {
-  document.querySelectorAll("a[data-group]").forEach(function (a) {
-    a.href = WAITLIST_URL;
-    a.target = "_blank";
-    a.rel = "noopener";
-  });
-}
-
 /* ---------- 1. Currency switch ----------
    Prices are written once, in EUR, as data-eur="..." in index.html.
    Update the indicative exchange rates here when you want. */
@@ -108,13 +96,13 @@ if (box) {
 
 /* ---------- 4. Level finder ---------- */
 const LEVELS = CS ? {
-  beginner:     { name: "Začátečníci (A1–A2)", text: "Postavíte si základy a mluvit budete od první lekce. Hodí se skupina pro začátečníky i individuální lekce.", subject: "Beginner", cs: "začátečníky" },
-  intermediate: { name: "Mírně pokročilí (B1)", text: "Domluvíte se, takže se zaměříte na přesnost a rozsah: minulé časy, slovní zásobu a plynulou konverzaci.", subject: "Intermediate", cs: "mírně pokročilé" },
-  advanced:     { name: "Pokročilí (B2–C1)", text: "Mluvíte plynule, takže pracujete na nuancích, idiomech a stylu, s přesnou zpětnou vazbou.", subject: "Advanced", cs: "pokročilé" }
+  beginner:     { name: "Začátečníci (A1–A2)", text: "Postavíte si základy a mluvit budete od první lekce. Hodí se skupina pro začátečníky i individuální lekce." },
+  intermediate: { name: "Mírně pokročilí (B1)", text: "Domluvíte se, takže se zaměříte na přesnost a rozsah: minulé časy, slovní zásobu a plynulou konverzaci." },
+  advanced:     { name: "Pokročilí (B2–C1)", text: "Mluvíte plynule, takže pracujete na nuancích, idiomech a stylu, s přesnou zpětnou vazbou." }
 } : {
-  beginner:     { name: "Beginner (A1–A2)", text: "You build your base with plenty of speaking from day one. The Beginner group or private lessons both fit.", subject: "Beginner" },
-  intermediate: { name: "Intermediate (B1)", text: "You can already talk, so the work is accuracy and range: past tenses, vocabulary and fluent conversation.", subject: "Intermediate" },
-  advanced:     { name: "Advanced (B2–C1)", text: "You are fluent, so the work is nuance, idioms and register, with precise feedback.", subject: "Advanced" }
+  beginner:     { name: "Beginner (A1–A2)", text: "You build your base with plenty of speaking from day one. The Beginner group or private lessons both fit." },
+  intermediate: { name: "Intermediate (B1)", text: "You can already talk, so the work is accuracy and range: past tenses, vocabulary and fluent conversation." },
+  advanced:     { name: "Advanced (B2–C1)", text: "You are fluent, so the work is nuance, idioms and register, with precise feedback." }
 };
 const resultBox = document.getElementById("level-result");
 document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
@@ -122,14 +110,68 @@ document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
     const l = LEVELS[r.value];
     document.getElementById("level-title").textContent = l.name;
     document.getElementById("level-text").textContent = l.text;
-    const body = CS
-      ? "Dobrý den, Lucie,\n\nrád/a bych se přihlásil/a do lednové skupiny pro " + l.cs + ".\n\nČasové pásmo: \nVyhovující dny a časy: \n\nDěkuji!"
-      : "Hi Lucia,\n\nI'd like to reserve a place in the January " + l.subject + " group.\n\nMy time zone: \nPreferred days and times: \n\nThanks!";
-    document.getElementById("level-reserve").href = WAITLIST_URL ||
-      "mailto:lucia.scollo2000@gmail.com?subject=" + encodeURIComponent(t("Group course - ", "Skupinový kurz - ") + l.subject) + "&body=" + encodeURIComponent(body);
+    document.getElementById("level-reserve").href =
+      t("italian-group-course.html", "skupinovy-kurz-italstiny.html") + "?level=" + r.value + "#reserve";
     resultBox.hidden = false;
   });
 });
+
+/* ---------- 4b. Group course reservation form ----------
+   Sends the form to Lucia's Gmail through FormSubmit (formsubmit.co) without
+   leaving the page. Without JavaScript the form still posts normally and
+   FormSubmit brings the visitor back here with ?sent=1. If sending fails,
+   the visitor gets a pre-filled email to Lucia instead, so no request is lost. */
+(function () {
+  const form = document.getElementById("reserve-form");
+  if (!form) return;
+  const params = new URLSearchParams(location.search);
+  const status = form.querySelector(".reserve-status");
+  const btn = form.querySelector('button[type="submit"]');
+  const lvl = params.get("level");
+  if (lvl) {
+    const o = form.querySelector('option[data-level="' + lvl + '"]');
+    if (o) o.selected = true;
+  }
+  try {
+    if (!form.elements.time_zone.value) form.elements.time_zone.value = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  } catch (e) { /* old browser: the visitor types it */ }
+
+  const done = function () {
+    form.innerHTML = "<div class=\"reserve-done\"><p class=\"reserve-done-title\">" +
+      t("Thank you! Your reservation is on its way.", "Děkujeme! Přihláška je odeslaná.") + "</p><p>" +
+      t("Lucia replies within 24 hours to confirm your level and the day and time of your group. Check your spam folder if you do not hear from her.",
+        "Lucia odpoví do 24 hodin a potvrdí vaši úroveň a den a čas skupiny. Pokud odpověď nepřijde, podívejte se do složky se spamem.") + "</p></div>";
+    form.scrollIntoView({ block: "center" });
+  };
+  if (params.get("sent")) { done(); return; }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (form.elements._honey.value) return;
+    const data = {};
+    new FormData(form).forEach(function (v, k) { data[k] = v; });
+    delete data._next; delete data._honey;
+    data._subject = t("Group course reservation", "Přihláška do skupinového kurzu") + ": " + data.level + " – " + data.name;
+    data._replyto = data.email;
+    btn.disabled = true;
+    status.textContent = t("Sending…", "Odesílám…");
+    const fail = function () {
+      btn.disabled = false;
+      const body = Object.keys(data).filter(function (k) { return k.charAt(0) !== "_"; })
+        .map(function (k) { return k + ": " + data[k]; }).join("\n");
+      const href = "mailto:lucia.scollo2000@gmail.com?subject=" + encodeURIComponent(data._subject) + "&body=" + encodeURIComponent(body);
+      status.innerHTML = t("Sorry, the form could not be sent. ", "Formulář se nepodařilo odeslat. ") +
+        "<a href=\"" + href + "\">" + t("Send the same details by email", "Pošlete stejné údaje e-mailem") + "</a>.";
+    };
+    fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(data)
+    }).then(function (r) { return r.json(); })
+      .then(function (res) { if (String(res.success) === "true") done(); else fail(); })
+      .catch(fail);
+  });
+})();
 
 /* ---------- 5. Copy the email address ---------- */
 const copyBtn = document.getElementById("copy-mail");
@@ -288,7 +330,7 @@ if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
         entries.forEach(function (en) { if (en.isIntersecting) seen.add(en.target); else seen.delete(en.target); });
         atEnd = seen.size > 0; update();
       });
-      document.querySelectorAll("#book, .foot").forEach(function (el) { io.observe(el); });
+      document.querySelectorAll("#book, #reserve, .foot").forEach(function (el) { io.observe(el); });
     }
   }
 

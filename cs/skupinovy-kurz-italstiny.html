@@ -225,7 +225,7 @@
     <h1>Skupinový kurz italštiny od ledna</h1>
     <p class="lead">Dvanáct týdenních živých lekcí online v malé skupině tří až pěti lidí. Úroveň pro začátečníky, mírně pokročilé i pokročilé, za nižší cenu než individuální výuka: 18 € za osobu a lekci.</p>
     <div class="hero-cta">
-      <a class="btn btn-lemon btn-lg" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Skupinov%C3%BD%20kurz%20-%20p%C5%99ihl%C3%A1%C5%A1ka&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20se%20p%C5%99ihl%C3%A1sil%2Fa%20do%20lednov%C3%A9ho%20skupinov%C3%A9ho%20kurzu.%0A%0A%C3%9Arove%C5%88%20%28za%C4%8D%C3%A1te%C4%8Dn%C3%ADk%20%2F%20m%C3%ADrn%C4%9B%20pokro%C4%8Dil%C3%BD%20%2F%20pokro%C4%8Dil%C3%BD%20%2F%20nev%C3%ADm%29%3A%20%0A%C4%8Casov%C3%A9%20p%C3%A1smo%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Přihlásit se do kurzu</a>
+      <a class="btn btn-lemon btn-lg" data-group href="#reserve">Přihlásit se do kurzu</a>
       <a class="btn btn-line btn-lg" href="#levels">Co se naučíte</a>
     </div>
     <p class="hero-note">Teď nic neplatíte. Platíte až ve chvíli, kdy Lucia potvrdí vaši skupinu. Odpoví do 24 hodin.</p>
@@ -308,16 +308,50 @@
 
 <h2>Jak se přihlásit</h2>
 <ol class="num">
-  <li><b>Napište Lucii</b> úroveň, o kterou máte zájem, své časové pásmo a dny a časy, které vám vyhovují. Klidně česky.</li>
+  <li><b><a href="#reserve">Vyplňte krátký formulář</a></b> s úrovní, o kterou máte zájem, časovým pásmem a dny a časy, které vám vyhovují, nebo napište Lucii e-mail. Klidně česky.</li>
   <li><b>Lucia potvrdí</b> vaši úroveň a den a čas vaší skupiny. Ve skupině je nejvýš pět míst.</li>
   <li><b>Zaplatíte kurz</b> přes Revolut (nejraději) nebo bankovním převodem, až když je skupina potvrzená.</li>
 </ol>
 <p class="muted">Pro skupinové lekce platí stejné pravidlo jako pro individuální: lekci můžete zrušit nejpozději 24 hodin předem, později se počítá jako odučená.</p>
-<p><a class="btn btn-lemon" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Skupinov%C3%BD%20kurz%20-%20p%C5%99ihl%C3%A1%C5%A1ka&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20se%20p%C5%99ihl%C3%A1sil%2Fa%20do%20lednov%C3%A9ho%20skupinov%C3%A9ho%20kurzu.%0A%0A%C3%9Arove%C5%88%20%28za%C4%8D%C3%A1te%C4%8Dn%C3%ADk%20%2F%20m%C3%ADrn%C4%9B%20pokro%C4%8Dil%C3%BD%20%2F%20pokro%C4%8Dil%C3%BD%20%2F%20nev%C3%ADm%29%3A%20%0A%C4%8Casov%C3%A9%20p%C3%A1smo%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Přihlásit se do kurzu</a></p>
+<p><a class="btn btn-lemon" data-group href="#reserve">Přihlásit se do kurzu</a></p>
 
 <h2>Skupina, nebo individuálně?</h2>
 <p>Skupinu si vyberte, pokud se rádi učíte s ostatními, chcete pravidelný týdenní rytmus a nižší cenu. <a href="./#lessons">Individuální lekce</a> si vyberte, pokud potřebujete vlastní tempo, konkrétní cíl, například práci nebo zkoušku, nebo flexibilní rozvrh. Obojí lze i kombinovat.</p>
 
+  </div>
+</section>
+<section class="s s-paper" id="reserve">
+  <div class="wrap reserve">
+    <div class="reserve-intro">
+      <h2>Přihláška do kurzu</h2>
+      <p>Vyplňte krátký formulář. Lucia odpoví do 24 hodin a potvrdí vaši úroveň a den a čas vaší skupiny.</p>
+      <p>Přihláška je zdarma: platíte až po potvrzení skupiny.</p>
+      <p class="reserve-alt">Raději e-mailem? Napište na <a href="mailto:lucia.scollo2000@gmail.com">lucia.scollo2000@gmail.com</a>.</p>
+    </div>
+    <form class="reserve-form" id="reserve-form" action="https://formsubmit.co/lucia.scollo2000@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Přihláška do skupinového kurzu (web)">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://italianwithlucia.com/cs/skupinovy-kurz-italstiny.html?sent=1#reserve">
+      <input type="hidden" name="language" value="Czech / čeština">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="fld"><span>Jméno</span><input type="text" name="name" required autocomplete="name"></label>
+      <label class="fld"><span>E-mail</span><input type="email" name="email" required autocomplete="email"></label>
+      <label class="fld"><span>Úroveň</span>
+        <select name="level" required>
+          <option value="">Vyberte úroveň</option>
+          <option value="Začátečníci (A1–A2)" data-level="beginner">Začátečníci (A1–A2)</option>
+          <option value="Mírně pokročilí (B1)" data-level="intermediate">Mírně pokročilí (B1)</option>
+          <option value="Pokročilí (B2–C1)" data-level="advanced">Pokročilí (B2–C1)</option>
+          <option value="Ještě nevím" data-level="unsure">Ještě nevím</option>
+        </select></label>
+      <label class="fld"><span>Časové pásmo</span><input type="text" name="time_zone" placeholder="např. Europe/Prague"></label>
+      <label class="fld fld-wide"><span>Dny a časy, které vám vyhovují</span><textarea name="times" rows="3" required placeholder="např. úterý nebo čtvrtek po 18. hodině"></textarea></label>
+      <label class="fld fld-wide"><span>Ještě něco? (nepovinné)</span><textarea name="message" rows="3"></textarea></label>
+      <p class="fld-wide reserve-note">Lucia tyto údaje použije jen k organizaci skupin a ke kontaktu s vámi. <a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a></p>
+      <button class="btn btn-lemon btn-lg" type="submit">Odeslat přihlášku</button>
+      <p class="reserve-status fld-wide" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 <section class="s s-paper" id="faq">
@@ -376,9 +410,9 @@
 <section class="s s-cobalt final" id="book">
   <div class="wrap final-in">
     <h2>Přihlaste se na leden.</h2>
-    <p>Pošlete krátký e-mail se svou úrovní a časy, které vám vyhovují. Lucia odpoví do 24 hodin. Nic neplatíte, dokud není skupina potvrzená.</p>
-    <a class="btn btn-lemon btn-lg" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Skupinov%C3%BD%20kurz%20-%20p%C5%99ihl%C3%A1%C5%A1ka&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20se%20p%C5%99ihl%C3%A1sil%2Fa%20do%20lednov%C3%A9ho%20skupinov%C3%A9ho%20kurzu.%0A%0A%C3%9Arove%C5%88%20%28za%C4%8D%C3%A1te%C4%8Dn%C3%ADk%20%2F%20m%C3%ADrn%C4%9B%20pokro%C4%8Dil%C3%BD%20%2F%20pokro%C4%8Dil%C3%BD%20%2F%20nev%C3%ADm%29%3A%20%0A%C4%8Casov%C3%A9%20p%C3%A1smo%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Přihlásit se do kurzu</a>
-    <p class="final-alt">Nemáte v zařízení e-mailovou aplikaci? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Zkopírujte adresu</button> nebo <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Skupinov%C3%BD%20kurz%20-%20p%C5%99ihl%C3%A1%C5%A1ka" target="_blank" rel="noopener">napište přes Gmail</a>.</p>
+    <p>Vyplňte krátký formulář se svou úrovní a časy, které vám vyhovují. Lucia odpoví do 24 hodin. Nic neplatíte, dokud není skupina potvrzená.</p>
+    <a class="btn btn-lemon btn-lg" data-group href="#reserve">Přihlásit se do kurzu</a>
+    <p class="final-alt">Raději e-mailem? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Zkopírujte adresu</button> nebo <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Skupinov%C3%BD%20kurz%20-%20p%C5%99ihl%C3%A1%C5%A1ka" target="_blank" rel="noopener">napište přes Gmail</a>.</p>
     <p class="final-mail">lucia.scollo2000@gmail.com</p>
     <span class="sr-only" id="copy-status" role="status"></span>
   </div>
@@ -407,7 +441,7 @@
 </footer>
 
 <div class="dock" id="dock">
-  <a class="btn btn-lemon" data-group href="mailto:lucia.scollo2000@gmail.com?subject=Skupinov%C3%BD%20kurz%20-%20p%C5%99ihl%C3%A1%C5%A1ka&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20se%20p%C5%99ihl%C3%A1sil%2Fa%20do%20lednov%C3%A9ho%20skupinov%C3%A9ho%20kurzu.%0A%0A%C3%9Arove%C5%88%20%28za%C4%8D%C3%A1te%C4%8Dn%C3%ADk%20%2F%20m%C3%ADrn%C4%9B%20pokro%C4%8Dil%C3%BD%20%2F%20pokro%C4%8Dil%C3%BD%20%2F%20nev%C3%ADm%29%3A%20%0A%C4%8Casov%C3%A9%20p%C3%A1smo%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Přihlásit se</a>
+  <a class="btn btn-lemon" data-group href="#reserve">Přihlásit se</a>
   <a class="btn btn-line" href="#levels">Úrovně</a>
 </div>
 
