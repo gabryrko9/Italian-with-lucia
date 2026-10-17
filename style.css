@@ -537,3 +537,7 @@ body.menu-open .dock { transform: translateY(110%); }
 .prose .gallery { margin-top: 1rem; display: grid; grid-template-columns: 1.6fr 1fr; gap: 0.8rem; align-items: stretch; }
 .prose .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--bubble); }
 @media (max-width: 560px) { .prose .gallery { grid-template-columns: 1fr; } }
+
+/* Companies page */
+.biz-notes { margin-top: 2.2rem; }
+.biz-notes p { margin-top: 0.5rem; }
