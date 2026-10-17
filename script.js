@@ -97,12 +97,12 @@ if (box) {
 /* ---------- 4. Level finder ---------- */
 const LEVELS = CS ? {
   beginner:     { name: "Začátečníci (A1–A2)", text: "Postavíte si základy a mluvit budete od první lekce. Hodí se skupina pro začátečníky i individuální lekce." },
-  intermediate: { name: "Mírně pokročilí (B1)", text: "Domluvíte se, takže se zaměříte na přesnost a rozsah: minulé časy, slovní zásobu a plynulou konverzaci." },
-  advanced:     { name: "Pokročilí (B2–C1)", text: "Mluvíte plynule, takže pracujete na nuancích, idiomech a stylu, s přesnou zpětnou vazbou." }
+  intermediate: { name: "Mírně pokročilí (B1)", text: "Domluvíte se, takže se zaměříte na přesnost a rozsah: minulé časy, slovní zásobu a plynulou konverzaci. Skupina se otevře, jakmile se přihlásí tři lidé: zapište se na čekací listinu.", wait: true },
+  advanced:     { name: "Pokročilí (B2–C1)", text: "Mluvíte plynule, takže pracujete na nuancích, idiomech a stylu, s přesnou zpětnou vazbou. Skupina se otevře, jakmile se přihlásí tři lidé: zapište se na čekací listinu.", wait: true }
 } : {
   beginner:     { name: "Beginner (A1–A2)", text: "You build your base with plenty of speaking from day one. The Beginner group or private lessons both fit." },
-  intermediate: { name: "Intermediate (B1)", text: "You can already talk, so the work is accuracy and range: past tenses, vocabulary and fluent conversation." },
-  advanced:     { name: "Advanced (B2–C1)", text: "You are fluent, so the work is nuance, idioms and register, with precise feedback." }
+  intermediate: { name: "Intermediate (B1)", text: "You can already talk, so the work is accuracy and range: past tenses, vocabulary and fluent conversation. This group opens as soon as three people sign up: join the waiting list.", wait: true },
+  advanced:     { name: "Advanced (B2–C1)", text: "You are fluent, so the work is nuance, idioms and register, with precise feedback. This group opens as soon as three people sign up: join the waiting list.", wait: true }
 };
 const resultBox = document.getElementById("level-result");
 document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
@@ -110,8 +110,9 @@ document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
     const l = LEVELS[r.value];
     document.getElementById("level-title").textContent = l.name;
     document.getElementById("level-text").textContent = l.text;
-    document.getElementById("level-reserve").href =
-      t("italian-group-course.html", "skupinovy-kurz-italstiny.html") + "?level=" + r.value + "#reserve";
+    const reserve = document.getElementById("level-reserve");
+    reserve.href = t("italian-group-course.html", "skupinovy-kurz-italstiny.html") + "?level=" + r.value + "#reserve";
+    reserve.textContent = l.wait ? t("Join the waiting list", "Zapsat se na čekací listinu") : t("Reserve a place in the January group", "Přihlásit se do lednové skupiny");
     resultBox.hidden = false;
   });
 });

@@ -238,10 +238,10 @@ def service(cs, name, meta):
 
 COURSE = {
     "@type": "Course", "@id": cs_url("skupinovy-kurz-italstiny.html") + "#course",
-    "name": "Skupinový kurz italštiny (začátečníci, mírně pokročilí, pokročilí)",
-    "description": "Skupinový kurz italštiny online s Lucií: 12 týdenních živých lekcí ve skupině 3 až 5 studentů. Začátečníci až pokročilí, 18 € za lekci.",
+    "name": "Skupinový kurz italštiny pro začátečníky (A1–A2)",
+    "description": "Skupinový kurz italštiny online pro začátečníky: 12 týdenních živých lekcí přes video ve skupině 3 až 5 studentů, 18 € za lekci.",
     "url": cs_url("skupinovy-kurz-italstiny.html"), "provider": BIZ, "inLanguage": "it", "teaches": "Italština",
-    "educationalLevel": "Začátečníci (A1–A2), mírně pokročilí (B1), pokročilí (B2–C1)", "image": BASE + "og.jpg",
+    "educationalLevel": "Začátečníci (A1–A2)", "image": BASE + "og.jpg",
     "offers": {"@type": "Offer", "price": "216", "priceCurrency": "EUR", "category": "Paid", "url": cs_url("skupinovy-kurz-italstiny.html")},
     "hasCourseInstance": {"@type": "CourseInstance", "courseMode": "Online", "startDate": "2027-01",
                           "courseSchedule": {"@type": "Schedule", "repeatFrequency": "P1W", "repeatCount": 12, "duration": "PT1H"},
@@ -251,7 +251,7 @@ COURSE = {
 META = {
     "index.html": dict(
         title="Italian with Lucia: lekce italštiny v Praze a online",
-        description="Naučte se italsky s Lucií: individuální lekce a skupinové kurzy online nebo osobně v Praze. Magisterský titul z výuky italštiny, přes 1 000 hodin praxe. Lekce zdarma.",
+        description="Naučte se italsky s Lucií: individuální lekce a skupinové kurzy online nebo osobně v Praze. Magisterský titul z výuky italštiny, přes 2 000 hodin výuky a 150 studentů. Lekce zdarma.",
         skip=("#lessons", "Přejít na lekce"), dock=DOCK_TRIAL),
     "lekce-italstiny-praha.html": dict(
         title="Lekce italštiny v Praze | Soukromá lektorka, lekce zdarma",
@@ -262,8 +262,8 @@ META = {
         description="Lekce italštiny online s Lucií, kvalifikovanou lektorkou. Živé individuální lekce přes video, všechny úrovně. 30 minut zdarma, balíčky od 25 € za lekci.",
         crumb="Italština online", service="Individuální lekce italštiny online"),
     "skupinovy-kurz-italstiny.html": dict(
-        title="Skupinový kurz italštiny online | Malé skupiny od ledna",
-        description="Skupinový kurz italštiny online s Lucií: 12 týdenních lekcí ve skupině 3–5 lidí. Začátečníci až pokročilí. 18 € za lekci, platíte až po potvrzení skupiny.",
+        title="Skupinový kurz italštiny pro začátečníky online | Od ledna",
+        description="Online kurz italštiny pro začátečníky v malé skupině: 12 týdenních živých lekcí přes video s Lucií, 3–5 lidí. 18 € za lekci, platíte až po potvrzení skupiny.",
         crumb="Skupinový kurz italštiny", dock=DOCK_GROUP, course=True),
     "italstina-pro-zacatecniky.html": dict(
         title="Italština pro začátečníky | Od nuly s lektorkou",
@@ -290,7 +290,7 @@ META = {
         crumb="Italské fráze na cesty", parent=True, og_type="article"),
     "o-lucii.html": dict(
         title="O Lucii | Italian with Lucia, lektorka italštiny v Praze",
-        description="Seznamte se s Lucií: magisterský titul z výuky italštiny, přes 1 000 hodin výuky, lekce v Praze a online. Mluví trochu česky a učí i studenty, kteří mluví jen česky.",
+        description="Seznamte se s Lucií: magisterský titul z výuky italštiny, přes 2 000 hodin výuky a 150 studentů, lekce v Praze a online. Mluví trochu česky a učí i studenty, kteří mluví jen česky.",
         crumb="O Lucii", about=True),
     "ochrana-osobnich-udaju.html": dict(
         title="Ochrana osobních údajů | Italian with Lucia",
@@ -313,7 +313,7 @@ def build(cs):
                       "name": "Italian with Lucia", "url": BASE,
                       "description": "Individuální lekce italštiny a skupinové kurzy online i osobně v Praze 1, 2 a 3.",
                       "knowsLanguage": ["it", "en", "cs"], "areaServed": [{"@type": "City", "name": "Praha"}, {"@type": "Place", "name": "Online"}]})
-        graph.append(dict(COURSE, description="Dvanáct týdenních živých lekcí italštiny online ve skupině 3 až 5 studentů, pro začátečníky, mírně pokročilé i pokročilé."))
+        graph.append(dict(COURSE, description="Dvanáct týdenních živých lekcí italštiny online pro začátečníky, ve skupině 3 až 5 studentů."))
     else:
         items = []
         if meta.get("parent"):

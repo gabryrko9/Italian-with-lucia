@@ -523,3 +523,8 @@ body.menu-open .dock { transform: translateY(110%); }
 .reserve-done p { margin-top: 0.6rem; }
 .reserve-done .reserve-done-title { margin-top: 0; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 800; font-stretch: 75%; line-height: 1.1; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* short facts under a page title (group course) */
+.hero-badges { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; max-width: none; }
+.hero-badges span { border: 2px solid currentColor; border-radius: 999px; padding: 0.3rem 0.85rem; font-weight: 700; font-size: 0.95rem; }
+.levels .wait { display: inline-block; margin-left: 0.4rem; padding: 0.1rem 0.6rem; border-radius: 999px; background: rgba(255, 255, 255, 0.16); font-size: 0.8rem; font-weight: 700; vertical-align: middle; }
