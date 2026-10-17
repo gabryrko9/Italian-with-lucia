@@ -251,7 +251,7 @@ COURSE = {
 META = {
     "index.html": dict(
         title="Italian with Lucia: lekce italštiny v Praze a online",
-        description="Naučte se italsky s Lucií: individuální lekce a skupinové kurzy online nebo osobně v Praze. Magisterský titul z výuky italštiny, přes 2 000 hodin výuky a 150 studentů. Lekce zdarma.",
+        description="Naučte se italsky s Lucií: individuální lekce a skupinové kurzy online nebo osobně v Praze. Postgraduální Master v didaktice italštiny, přes 2 000 hodin výuky a 150 studentů. Lekce zdarma.",
         skip=("#lessons", "Přejít na lekce"), dock=DOCK_TRIAL),
     "lekce-italstiny-praha.html": dict(
         title="Lekce italštiny v Praze | Soukromá lektorka, lekce zdarma",
@@ -290,7 +290,7 @@ META = {
         crumb="Italské fráze na cesty", parent=True, og_type="article"),
     "o-lucii.html": dict(
         title="O Lucii | Italian with Lucia, lektorka italštiny v Praze",
-        description="Seznamte se s Lucií: magisterský titul z výuky italštiny, přes 2 000 hodin výuky a 150 studentů, lekce v Praze a online. Mluví trochu česky a učí i studenty, kteří mluví jen česky.",
+        description="Seznamte se s Lucií: postgraduální Master v didaktice italštiny, přes 2 000 hodin výuky a 150 studentů, lekce v Praze a online. Mluví trochu česky a učí i studenty, kteří mluví jen česky.",
         crumb="O Lucii", about=True),
     "ochrana-osobnich-udaju.html": dict(
         title="Ochrana osobních údajů | Italian with Lucia",
