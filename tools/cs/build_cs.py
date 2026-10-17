@@ -179,6 +179,7 @@ def footer(dock):
       <li><a href="./#faq">Otázky</a></li>
     </ul>
     <p><a href="{MAILS['PLAIN']}">{EMAIL}</a></p>
+    <p><a href="https://www.linkedin.com/in/lucia-scollo/" target="_blank" rel="me noopener">LinkedIn</a></p>
     <p>Lekci lze zrušit nejpozději 24 hodin před začátkem.</p>
     <p data-portal hidden>Už k Lucii chodíte? <a href="../portal.html">Zobrazit moje lekce</a></p>
     <p class="foot-fine">© 2026 Italian with Lucia, Praha · <a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a></p>
@@ -343,7 +344,7 @@ def build(cs):
     if meta.get("about"):
         graph.append({"@type": "AboutPage", "name": meta["title"], "url": cs_url(cs), "inLanguage": "cs", "mainEntity": {"@id": BASE + "#lucia"}})
         graph.append({"@type": "Person", "@id": BASE + "#lucia", "name": "Lucia", "jobTitle": "Lektorka italštiny",
-                      "image": BASE + "lucia-portrait.jpg", "url": cs_url(cs),
+                      "image": BASE + "lucia-portrait.jpg", "url": cs_url(cs), "sameAs": ["https://www.linkedin.com/in/lucia-scollo/"],
                       "alumniOf": {"@type": "CollegeOrUniversity", "name": "Università per Stranieri di Perugia"},
                       "knowsLanguage": ["it", "en", "cs"], "worksFor": {"@id": BASE + "#business"},
                       "workLocation": {"@type": "City", "name": "Praha"}})
