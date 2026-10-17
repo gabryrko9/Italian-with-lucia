@@ -528,3 +528,12 @@ body.menu-open .dock { transform: translateY(110%); }
 .hero-badges { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; max-width: none; }
 .hero-badges span { border: 2px solid currentColor; border-radius: 999px; padding: 0.3rem 0.85rem; font-weight: 700; font-size: 0.95rem; }
 .levels .wait { display: inline-block; margin-left: 0.4rem; padding: 0.1rem 0.6rem; border-radius: 999px; background: rgba(255, 255, 255, 0.16); font-size: 0.8rem; font-weight: 700; vertical-align: middle; }
+
+/* photos inside text pages */
+.prose .pic { margin: 1.2rem 0 0; }
+.prose .pic img { display: block; width: 100%; max-width: 100%; height: auto; border-radius: var(--bubble); }
+.prose .pic img[height="1000"] { max-width: 22rem; }
+.prose .pic figcaption { margin-top: 0.5rem; font-size: 0.93rem; opacity: 0.8; }
+.prose .gallery { margin-top: 1rem; display: grid; grid-template-columns: 1.6fr 1fr; gap: 0.8rem; align-items: stretch; }
+.prose .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--bubble); }
+@media (max-width: 560px) { .prose .gallery { grid-template-columns: 1fr; } }

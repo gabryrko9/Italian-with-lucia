@@ -73,7 +73,7 @@ def head(cs, meta, ld):
     robots = meta.get("robots", "index, follow, max-image-preview:large")
     esc = lambda s: s.replace("&", "&amp;").replace('"', "&quot;")
     t, d = esc(meta["title"]), esc(meta["description"])
-    pre = '  <link rel="preload" as="image" href="../lucia-bubble.jpg" fetchpriority="high">\n' if cs == "index.html" else ""
+    pre = '  <link rel="preload" as="image" href="../lucia-cafe.jpg" fetchpriority="high">\n' if cs == "index.html" else ""
     return f"""<!DOCTYPE html>
 <html lang="cs">
 <head>
