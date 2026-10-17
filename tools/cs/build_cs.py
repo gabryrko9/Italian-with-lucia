@@ -22,6 +22,7 @@ PAGES = {
     "how-long-does-it-take-to-learn-italian.html": "jak-dlouho-trva-naucit-se-italsky.html",
     "passato-prossimo-vs-imperfetto.html": "passato-prossimo-vs-imperfetto.html",
     "italian-phrases-for-travellers.html": "italske-fraze-na-cesty.html",
+    "italian-for-companies.html": "italstina-pro-firmy.html",
     "about-lucia.html": "o-lucii.html",
     "privacy.html": "ochrana-osobnich-udaju.html",
 }
@@ -54,6 +55,9 @@ MAILS = {
     "PKG10": mail("Balíček 10 lekcí", HI + "rád/a bych začal/a s balíčkem 10 lekcí.\n\nMoje úroveň: \nOnline, nebo v Praze: " + BYE),
     "PKG20": mail("Balíček 20 lekcí", HI + "rád/a bych začal/a s balíčkem 20 lekcí.\n\nMoje úroveň: \nOnline, nebo v Praze: " + BYE),
     "BOOKING": mail("Rezervace lekce", HI + "rád/a bych si zarezervoval/a další lekci.\n\nVyhovující dny a časy: " + BYE),
+    "BIZ": mail("Kurz italštiny pro náš tým", HI + "chtěli bychom kurz italštiny pro náš tým.\n\nFirma: \nPočet lidí: \n"
+                "Úrovně (začátečníci / středně pokročilí / pokročilí): \nCíl (schůzky, e-maily, cesta, veletrh...): \n"
+                "Online, nebo u nás v kanceláři v Praze: \nVyhovující dny a časy: " + BYE),
     "PLAIN": "mailto:" + EMAIL,
 }
 
@@ -61,6 +65,7 @@ NAV = [  # (cs file or anchor, short label, menu label)
     ("lekce-italstiny-praha.html", "V Praze", "Lekce italštiny v Praze"),
     ("italstina-online.html", "Online", "Italština online"),
     ("skupinovy-kurz-italstiny.html", "Skupinový kurz", "Skupinový kurz italštiny"),
+    ("italstina-pro-firmy.html", "Pro firmy", "Italština pro firmy"),
     ("clanky.html", "Články", "Články o italštině"),
 ]
 
@@ -167,6 +172,7 @@ def footer(dock):
       <li><a href="lekce-italstiny-praha.html">Lekce italštiny v Praze</a></li>
       <li><a href="italstina-online.html">Italština online</a></li>
       <li><a href="skupinovy-kurz-italstiny.html">Skupinový kurz italštiny</a></li>
+      <li><a href="italstina-pro-firmy.html">Italština pro firmy</a></li>
       <li><a href="italstina-pro-zacatecniky.html">Italština pro začátečníky</a></li>
       <li><a href="clanky.html">Články o italštině</a></li>
       <li><a href="o-lucii.html">O Lucii</a></li>
@@ -202,6 +208,7 @@ FINAL = """<section class="s s-cobalt final" id="book">
 </section>"""
 
 DOCK_TRIAL =f'  <a class="btn btn-lemon" data-trial href="{MAILS["TRIAL"]}">Lekce zdarma</a>\n  <a class="btn btn-line" href="./#lessons">Ceny</a>'
+DOCK_BIZ = f'  <a class="btn btn-lemon" href="{MAILS["BIZ"]}">Požádat o nabídku</a>\n  <a class="btn btn-line" href="#prices">Ceny</a>'
 DOCK_GROUP = f'  <a class="btn btn-lemon" data-group href="#reserve">Přihlásit se</a>\n  <a class="btn btn-line" href="#levels">Úrovně</a>'
 
 BIZ = {"@type": "EducationalOrganization", "@id": BASE + "#business", "name": "Italian with Lucia", "url": BASE}
@@ -288,6 +295,10 @@ META = {
         h1="Nejdůležitější italské fráze na cesty",
         description="Italské fráze na cesty a do běžného života s jednoduchou výslovností: pozdravy, kavárna, restaurace, cesta a nákupy. A 5 pravidel výslovnosti.",
         crumb="Italské fráze na cesty", parent=True, og_type="article"),
+    "italstina-pro-firmy.html": dict(
+        title="Italština pro firmy v Praze | Kurzy pro týmy",
+        description="Kurzy italštiny pro firmy a týmy v Praze: individuálně nebo v malých skupinách, online nebo u vás v kanceláři, zaměřené na schůzky, e-maily a pracovní cesty. Od 35 € za lekci.",
+        crumb="Italština pro firmy", service="Kurzy italštiny pro firmy", dock=DOCK_BIZ),
     "o-lucii.html": dict(
         title="O Lucii | Italian with Lucia, lektorka italštiny v Praze",
         description="Seznamte se s Lucií: postgraduální Master v didaktice italštiny, přes 2 000 hodin výuky a 150 studentů, lekce v Praze a online. Mluví trochu česky a učí i studenty, kteří mluví jen česky.",
