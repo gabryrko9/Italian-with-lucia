@@ -61,11 +61,13 @@ MAILS = {
     "PLAIN": "mailto:" + EMAIL,
 }
 
-NAV = [  # (cs file or anchor, short label, menu label)
-    ("lekce-italstiny-praha.html", "V Praze", "Lekce italštiny v Praze"),
-    ("italstina-online.html", "Online", "Italština online"),
+NAV = [  # (cs file or anchor, short label, menu label): same order as the homepage menu
+    ("o-lucii.html", "O Lucii", "O Lucii"),
     ("skupinovy-kurz-italstiny.html", "Skupinový kurz", "Skupinový kurz italštiny"),
     ("italstina-pro-firmy.html", "Pro firmy", "Italština pro firmy"),
+    ("./#prices", "Ceny", "Individuální lekce a ceny"),
+    ("lekce-italstiny-praha.html", "V Praze", "Lekce italštiny v Praze"),
+    ("italstina-online.html", "Online", "Italština online"),
     ("clanky.html", "Články", "Články o italštině"),
 ]
 
@@ -126,7 +128,7 @@ def head(cs, meta, ld):
 def header(cs, skip):
     en = EN_OF[cs]
     en_rel = "../" if en == "index.html" else "../" + en
-    nav = "\n".join(f'      <a href="{h}">{s}</a>' for h, s, _ in NAV)
+    nav = "\n".join(f'      <a href="{h}"' + (' aria-current="page"' if h == cs else '') + f'>{s}</a>' for h, s, _ in NAV)
     menu = "\n".join(f'    <a href="{h}">{m}</a>' for h, _, m in NAV)
     return f"""<a class="skip" href="{skip[0]}">{skip[1]}</a>
 <header class="bar">
@@ -140,7 +142,7 @@ def header(cs, skip):
       <a href="./#faq">Otázky</a>
       <a class="portal-link" href="../portal.html" data-portal hidden>Moje lekce</a>
     </nav>
-    <a class="lang" href="{en_rel}" hreflang="en" lang="en" aria-label="English version">EN</a>
+    <a class="lang" href="{en_rel}" hreflang="en" lang="en" aria-label="English version">English</a>
     <a class="btn btn-lemon btn-sm bar-cta" data-trial href="{MAILS['TRIAL']}">Lekce zdarma</a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Otevřít menu"><span></span><span></span><span></span></button>
   </div>
@@ -149,10 +151,8 @@ def header(cs, skip):
 <div class="menu" id="menu" hidden>
   <nav class="wrap menu-in" aria-label="Menu webu">
     <a href="./">Úvod</a>
-    <a href="./#lessons">Individuální lekce a ceny</a>
 {menu}
     <a href="italstina-pro-zacatecniky.html">Italština pro začátečníky</a>
-    <a href="o-lucii.html">O Lucii</a>
     <a href="./#faq">Otázky</a>
     <a class="portal-link" href="../portal.html" data-portal hidden>Moje lekce (studentská sekce)</a>
     <a href="{en_rel}" hreflang="en" lang="en">English version</a>
@@ -168,7 +168,7 @@ def footer(dock):
     <p class="foot-brand">Italian with Lucia</p>
     <p>Lekce italštiny v Praze a online. Působnost: Praha 1, 2 a 3 a online po celém světě.</p>
     <ul class="foot-nav" aria-label="Další stránky">
-      <li><a href="./#lessons">Individuální lekce a ceny</a></li>
+      <li><a href="./#prices">Individuální lekce a ceny</a></li>
       <li><a href="lekce-italstiny-praha.html">Lekce italštiny v Praze</a></li>
       <li><a href="italstina-online.html">Italština online</a></li>
       <li><a href="skupinovy-kurz-italstiny.html">Skupinový kurz italštiny</a></li>
@@ -208,7 +208,7 @@ FINAL = """<section class="s s-cobalt final" id="book">
   </div>
 </section>"""
 
-DOCK_TRIAL =f'  <a class="btn btn-lemon" data-trial href="{MAILS["TRIAL"]}">Lekce zdarma</a>\n  <a class="btn btn-line" href="./#lessons">Ceny</a>'
+DOCK_TRIAL =f'  <a class="btn btn-lemon" data-trial href="{MAILS["TRIAL"]}">Lekce zdarma</a>\n  <a class="btn btn-line" href="./#prices">Ceny</a>'
 DOCK_BIZ = f'  <a class="btn btn-lemon" href="{MAILS["BIZ"]}">Požádat o nabídku</a>\n  <a class="btn btn-line" href="#prices">Ceny</a>'
 DOCK_GROUP = f'  <a class="btn btn-lemon" data-group href="#reserve">Přihlásit se</a>\n  <a class="btn btn-line" href="#levels">Úrovně</a>'
 
@@ -260,7 +260,7 @@ META = {
     "index.html": dict(
         title="Italian with Lucia: lekce italštiny v Praze a online",
         description="Naučte se italsky s Lucií: individuální lekce a skupinové kurzy online nebo osobně v Praze. Postgraduální Master v didaktice italštiny, přes 2 000 hodin výuky a 150 studentů. Lekce zdarma.",
-        skip=("#lessons", "Přejít na lekce"), dock=DOCK_TRIAL),
+        skip=("#prices", "Přejít na lekce"), dock=DOCK_TRIAL),
     "lekce-italstiny-praha.html": dict(
         title="Lekce italštiny v Praze | Soukromá lektorka, lekce zdarma",
         description="Lekce italštiny v Praze s Lucií, kvalifikovanou lektorkou z Itálie. Individuálně v Praze 1, 2 a 3 nebo online. Začněte 30minutovou lekcí zdarma.",
@@ -356,7 +356,12 @@ def build(cs):
     open(os.path.join(SITE, "cs", cs), "w").write(html)
 
 
+# The Czech homepage (cs/index.html) has its own design, edited directly
+# like the English index.html, so it is not rebuilt from tools/cs/index.html.
+HAND_MADE = {"index.html"}
+
 if __name__ == "__main__":
-    for cs in META:
+    pages = [cs for cs in META if cs not in HAND_MADE]
+    for cs in pages:
         build(cs)
-    print("built", len(META), "Czech pages")
+    print("built", len(pages), "Czech pages (homepage left as is)")
