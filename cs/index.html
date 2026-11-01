@@ -31,7 +31,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="../lucia-cafe.jpg" fetchpriority="high">
-  <link rel="stylesheet" href="../style.css">
   <link rel="icon" href="../favicon.ico" sizes="48x48">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../logo.png">
@@ -200,639 +199,533 @@
   ]
 }
 </script>
+  <style>
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px;-webkit-text-size-adjust:100%}
+body{margin:0;background:#FFFFFF;overflow-x:clip}
+img{max-width:100%}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+[hidden]{display:none !important}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #FFD43B;outline-offset:3px}
+.cur{min-height:40px;padding:0 14px;border:0;border-radius:12px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;background:transparent;color:#0E1240}
+.cur.is-on{background:#0E1240;color:#FFFFFF}
+.cur-dark .cur{color:#FFFFFF}
+.cur-dark .cur.is-on{background:#FFD43B;color:#0E1240}
+.opt{width:100%;min-height:56px;padding:14px 18px;text-align:left;font:inherit;font-size:16px;font-weight:600;line-height:1.35;color:#0E1240;border:2px solid #0E1240;border-radius:20px 20px 20px 5px;cursor:pointer;background:rgba(255,255,255,0.45);transition:background .2s,box-shadow .2s}
+.opt[aria-pressed="true"]{background:#FFFFFF;box-shadow:4px 4px 0 #0E1240}
+summary{list-style-position:outside}
+@keyframes iwl-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes iwl-pop{0%{opacity:0;transform:scale(.6) rotate(-6deg)}65%{opacity:1;transform:scale(1.06) rotate(1deg)}100%{opacity:1;transform:none}}
+@keyframes iwl-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes iwl-swap-it{0%,42%{opacity:1;transform:none}50%,92%{opacity:0;transform:translateY(-8px)}100%{opacity:1;transform:none}}
+@keyframes iwl-swap-en{0%,42%{opacity:0;transform:translateY(8px)}50%,92%{opacity:1;transform:none}100%{opacity:0;transform:translateY(8px)}}
+@keyframes iwl-marquee{to{transform:translateX(-50%)}}
+@keyframes iwl-draw{to{stroke-dashoffset:0}}
+@keyframes iwl-pulse{0%{box-shadow:0 0 0 0 rgba(255,212,59,.75)}100%{box-shadow:0 0 0 12px rgba(255,212,59,0)}}
+@keyframes iwl-wiggle{0%,84%,100%{transform:rotate(0)}88%{transform:rotate(-9deg)}92%{transform:rotate(8deg)}96%{transform:rotate(-4deg)}}
+@keyframes iwl-bob{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-8px) rotate(.6deg)}}
+@keyframes iwl-drift{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(14px,-18px) rotate(10deg)}}
+@keyframes iwl-shadow{from{box-shadow:0 0 0 var(--tomato)}to{box-shadow:16px 16px 0 var(--tomato)}}
+@keyframes iwl-reveal{from{opacity:0;transform:translateY(48px) scale(.97)}to{opacity:1;transform:none}}
+.rise{animation:iwl-rise .7s cubic-bezier(.2,.8,.2,1) both}
+.pop-in{animation:iwl-pop .7s cubic-bezier(.2,.9,.3,1.15) both}
+.photo-in{animation:iwl-pop .8s .15s cubic-bezier(.2,.9,.3,1.1) both,iwl-shadow .45s 1s cubic-bezier(.2,.9,.3,1.3) both}
+.phrase{animation:iwl-pop .6s cubic-bezier(.2,.9,.3,1.2) both,iwl-float 5s ease-in-out infinite}
+.swap{display:grid;align-items:center}
+.swap>*{grid-area:1/1}
+.swap .it{animation:iwl-swap-it 7s ease-in-out infinite}
+.swap .en{animation:iwl-swap-en 7s ease-in-out infinite}
+.swap .it,.swap .en{animation-fill-mode:both}
+.pulse{animation:iwl-pulse 1.6s ease-out infinite}
+.wiggle{animation:iwl-wiggle 4.5s ease-in-out infinite}
+.bob{animation:iwl-bob 6s ease-in-out infinite}
+.drift{animation:iwl-drift 9s ease-in-out infinite}
+.draw path{stroke-dasharray:420;stroke-dashoffset:420;animation:iwl-draw .9s 1s cubic-bezier(.6,0,.2,1) forwards}
+.btn-pop{transition:transform .18s cubic-bezier(.2,.9,.3,1.4),box-shadow .18s}
+.btn-pop:hover{transform:translate(-2px,-3px)}
+.btn-pop:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink) !important}
+.lift{transition:transform .25s cubic-bezier(.2,.9,.3,1.3)}
+.lift:hover{transform:translateY(-6px) rotate(-.5deg)}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.track{display:flex;width:max-content;animation:iwl-marquee 80s linear infinite}
+.track-rev{animation-direction:reverse;animation-duration:60s}
+.marquee:hover .track,.marquee:focus-within .track{animation-play-state:paused}
+@supports (animation-timeline: view()){.reveal{animation:iwl-reveal linear both;animation-timeline:view();animation-range:entry 0% entry 60%}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}.swap .en{opacity:0}.draw path{stroke-dashoffset:0}.marquee{overflow-x:auto}}
+  </style>
 </head>
 <body>
-<a class="skip" href="#lessons">Přejít na lekce</a>
-<header class="bar">
-  <div class="wrap bar-in">
-    <a class="mark" href="./" aria-label="Italian with Lucia, úvodní stránka">
-      <svg class="mark-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 4h22a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H15l-7 6v-6H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" fill="currentColor"/></svg>
-      Italian with Lucia
-    </a>
-    <nav class="bar-nav" aria-label="Hlavní menu">
-      <a href="lekce-italstiny-praha.html">V Praze</a>
-      <a href="italstina-online.html">Online</a>
-      <a href="skupinovy-kurz-italstiny.html">Skupinový kurz</a>
-      <a href="italstina-pro-firmy.html">Pro firmy</a>
-      <a href="clanky.html">Články</a>
-      <a href="./#faq">Otázky</a>
-      <a class="portal-link" href="../portal.html" data-portal hidden>Moje lekce</a>
-    </nav>
-    <a class="lang" href="../" hreflang="en" lang="en" aria-label="English version">EN</a>
-    <a class="btn btn-lemon btn-sm bar-cta" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Lekce zdarma</a>
-    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Otevřít menu"><span></span><span></span><span></span></button>
-  </div>
-</header>
+<div style="--ink: #0E1240; --cobalt: #2438D6; --lemon: #FFD43B; --tomato: #F24F37; --paper: #F6F7FC; width: 100%; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 17px; line-height: 1.55; color: var(--ink); background: #FFFFFF; -webkit-font-smoothing: antialiased">
 
-<div class="menu" id="menu" hidden>
-  <nav class="wrap menu-in" aria-label="Menu webu">
-    <a href="./">Úvod</a>
-    <a href="./#lessons">Individuální lekce a ceny</a>
-    <a href="lekce-italstiny-praha.html">Lekce italštiny v Praze</a>
-    <a href="italstina-online.html">Italština online</a>
-    <a href="skupinovy-kurz-italstiny.html">Skupinový kurz italštiny</a>
-    <a href="italstina-pro-firmy.html">Italština pro firmy</a>
-    <a href="clanky.html">Články o italštině</a>
-    <a href="italstina-pro-zacatecniky.html">Italština pro začátečníky</a>
-    <a href="o-lucii.html">O Lucii</a>
-    <a href="./#faq">Otázky</a>
-    <a class="portal-link" href="../portal.html" data-portal hidden>Moje lekce (studentská sekce)</a>
-    <a href="../" hreflang="en" lang="en">English version</a>
-  </nav>
-  <div class="wrap menu-cta"><a class="btn btn-lemon btn-lg" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Napsat Lucii o lekci zdarma</a></div>
+<header style="position: sticky; top: 0; z-index: 20; background: #FFFFFF; border-bottom: 2px solid var(--ink)">
+<div style="max-width: 1160px; margin: 0 auto; padding: 12px clamp(18px, 5vw, 40px) 0; display: flex; align-items: center; gap: 12px">
+<a href="#top" aria-label="Italian with Lucia, úvod" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 800; font-stretch: 80%; font-size: 21px; letter-spacing: -0.01em; flex: 1 1 auto; min-width: 0">
+<span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--cobalt); color: var(--lemon); border-radius: 12px 12px 12px 3px; flex: none">
+<svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 4h22a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H15l-7 6v-6H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z" fill="currentColor"></path></svg>
+</span>
+<span style="white-space: nowrap">Italian with Lucia</span>
+</a>
+<a class="btn-pop" href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; background: var(--lemon); color: var(--ink); border: 2px solid var(--ink); border-radius: 16px 16px 16px 4px; font-weight: 800; font-size: 15px; text-decoration: none; white-space: nowrap; flex: none">Lekce zdarma</a>
 </div>
-
-<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-  <defs>
-    <clipPath id="bubble" clipPathUnits="objectBoundingBox">
-      <path d="M0.14,0 H0.86 C0.94,0 1,0.06 1,0.14 V0.70 C1,0.78 0.94,0.84 0.86,0.84 H0.38 L0.12,1 L0.20,0.84 H0.14 C0.06,0.84 0,0.78 0,0.70 V0.14 C0,0.06 0.06,0 0.14,0 Z"/>
-    </clipPath>
-  </defs>
-</svg>
+<nav aria-label="Hlavní menu" style="max-width: 1160px; margin: 0 auto; padding: 10px clamp(18px, 5vw, 40px) 12px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; white-space: nowrap">
+<a href="#lucia" style="padding: 8px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">O Lucii</a>
+<a href="#group" style="padding: 8px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">Skupinový kurz</a>
+<a href="italstina-pro-firmy.html" style="padding: 8px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">Pro firmy</a>
+<a href="#reviews" style="padding: 8px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">Recenze</a>
+<a href="#prices" style="padding: 8px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">Ceny</a>
+<a href="#how" style="padding: 8px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">Praha, nebo online</a>
+<a href="clanky.html" style="padding: 8px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">Články</a>
+<a href="#faq" style="padding: 8px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">Otázky</a>
+<a href="cs/" hreflang="cs" lang="cs" style="padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--ink); color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none">Česky</a>
+<a href="../portal.html" data-portal hidden style="padding: 8px 14px; border-radius: 999px; background: #0E1240; color: #FFFFFF; font-weight: 600; font-size: 15px; text-decoration: none">Moje lekce</a>
+</nav>
+</header>
 
 <main id="top">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <h1>Lekce italštiny v Praze a online, s Lucií.</h1>
-      <p class="hero-lead">Individuální lekce a malé skupiny. Mluvit budete od první lekce a gramatika vám konečně začne dávat smysl.</p>
-      <div class="hero-cta">
-        <a class="btn btn-lemon btn-lg" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Napsat Lucii o lekci zdarma</a>
-        <a class="btn btn-line btn-lg" href="#group">Lednová skupina pro začátečníky</a>
-      </div>
-      <p class="hero-note">Zdarma, 30 minut, nezávazně. Lucia odpoví do 24 hodin.</p>
-      <ul class="hero-proof">
-        <li>Postgraduální Master v didaktice italštiny, Univerzita pro cizince v Perugii</li>
-        <li>Přes 2 000 hodin výuky a 150 studentů</li>
-        <li>Online odkudkoli, nebo osobně v Praze</li>
-      </ul>
-    </div>
+<section style="position: relative; background: var(--cobalt); color: #FFFFFF; overflow: hidden">
+<span class="drift" aria-hidden="true" style="position: absolute; top: 16px; right: -24px; width: 90px; height: 90px; border-radius: 50%; background: var(--lemon); opacity: 0.18"></span>
+<span class="drift" aria-hidden="true" style="position: absolute; bottom: 120px; left: -30px; width: 120px; height: 96px; border-radius: 40px 40px 40px 6px; background: var(--tomato); opacity: 0.22; animation-delay: -4s"></span>
+<span class="drift" aria-hidden="true" style="position: absolute; top: 46%; left: 48%; width: 54px; height: 54px; border-radius: 50%; border: 6px solid var(--lemon); opacity: 0.25; animation-delay: -2s; animation-duration: 12s"></span>
+<div style="position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; padding: clamp(40px, 8vw, 88px) clamp(18px, 5vw, 40px) clamp(48px, 8vw, 88px); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(40px, 6vw, 72px)">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<p class="rise" style="margin: 0; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(255,255,255,0.14); border-radius: 999px; font-size: 14px; font-weight: 600">
+<span class="pulse" style="width: 8px; height: 8px; border-radius: 50%; background: var(--lemon)"></span>Individuální lekce a malé skupiny</p>
+<h1 class="rise" style="animation-delay: .1s; margin: 0; font-size: clamp(42px, 8.2vw, 82px); line-height: 0.95; font-weight: 800; font-stretch: 75%; letter-spacing: -0.015em">Lekce italštiny v Praze a online, <span style="position: relative; display: inline-block; color: var(--lemon)">s Lucií.<svg class="draw" viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: 0; bottom: -0.16em; width: 100%; height: 0.24em; overflow: visible"><path d="M4 14 C 70 4, 150 4, 296 10" fill="none" stroke="#F24F37" stroke-width="7" stroke-linecap="round"></path></svg></span></h1>
+<p class="rise" style="animation-delay: .2s; margin: 0; font-size: clamp(18px, 2.4vw, 21px); line-height: 1.5; max-width: 520px; color: #E9ECFF">Mluvit budete od první lekce a gramatika vám konečně začne dávat smysl.</p>
+<div class="rise" style="animation-delay: .3s; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px">
+<a class="btn-pop" href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21" style="flex: 1 1 240px; max-width: 320px; display: inline-flex; justify-content: center; align-items: center; min-height: 56px; padding: 0 26px; background: var(--lemon); color: var(--ink); border: 2px solid var(--ink); border-radius: 22px 22px 22px 5px; box-shadow: 5px 5px 0 var(--ink); font-weight: 800; font-size: 18px; text-decoration: none">Domluvit lekci zdarma</a>
+<a href="#group" style="flex: 1 1 200px; max-width: 280px; display: inline-flex; justify-content: center; align-items: center; min-height: 56px; padding: 0 24px; color: #FFFFFF; border: 2px solid #FFFFFF; border-radius: 22px 22px 22px 5px; font-weight: 700; font-size: 17px; text-decoration: none">Lednová skupina pro začátečníky</a>
+</div>
+<p class="rise" style="animation-delay: .4s; margin: 0; font-size: 15px; color: #DDE2FF">Zdarma, 30 minut, nezávazně. Lucia odpoví do 24 hodin.</p>
+</div>
 
-    <div class="hero-art">
-      <div class="bubble-wrap">
-        <img src="../lucia-cafe.jpg" width="900" height="900" fetchpriority="high" alt="Lucia, lektorka italštiny v Praze, s úsměvem v kavárně">
-      </div>
-      <button class="phrase phrase-1" type="button" title="Klepněte pro překlad"><span class="it" lang="it">Piacere!</span><span class="en">Těší mě!</span></button>
-      <button class="phrase phrase-2" type="button" title="Klepněte pro překlad"><span class="it" lang="it">Come va?</span><span class="en">Jak se máš?</span></button>
-      <button class="phrase phrase-3" type="button" title="Klepněte pro překlad"><span class="it" lang="it">Parli italiano!</span><span class="en">Mluvíš italsky!</span></button>
-      <p class="hero-hint">Klepněte na bublinu a uvidíte překlad</p>
-    </div>
-  </div>
+<div style="flex: 1 1 300px; max-width: 440px; margin: 0 auto; position: relative; padding: 0 16px 16px 0">
+<img class="photo-in" src="../lucia-cafe.jpg" alt="Lucia, lektorka italštiny v Praze, s úsměvem u stolku v kavárně" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 48px 48px 48px 10px; box-shadow: 16px 16px 0 var(--tomato); background: var(--lemon)">
+<div class="phrase" style="position: absolute; top: 6%; left: -10px; animation-delay: .8s, 1.4s"><p class="swap" style="margin: 0; padding: 12px 18px; background: var(--lemon); color: var(--ink); border-radius: 20px 20px 20px 4px; line-height: 1.15; transform: rotate(-4deg)"><b class="it" lang="it" style="font-size: 20px">Piacere!</b><b class="en" style="font-size: 17px">Těší mě!</b></p></div>
+<div class="phrase" style="position: absolute; top: 44%; right: -6px; animation-delay: 1s, 2.2s"><p class="swap" style="margin: 0; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 4px 20px; line-height: 1.15; transform: rotate(3deg)"><b class="it" lang="it" style="font-size: 20px; animation-delay: 2.3s">Come va?</b><b class="en" style="font-size: 17px; animation-delay: 2.3s">Jak se máš?</b></p></div>
+<div class="phrase" style="position: absolute; bottom: 8%; left: 6%; animation-delay: 1.2s, 3s"><p class="swap" style="margin: 0; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 4px; line-height: 1.15; transform: rotate(-2deg)"><b class="it" lang="it" style="font-size: 20px; color: var(--lemon); animation-delay: 4.6s">Parli italiano!</b><b class="en" style="font-size: 17px; animation-delay: 4.6s">Mluvíš italsky!</b></p></div>
+</div>
+</div>
+
+<div style="position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; padding: 0 clamp(18px, 5vw, 40px) clamp(40px, 6vw, 64px)">
+<ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px">
+<li class="rise" style="animation-delay: .5s; padding: 16px 18px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.28); border-radius: 20px 20px 20px 5px"><b style="display: block; font-size: clamp(24px, 6vw, 30px); font-weight: 800; font-stretch: 75%; line-height: 1; color: var(--lemon); font-variant-numeric: tabular-nums"><span data-count="2000">2&nbsp;000</span>+</b><span style="font-size: 14px; color: #E9ECFF">hodin odučených lekcí</span></li>
+<li class="rise" style="animation-delay: .6s; padding: 16px 18px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.28); border-radius: 20px 20px 20px 5px"><b style="display: block; font-size: clamp(24px, 6vw, 30px); font-weight: 800; font-stretch: 75%; line-height: 1; color: var(--lemon); font-variant-numeric: tabular-nums"><span data-count="150">150</span>+</b><span style="font-size: 14px; color: #E9ECFF">studentů</span></li>
+<li class="rise" style="animation-delay: .7s; padding: 16px 18px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.28); border-radius: 20px 20px 20px 5px"><b style="display: block; font-size: clamp(24px, 6vw, 30px); font-weight: 800; font-stretch: 75%; line-height: 1; color: var(--lemon)">Master</b><span style="font-size: 14px; color: #E9ECFF">v didaktice italštiny, Univerzita pro cizince v Perugii</span></li>
+<li class="rise" style="animation-delay: .8s; padding: 16px 18px; background: rgba(255,255,255,0.1); border: 1.5px solid rgba(255,255,255,0.28); border-radius: 20px 20px 20px 5px"><b style="display: block; font-size: clamp(24px, 6vw, 30px); font-weight: 800; font-stretch: 75%; line-height: 1; color: var(--lemon)">Kdekoli</b><span style="font-size: 14px; color: #E9ECFF">online odkudkoli, nebo osobně v Praze</span></li>
+</ul>
+</div>
 </section>
 
-<!-- VIDEO -->
-<section class="s s-paper" id="video">
-  <div class="wrap">
-    <div class="head">
-      <h2>Seznamte se s Lucií</h2>
-      <p>Poslechněte si její hlas a způsob výuky dřív, než si cokoli zarezervujete. Video je v angličtině.</p>
-    </div>
-    <div class="video" id="video-box" data-id="Bb2mI4j_BoE">
-      <img class="video-poster" src="https://i.ytimg.com/vi/Bb2mI4j_BoE/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Bb2mI4j_BoE/hqdefault.jpg'">
-      <button class="video-play" type="button" aria-label="Přehrát video: Lucia se představuje">
-        <span class="video-play-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
-        <span class="video-play-text">Přehrát představení</span>
-      </button>
-    </div>
-  </div>
+<section style="background: #FFFFFF">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px)">
+<p style="margin: 0 0 12px; display: inline-block; padding: 5px 12px; background: var(--lemon); border-radius: 12px 12px 12px 3px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase">Jak to funguje</p>
+<h2 style="margin: 0 0 36px; font-size: clamp(34px, 5.6vw, 56px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Začněte ve třech krocích</h2>
+<ol class="reveal" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px">
+<li class="lift" style="padding: 26px; background: var(--paper); border-radius: 28px 28px 28px 6px; display: flex; flex-direction: column; gap: 10px">
+<span style="display: grid; place-items: center; width: 48px; height: 48px; background: var(--cobalt); color: #FFFFFF; border-radius: 16px 16px 16px 4px; font-size: 24px; font-weight: 800">1</span>
+<h3 style="margin: 6px 0 0; font-size: 23px; line-height: 1.15; font-weight: 800">Pošlete krátký e-mail</h3>
+<p style="margin: 0; font-size: 16px">Napište Lucii svou úroveň, cíle a jestli chcete lekce online, nebo v Praze. Klidně česky. Odpoví do 24 hodin.</p>
+</li>
+<li class="lift" style="padding: 26px; background: var(--paper); border-radius: 28px 28px 28px 6px; display: flex; flex-direction: column; gap: 10px">
+<span style="display: grid; place-items: center; width: 48px; height: 48px; background: var(--tomato); color: var(--ink); border-radius: 16px 16px 16px 4px; font-size: 24px; font-weight: 800">2</span>
+<h3 style="margin: 6px 0 0; font-size: 23px; line-height: 1.15; font-weight: 800">Vyzkoušejte lekci zdarma</h3>
+<p style="margin: 0; font-size: 16px">Třicet minut na seznámení, ověření úrovně a plán: forma, tempo a materiály. Nezávazně.</p>
+</li>
+<li class="lift" style="padding: 26px; background: var(--paper); border-radius: 28px 28px 28px 6px; display: flex; flex-direction: column; gap: 10px">
+<span style="display: grid; place-items: center; width: 48px; height: 48px; background: var(--lemon); color: var(--ink); border-radius: 16px 16px 16px 4px; font-size: 24px; font-weight: 800">3</span>
+<h3 style="margin: 6px 0 0; font-size: 23px; line-height: 1.15; font-weight: 800">Začněte mluvit</h3>
+<p style="margin: 0; font-size: 16px">Pravidelné lekce online nebo v Praze, s materiály a domácími úkoly mezi hodinami.</p>
+</li>
+</ol>
+</div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="s s-lemon" id="how">
-  <div class="wrap">
-    <div class="head">
-      <h2>Začněte ve třech krocích</h2>
-    </div>
-    <ol class="steps">
-      <li>
-        <h3>Pošlete krátký e-mail</h3>
-        <p>Napište Lucii svou úroveň, cíle a jestli chcete lekce online, nebo v Praze. Klidně česky. Odpoví do 24 hodin a domluvíte si termín.</p>
-      </li>
-      <li>
-        <h3>Vyzkoušejte lekci zdarma</h3>
-        <p>Třicet minut na seznámení, ověření úrovně a plán podle vašich cílů: forma, tempo a materiály. Nezávazně.</p>
-      </li>
-      <li>
-        <h3>Začněte mluvit</h3>
-        <p>Pravidelné lekce online nebo v Praze, s materiály a domácími úkoly mezi hodinami. Lekci můžete zrušit nejpozději 24 hodin předem.</p>
-      </li>
-    </ol>
-  </div>
+<section id="prices" style="background: var(--paper)">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px)">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 28px">
+<div style="flex: 1 1 420px; min-width: 0">
+<p style="margin: 0 0 12px; display: inline-block; padding: 5px 12px; background: var(--lemon); border-radius: 12px 12px 12px 3px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase">Individuální lekce</p>
+<h2 style="margin: 0 0 12px; font-size: clamp(34px, 5.6vw, 56px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Ceny</h2>
+<p style="margin: 0; max-width: 560px; font-size: 18px">Lekce jeden na jednoho v balíčcích. Čím víc lekcí, tím nižší cena za jednu.</p>
+</div>
+<div role="group" aria-label="Vyberte měnu" style="display: inline-flex; padding: 4px; gap: 4px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 16px">
+<button type="button" class="cur is-on" data-currency="EUR" aria-pressed="true">EUR €</button>
+<button type="button" class="cur" data-currency="CZK" aria-pressed="false">CZK Kč</button>
+<button type="button" class="cur" data-currency="USD" aria-pressed="false">USD $</button>
+</div>
+</div>
+
+<ul style="list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px">
+<li style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: #FFFFFF; border-radius: 999px; font-size: 15px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="#2438D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>Jeden na jednoho, 60 minut</li>
+<li style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: #FFFFFF; border-radius: 999px; font-size: 15px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="#2438D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>Online nebo v Praze</li>
+<li style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: #FFFFFF; border-radius: 999px; font-size: 15px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="#2438D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>Materiály a domácí úkoly v ceně</li>
+</ul>
+
+<div class="reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; align-items: stretch">
+<article class="lift" style="padding: 26px; background: #FFFFFF; border: 2px dashed var(--ink); border-radius: 28px 28px 28px 6px; display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 19px; font-weight: 700">Lekce zdarma</h3>
+<p style="margin: 0; font-size: clamp(36px, 3.2vw, 44px); line-height: 1.05; white-space: nowrap; font-weight: 800; font-stretch: 75%">Zdarma</p>
+<p style="margin: 0 0 18px; font-size: 15px; color: #4A4E73">30 minut: seznámíte se s Lucií, ověříte úroveň a naplánujete další kroky</p>
+<a href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21" class="btn-pop" style="margin-top: auto; display: flex; justify-content: center; align-items: center; min-height: 50px; background: var(--ink); color: #FFFFFF; border-radius: 18px 18px 18px 4px; font-weight: 700; text-decoration: none">Napsat o lekci zdarma</a>
+</article>
+<article class="lift" style="padding: 26px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 19px; font-weight: 700">5 lekcí</h3>
+<p style="margin: 0; font-size: clamp(36px, 3.2vw, 44px); line-height: 1.05; white-space: nowrap; font-weight: 800; font-stretch: 75%"><span data-eur="30">€30</span> <small style="display: block; margin-top: 4px; font-size: 15px; font-weight: 600; font-stretch: 100%; line-height: 1.3">za lekci</small></p>
+<p style="margin: 0 0 18px; font-size: 15px; color: #4A4E73"><span data-eur="150">€150</span> za balíček</p>
+<a href="mailto:lucia.scollo2000@gmail.com?subject=Bal%C3%AD%C4%8Dek%205%20lekc%C3%AD&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20za%C4%8Dal%2Fa%20s%20bal%C3%AD%C4%8Dkem%205%20lekc%C3%AD.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0A%0AD%C4%9Bkuji%21" class="btn-pop" style="margin-top: auto; display: flex; justify-content: center; align-items: center; min-height: 50px; background: var(--ink); color: #FFFFFF; border-radius: 18px 18px 18px 4px; font-weight: 700; text-decoration: none">Chci 5 lekcí</a>
+</article>
+<article class="lift" style="padding: 26px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; display: flex; flex-direction: column; gap: 6px">
+<h3 style="margin: 0; font-size: 19px; font-weight: 700">10 lekcí</h3>
+<p style="margin: 0; font-size: clamp(36px, 3.2vw, 44px); line-height: 1.05; white-space: nowrap; font-weight: 800; font-stretch: 75%"><span data-eur="27">€27</span> <small style="display: block; margin-top: 4px; font-size: 15px; font-weight: 600; font-stretch: 100%; line-height: 1.3">za lekci</small></p>
+<p style="margin: 0; font-size: 15px; color: #4A4E73"><span data-eur="270">€270</span> za balíček</p>
+<p style="margin: 4px 0 18px; align-self: flex-start; padding: 4px 10px; background: var(--paper); border-radius: 999px; font-size: 14px; font-weight: 700; color: var(--cobalt)">Ušetříte <span data-eur="30">€30</span></p>
+<a href="mailto:lucia.scollo2000@gmail.com?subject=Bal%C3%AD%C4%8Dek%2010%20lekc%C3%AD&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20za%C4%8Dal%2Fa%20s%20bal%C3%AD%C4%8Dkem%2010%20lekc%C3%AD.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0A%0AD%C4%9Bkuji%21" class="btn-pop" style="margin-top: auto; display: flex; justify-content: center; align-items: center; min-height: 50px; background: var(--lemon); color: var(--ink); border: 2px solid var(--ink); border-radius: 18px 18px 18px 4px; font-weight: 800; text-decoration: none">Chci 10 lekcí</a>
+</article>
+<article class="lift" style="position: relative; padding: 26px; background: var(--cobalt); color: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 6px 6px 0 var(--ink); display: flex; flex-direction: column; gap: 6px">
+<p class="wiggle" style="margin: 0; position: absolute; top: -14px; right: 18px; padding: 5px 12px; background: var(--tomato); color: var(--ink); border: 2px solid var(--ink); border-radius: 12px 12px 12px 3px; font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase">Nejvýhodnější</p>
+<h3 style="margin: 0; font-size: 19px; font-weight: 700">20 lekcí</h3>
+<p style="margin: 0; font-size: clamp(36px, 3.2vw, 44px); line-height: 1.05; white-space: nowrap; font-weight: 800; font-stretch: 75%; color: var(--lemon)"><span data-eur="25">€25</span> <small style="display: block; margin-top: 4px; font-size: 15px; font-weight: 600; font-stretch: 100%; line-height: 1.3; color: #FFFFFF">za lekci</small></p>
+<p style="margin: 0; font-size: 15px; color: #DDE2FF"><span data-eur="500">€500</span> za balíček</p>
+<p style="margin: 4px 0 18px; align-self: flex-start; padding: 4px 10px; background: rgba(255,255,255,0.16); border-radius: 999px; font-size: 14px; font-weight: 700">Ušetříte <span data-eur="100">€100</span></p>
+<a href="mailto:lucia.scollo2000@gmail.com?subject=Bal%C3%AD%C4%8Dek%2020%20lekc%C3%AD&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20za%C4%8Dal%2Fa%20s%20bal%C3%AD%C4%8Dkem%2020%20lekc%C3%AD.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0A%0AD%C4%9Bkuji%21" class="btn-pop" style="margin-top: auto; display: flex; justify-content: center; align-items: center; min-height: 50px; background: var(--lemon); color: var(--ink); border: 2px solid var(--ink); border-radius: 18px 18px 18px 4px; font-weight: 800; text-decoration: none">Chci 20 lekcí</a>
+</article>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 16px">
+<aside id="cancellation" style="display: flex; gap: 16px; align-items: flex-start; padding: 22px 24px; background: #FFFFFF; border-radius: 24px 24px 24px 6px">
+<svg width="36" height="36" viewBox="0 0 48 48" aria-hidden="true" style="flex: none; color: var(--tomato)"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="4"></circle><path d="M24 13v12l8 5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div><h3 style="margin: 0 0 4px; font-size: 18px; font-weight: 800">Zrušení nejpozději 24 hodin předem</h3><p style="margin: 0; font-size: 15px; color: #4A4E73">Lekci zrušíte e-mailem nejpozději 24 hodin před začátkem. Později se počítá jako odučená. Platí pro individuální i skupinové lekce.</p></div>
+</aside>
+<aside style="display: flex; gap: 16px; align-items: flex-start; padding: 22px 24px; background: #FFFFFF; border-radius: 24px 24px 24px 6px">
+<svg width="36" height="36" viewBox="0 0 48 48" aria-hidden="true" style="flex: none; color: var(--cobalt)"><rect x="5" y="10" width="38" height="28" rx="5" fill="none" stroke="currentColor" stroke-width="4"></rect><path d="M7 13l17 13 17-13" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div><h3 style="margin: 0 0 4px; font-size: 18px; font-weight: 800">Už k Lucii chodíte?</h3><p style="margin: 0; font-size: 15px; color: #4A4E73">Napište Lucii, které dny a časy vám vyhovují, a ona vám potvrdí další lekci. <a id="lesson-book" href="mailto:lucia.scollo2000@gmail.com?subject=Rezervace%20lekce&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20zarezervoval%2Fa%20dal%C5%A1%C3%AD%20lekci.%0A%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21" style="color: var(--cobalt); font-weight: 700">Napsat o rezervaci</a></p></div>
+</aside>
+</div>
+<p style="margin: 18px 0 0; font-size: 14px; color: #4A4E73">Platba přes Revolut nebo bankovním převodem. Ceny jsou v eurech, částky v Kč a USD jsou orientační přepočet.</p>
+</div>
 </section>
 
-<!-- PRIVATE LESSONS -->
-<section class="s s-white" id="lessons">
-  <div class="wrap">
-    <div class="head head-split">
-      <div>
-        <h2>Individuální lekce</h2>
-        <p>Jeden na jednoho, podle vaší úrovně a vašich cílů. Každá lekce trvá 60 minut, online nebo osobně v Praze. Lekce se kupují v balíčcích, abyste měli pravidelný rytmus. Čím víc lekcí, tím nižší cena za jednu.</p>
-      </div>
-      <div class="currency" role="group" aria-label="Zvolte měnu">
-        <button type="button" class="cur" data-currency="EUR" aria-pressed="false">EUR €</button>
-        <button type="button" class="cur is-on" data-currency="CZK" aria-pressed="true">CZK Kč</button>
-        <button type="button" class="cur" data-currency="USD" aria-pressed="false">USD $</button>
-      </div>
-    </div>
+<section id="group" style="background: var(--ink); color: #FFFFFF">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px); display: flex; flex-wrap: wrap; gap: clamp(32px, 5vw, 64px)">
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; align-self: flex-start; padding: 5px 12px; background: var(--tomato); color: var(--ink); border-radius: 12px 12px 12px 3px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase">Skupinový kurz</p>
+<h2 style="margin: 0; font-size: clamp(34px, 5.6vw, 56px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Skupina pro začátečníky začíná v <span style="color: var(--lemon)">lednu</span></h2>
+<p style="margin: 0; font-size: 18px; color: #D5D8F0">Dvanáct týdenních lekcí živě online přes video, ve skupině tří až pěti lidí. Hodně mluvení a nižší cena za lekci než u individuální výuky.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding: 20px 22px; background: rgba(255,255,255,0.07); border-radius: 24px 24px 24px 6px">
+<p style="margin: 0; flex: 1 1 auto"><b style="font-size: 44px; line-height: 1; font-weight: 800; font-stretch: 75%; color: var(--lemon)"><span data-eur="18">€18</span></b> <span style="font-size: 15px">za osobu a lekci</span><br><span style="font-size: 15px; color: #D5D8F0"><span data-eur="216">€216</span> za celý 12týdenní kurz</span></p>
+<div class="cur-dark" role="group" aria-label="Vyberte měnu" style="display: inline-flex; padding: 4px; gap: 4px; border: 2px solid rgba(255,255,255,0.4); border-radius: 16px">
+<button type="button" class="cur is-on" data-currency="EUR" aria-pressed="true">EUR €</button>
+<button type="button" class="cur" data-currency="CZK" aria-pressed="false">CZK Kč</button>
+<button type="button" class="cur" data-currency="USD" aria-pressed="false">USD $</button>
+</div>
+</div>
+<ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 16px">
+<li style="display: flex; gap: 10px"><span style="flex: none; width: 10px; height: 10px; margin-top: 8px; background: var(--lemon); border-radius: 5px 5px 5px 1px"></span><span>Živě online, 60 minut týdně: připojíte se odkudkoli. Chcete se učit osobně? Vyberte si <a href="#prices" style="color: var(--lemon)">individuální lekce</a> v Praze.</span></li>
+<li style="display: flex; gap: 10px"><span style="flex: none; width: 10px; height: 10px; margin-top: 8px; background: var(--lemon); border-radius: 5px 5px 5px 1px"></span><span>Ve skupině je nejvýš pět lidí.</span></li>
+<li style="display: flex; gap: 10px"><span style="flex: none; width: 10px; height: 10px; margin-top: 8px; background: var(--lemon); border-radius: 5px 5px 5px 1px"></span><span>Přihlásíte se e-mailem a Lucia s vámi domluví den a čas. Platíte až po potvrzení skupiny.</span></li>
+<li style="display: flex; gap: 10px"><span style="flex: none; width: 10px; height: 10px; margin-top: 8px; background: var(--lemon); border-radius: 5px 5px 5px 1px"></span><span>Platí stejné <a href="#cancellation" style="color: var(--lemon)">pravidlo zrušení 24 hodin předem</a>. <a href="skupinovy-kurz-italstiny.html" style="color: var(--lemon); font-weight: 700">Program kurzu</a></span></li>
+</ul>
+</div>
 
-    <div class="plans">
-      <article class="plan plan-trial">
-        <h3>Lekce zdarma</h3>
-        <p class="plan-price">Zdarma</p>
-        <p class="plan-sub">30 minut, nezávazně</p>
-        <ul>
-          <li>Seznamte se s Lucií a zeptejte se na cokoli</li>
-          <li>Upřímné ověření vaší úrovně</li>
-          <li>Plán, jak pokračovat</li>
-        </ul>
-        <a class="btn btn-ink" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Napsat o lekci zdarma</a>
-      </article>
-
-      <article class="plan plan-five">
-        <h3>5 lekcí</h3>
-        <p class="plan-price"><span class="money" data-eur="30">€30</span> <small>za lekci</small></p>
-        <p class="plan-sub"><span class="money" data-eur="150">€150</span> za balíček</p>
-        <ul>
-          <li>Jeden na jednoho, 60 minut</li>
-          <li>Online nebo v Praze</li>
-          <li>Materiály a domácí úkoly v ceně</li>
-        </ul>
-        <a class="btn btn-ink" href="mailto:lucia.scollo2000@gmail.com?subject=Bal%C3%AD%C4%8Dek%205%20lekc%C3%AD&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20za%C4%8Dal%2Fa%20s%20bal%C3%AD%C4%8Dkem%205%20lekc%C3%AD.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0A%0AD%C4%9Bkuji%21">Chci 5 lekcí</a>
-      </article>
-
-      <article class="plan plan-ten">
-        <h3>10 lekcí</h3>
-        <p class="plan-price"><span class="money" data-eur="27">€27</span> <small>za lekci</small></p>
-        <p class="plan-sub"><span class="money" data-eur="270">€270</span> za balíček</p>
-        <ul>
-          <li>Jeden na jednoho, 60 minut</li>
-          <li>Online nebo v Praze</li>
-          <li>Materiály a domácí úkoly v ceně</li>
-          <li class="plan-save">Ušetříte <span class="money" data-eur="30">€30</span> oproti ceně balíčku 5 lekcí</li>
-        </ul>
-        <a class="btn btn-lemon" href="mailto:lucia.scollo2000@gmail.com?subject=Bal%C3%AD%C4%8Dek%2010%20lekc%C3%AD&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20za%C4%8Dal%2Fa%20s%20bal%C3%AD%C4%8Dkem%2010%20lekc%C3%AD.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0A%0AD%C4%9Bkuji%21">Chci 10 lekcí</a>
-      </article>
-
-      <article class="plan plan-twenty">
-        <p class="plan-flag">Nejvýhodnější</p>
-        <h3>20 lekcí</h3>
-        <p class="plan-price"><span class="money" data-eur="25">€25</span> <small>za lekci</small></p>
-        <p class="plan-sub"><span class="money" data-eur="500">€500</span> za balíček</p>
-        <ul>
-          <li>Jeden na jednoho, 60 minut</li>
-          <li>Online nebo v Praze</li>
-          <li>Materiály a domácí úkoly v ceně</li>
-          <li class="plan-save">Ušetříte <span class="money" data-eur="100">€100</span> oproti ceně balíčku 5 lekcí</li>
-        </ul>
-        <a class="btn btn-lemon" href="mailto:lucia.scollo2000@gmail.com?subject=Bal%C3%AD%C4%8Dek%2020%20lekc%C3%AD&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20za%C4%8Dal%2Fa%20s%20bal%C3%AD%C4%8Dkem%2020%20lekc%C3%AD.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0A%0AD%C4%9Bkuji%21">Chci 20 lekcí</a>
-      </article>
-
-    </div>
-    <div class="after-plans">
-      <aside class="booknow" id="book-lesson" aria-labelledby="booknow-title">
-        <h3 id="booknow-title">Už k Lucii chodíte?</h3>
-        <p id="booknow-text">Napište Lucii, které dny a časy vám vyhovují, a ona vám potvrdí další lekci. Její potvrzení si uschovejte jako doklad o rezervaci.</p>
-        <a class="btn btn-ink" id="lesson-book" href="mailto:lucia.scollo2000@gmail.com?subject=Rezervace%20lekce&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20zarezervoval%2Fa%20dal%C5%A1%C3%AD%20lekci.%0A%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Napsat Lucii o rezervaci</a>
-      </aside>
-      <aside class="policy" id="cancellation" aria-labelledby="cancel-title">
-        <svg class="policy-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="4"/><path d="M24 12v13l9 5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div>
-          <h3 id="cancel-title">Zrušení nejpozději 24 hodin předem</h3>
-          <p>Lekci můžete zrušit e-mailem nejpozději 24 hodin před začátkem. Později už ji zrušit nelze a počítá se jako odučená. Platí to pro individuální i skupinové lekce.</p>
-        </div>
-      </aside>
-    </div>
-    <p class="fine">Ještě si nejste jistí? Začněte lekcí zdarma. Ceny jsou v eurech, částky v Kč a USD jsou orientační přepočet. Platba přes Revolut nebo bankovním převodem.</p>
-  </div>
+<ul class="reveal" style="flex: 1 1 380px; min-width: 0; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+<li style="padding: 22px; background: var(--lemon); color: var(--ink); border-radius: 24px 24px 24px 6px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><h3 style="margin: 0; font-size: 24px; font-weight: 800; font-stretch: 85%">Začátečníci</h3><span style="padding: 2px 10px; background: var(--ink); color: #FFFFFF; border-radius: 999px; font-size: 13px; font-weight: 700">A1–A2</span><span style="padding: 2px 10px; background: #FFFFFF; border-radius: 999px; font-size: 13px; font-weight: 700">Začíná v lednu</span></div>
+<p style="margin: 0; font-size: 15px">Od nuly: představit se, objednat si, zeptat se na cestu a běžná konverzace, se správnou výslovností od prvního dne.</p>
+<a href="skupinovy-kurz-italstiny.html?level=beginner#reserve" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; background: var(--ink); color: #FFFFFF; border-radius: 16px 16px 16px 4px; font-weight: 700; font-size: 15px; text-decoration: none">Přihlásit se</a>
+</li>
+<li style="padding: 22px; background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.25); border-radius: 24px 24px 24px 6px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><h3 style="margin: 0; font-size: 24px; font-weight: 800; font-stretch: 85%">Mírně pokročilí</h3><span style="padding: 2px 10px; background: var(--lemon); color: var(--ink); border-radius: 999px; font-size: 13px; font-weight: 700">B1</span><span style="padding: 2px 10px; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 999px; font-size: 13px; font-weight: 600">Čekací listina</span></div>
+<p style="margin: 0; font-size: 15px; color: #D5D8F0">Překonejte stagnaci: minulé časy, které konečně pochopíte, širší slovní zásoba a řízená konverzace.</p>
+<a href="skupinovy-kurz-italstiny.html?level=intermediate#reserve" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border: 2px solid var(--lemon); color: var(--lemon); border-radius: 16px 16px 16px 4px; font-weight: 700; font-size: 15px; text-decoration: none">Zapsat se na čekací listinu</a>
+</li>
+<li style="padding: 22px; background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.25); border-radius: 24px 24px 24px 6px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px"><h3 style="margin: 0; font-size: 24px; font-weight: 800; font-stretch: 85%">Pokročilí</h3><span style="padding: 2px 10px; background: var(--lemon); color: var(--ink); border-radius: 999px; font-size: 13px; font-weight: 700">B2–C1</span><span style="padding: 2px 10px; border: 1.5px solid rgba(255,255,255,0.5); border-radius: 999px; font-size: 13px; font-weight: 600">Čekací listina</span></div>
+<p style="margin: 0; font-size: 15px; color: #D5D8F0">Nuance, idiomy a styl: vyprávějte, diskutujte a obhajujte svůj názor italsky, s přesnou zpětnou vazbou.</p>
+<a href="skupinovy-kurz-italstiny.html?level=advanced#reserve" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border: 2px solid var(--lemon); color: var(--lemon); border-radius: 16px 16px 16px 4px; font-weight: 700; font-size: 15px; text-decoration: none">Zapsat se na čekací listinu</a>
+</li>
+</ul>
+</div>
 </section>
 
-<!-- GROUP COURSE -->
-<section class="s s-ink" id="group">
-  <div class="wrap group-grid">
-    <div class="group-intro">
-      <h2>Skupina pro začátečníky začíná v lednu</h2>
-      <p>Dvanáct týdenních lekcí pro začátečníky, živě online přes video s Lucií, ve skupině tří až pěti lidí. Hodně mluvení, pravidelný týdenní rytmus a nižší cena za lekci než u individuální výuky.</p>
-
-      <div class="group-price">
-        <p class="group-price-big"><span class="money" data-eur="18">€18</span> <small>za osobu a lekci</small></p>
-        <p><span class="money" data-eur="216">€216</span> za celý 12týdenní kurz</p>
-      </div>
-
-      <div class="currency currency-dark" role="group" aria-label="Zvolte měnu">
-        <button type="button" class="cur" data-currency="EUR" aria-pressed="false">EUR €</button>
-        <button type="button" class="cur is-on" data-currency="CZK" aria-pressed="true">CZK Kč</button>
-        <button type="button" class="cur" data-currency="USD" aria-pressed="false">USD $</button>
-      </div>
-
-      <p class="group-note">Živě online, 60 minut týdně: ne v učebně, takže se připojíte odkudkoli. Chcete se učit osobně? Vyberte si <a href="#lessons">individuální lekce</a> v Praze. Ve skupině je nejvýš pět míst. Přihlásíte se e-mailem a Lucia s vámi domluví den a čas; platíte až po potvrzení skupiny. <a href="skupinovy-kurz-italstiny.html">Program kurzu</a>. Pro skupinové lekce platí stejné <a href="#cancellation">pravidlo zrušení 24 hodin předem</a>.</p>
-    </div>
-
-    <ul class="levels">
-      <li>
-        <div>
-          <h3>Začátečníci <span class="lvl">A1–A2</span><span class="wait">leden</span></h3>
-          <p>Od nuly. Na konci zvládnete představit se, objednat si, zeptat se na cestu a běžnou konverzaci, se správnou výslovností od prvního dne.</p>
-        </div>
-        <a class="btn btn-lemon btn-sm" data-group href="skupinovy-kurz-italstiny.html?level=beginner#reserve">Přihlásit se</a>
-      </li>
-      <li>
-        <div>
-          <h3>Mírně pokročilí <span class="lvl">B1</span><span class="wait">čekací listina</span></h3>
-          <p>Překonejte stagnaci. Minulé časy, které konečně pochopíte, širší slovní zásoba a každý týden řízená konverzace o skutečných tématech.</p>
-        </div>
-        <a class="btn btn-lemon btn-sm" data-group href="skupinovy-kurz-italstiny.html?level=intermediate#reserve">Čekací listina</a>
-      </li>
-      <li>
-        <div>
-          <h3>Pokročilí <span class="lvl">B2–C1</span><span class="wait">čekací listina</span></h3>
-          <p>Vybruste nuance, idiomy a styl. Vyprávějte, diskutujte a obhajujte svůj názor italsky, s přesnou zpětnou vazbou.</p>
-        </div>
-        <a class="btn btn-lemon btn-sm" data-group href="skupinovy-kurz-italstiny.html?level=advanced#reserve">Čekací listina</a>
-      </li>
-    </ul>
-  </div>
+<section id="level" style="background: var(--lemon)">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 8vw, 88px) clamp(18px, 5vw, 40px); display: flex; flex-wrap: wrap; gap: clamp(24px, 5vw, 64px); align-items: flex-start">
+<div style="flex: 1 1 320px; min-width: 0">
+<h2 style="margin: 0 0 12px; font-size: clamp(32px, 5vw, 50px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Nevíte, jakou máte úroveň?</h2>
+<p style="margin: 0; font-size: 18px">Klepněte na větu, která vás nejlépe vystihuje. Lucia vaši úroveň potvrdí na lekci zdarma.</p>
+</div>
+<div style="flex: 1.4 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<button type="button" class="opt" data-lvl="beginner" aria-pressed="false">Začínám od nuly nebo znám pár slov.</button>
+<button type="button" class="opt" data-lvl="beginner" aria-pressed="false">Řeknu jednoduché věty, ale skutečná konverzace je pro mě těžká.</button>
+<button type="button" class="opt" data-lvl="intermediate" aria-pressed="false">O běžných věcech mluvím, ale minulé časy a delší věty mi dělají potíže.</button>
+<button type="button" class="opt" data-lvl="advanced" aria-pressed="false">Mluvím plynule, ale chci znít přirozeněji a přesněji.</button>
+ <div class="pop-in" id="level-result" hidden role="status" style="margin-top: 6px; padding: 22px 24px; background: var(--ink); color: #FFFFFF; border-radius: 24px 24px 24px 6px; display: flex; flex-direction: column; gap: 10px">
+<h3 id="level-title" style="margin: 0; font-size: 24px; font-weight: 800; color: var(--lemon)"></h3>
+<p id="level-text" style="margin: 0; font-size: 16px; color: #D5D8F0"></p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px">
+<a id="level-reserve" href="skupinovy-kurz-italstiny.html#reserve" style="display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; background: var(--lemon); color: var(--ink); border-radius: 16px 16px 16px 4px; font-weight: 800; font-size: 15px; text-decoration: none">Přihlásit se</a>
+<a href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21" style="display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border: 2px solid #FFFFFF; color: #FFFFFF; border-radius: 16px 16px 16px 4px; font-weight: 700; font-size: 15px; text-decoration: none">Ověřit na lekci zdarma</a>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- LEVEL FINDER -->
-<section class="s s-white" id="level">
-  <div class="wrap level-grid">
-    <div class="level-intro">
-      <h2>Nevíte, jakou máte úroveň?</h2>
-      <p>Vyberte větu, která vás nejlépe vystihuje. Lucia vaši úroveň potvrdí na lekci zdarma.</p>
-    </div>
-    <div class="finder">
-      <fieldset>
-        <legend class="sr-only">Která věta vás nejlépe vystihuje?</legend>
-        <label class="opt"><input type="radio" name="lvl" value="beginner"><span>Začínám od nuly nebo znám pár slov.</span></label>
-        <label class="opt"><input type="radio" name="lvl" value="beginner"><span>Řeknu jednoduché věty, ale skutečná konverzace je pro mě těžká.</span></label>
-        <label class="opt"><input type="radio" name="lvl" value="intermediate"><span>O běžných věcech mluvím, ale minulé časy a delší věty mi dělají potíže.</span></label>
-        <label class="opt"><input type="radio" name="lvl" value="advanced"><span>Mluvím plynule, ale chci znít přirozeněji a přesněji.</span></label>
-      </fieldset>
-      <div class="result" id="level-result" hidden>
-        <h3 id="level-title"></h3>
-        <p id="level-text"></p>
-        <div class="result-cta">
-          <a class="btn btn-ink" id="level-reserve" data-group href="mailto:lucia.scollo2000@gmail.com">Přihlásit se do této skupiny</a>
-          <a class="btn btn-line" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Ověřit na lekci zdarma</a>
-        </div>
-      </div>
-    </div>
-  </div>
+<section id="lucia" style="background: #FFFFFF">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(36px, 6vw, 72px)">
+<div class="reveal" style="flex: 1 1 300px; max-width: 420px; margin: 0 auto; position: relative; padding: 0 0 16px 16px">
+<img src="../lucia-smile.jpg" alt="Lucia, vaše lektorka italštiny, se směje na slunném dvoře" style="display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 48px 48px 10px 48px; box-shadow: -16px 16px 0 var(--lemon)">
+</div>
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; align-self: flex-start; padding: 5px 12px; background: var(--lemon); border-radius: 12px 12px 12px 3px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase">O Lucii</p>
+<h2 style="margin: 0; font-size: clamp(34px, 5.6vw, 56px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Důsledná v obsahu, vlídná v přístupu</h2>
+<p style="margin: 0; font-size: 18px">Lucia učí italsky lidi, kteří chtějí mluvit, ne jen se učit pravidla: přesná výslovnost, gramatika, která dává smysl, a jistota vyjádřit se. Mluví trochu česky a má zkušenosti se studenty, kteří mluví jen česky.</p>
+<p style="margin: 0; padding-left: 16px; border-left: 4px solid var(--tomato); font-size: 20px; font-weight: 700; font-style: italic">Každá chyba je krok k vašemu novému italskému hlasu.</p>
+<ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 16px">
+<li style="display: flex; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="#2438D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>Postgraduální Master v didaktice italštiny, Univerzita pro cizince v Perugii</li>
+<li style="display: flex; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="#2438D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>Přes 3 roky praxe: 2 000+ hodin výuky a 150+ studentů</li>
+<li style="display: flex; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="#2438D6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>Od úplných začátečníků po pokročilé</li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px">
+<a class="btn-pop" href="https://www.youtube.com/watch?v=Bb2mI4j_BoE" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px 0 8px; background: var(--tomato); color: var(--ink); border: 2px solid var(--ink); border-radius: 20px 20px 20px 5px; font-weight: 800; text-decoration: none">
+<span class="pulse" style="display: grid; place-items: center; width: 36px; height: 36px; background: var(--ink); color: #FFFFFF; border-radius: 50%"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg></span>Video s představením (anglicky)</a>
+<a href="o-lucii.html" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 20px; color: var(--ink); border: 2px solid var(--ink); border-radius: 20px 20px 20px 5px; font-weight: 700; text-decoration: none">Více o Lucii</a>
+</div>
+</div>
+</div>
 </section>
 
-<!-- ABOUT -->
-<section class="s s-paper" id="about">
-  <div class="wrap about-grid">
-    <div class="about-photo">
-      <img src="../lucia-smile.jpg" width="800" height="1000" loading="lazy" alt="Lucia, vaše lektorka italštiny, se směje na slunném dvoře">
-    </div>
-    <div class="about-copy">
-      <h2>Důsledná v obsahu, vlídná v přístupu</h2>
-      <p>Lucia učí italsky lidi, kteří chtějí mluvit, ne jen se učit pravidla. Její lekce propojují strukturovanou výuku s přirozenou plynulostí: přesnou výslovnost, gramatiku, která dává smysl, a jistotu vyjádřit se.</p>
-      <p>Mluví trochu česky a má zkušenosti s výukou studentů, kteří mluví jen česky. Každá chyba je krok k vašemu novému italskému hlasu.</p>
-      <p><a href="o-lucii.html"><b>Více o Lucii</b></a></p>
-      <ul class="creds">
-        <li>Postgraduální Master v didaktice italštiny, Univerzita pro cizince v Perugii</li>
-        <li>Přes 3 roky praxe: 2 000+ hodin výuky a 150+ studentů</li>
-        <li>Lekce od úplných začátečníků po pokročilé</li>
-      </ul>
-    </div>
-  </div>
+<section id="reviews" style="background: var(--tomato); color: var(--ink)">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px) 0; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div>
+<h2 style="margin: 0 0 8px; font-size: clamp(34px, 5.6vw, 56px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Co říkají studenti</h2>
+<p style="margin: 0; font-size: 18px; font-weight: 600">29 recenzí od studentů, kteří se učí italsky s Lucií. Recenze necháváme v původním znění, v angličtině.</p>
+</div>
+<p style="margin: 0; font-size: 14px; font-weight: 700">Najetím nebo klepnutím zastavíte</p>
+</div>
+<div style="padding: 28px 0 clamp(56px, 9vw, 100px); display: flex; flex-direction: column; gap: 14px">
+<div class="marquee" tabindex="0" role="group" aria-label="Recenze studentů" style="padding: 8px 0 14px">
+<div class="track">
+<figure class="lift" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“Lucia made so many things clear to me that had confused me until now. She did it easily, clearly and with joy… I highly recommend working with her!”</blockquote>
+<figcaption class="btn-pop" style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--lemon); border-radius: 50%; font-weight: 800">M</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Meg</b>říjen 2026</span></figcaption>
+</figure>
+<figure class="lift" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“She's so kind and patient, making learning fun and efficient at the same time. Genuinely the best tutor you'll ever find!!!”</blockquote>
+<figcaption class="btn-pop" style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--cobalt); color: #FFFFFF; border-radius: 50%; font-weight: 800">A</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Anna</b>srpen 2026</span></figcaption>
+</figure>
+<figure class="lift" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“After a month, I was able to have conversations with Italians in Italy!”</blockquote>
+<figcaption class="btn-pop" style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--tomato); border-radius: 50%; font-weight: 800">J</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Jelke</b>leden 2025</span></figcaption>
+</figure>
+<figure class="lift" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“Great Teacher! Fun and engaging. Very good at adapting to my level (absolute beginner)!”</blockquote>
+<figcaption class="btn-pop" style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--lemon); border-radius: 50%; font-weight: 800">D</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">David</b>červen 2026</span></figcaption>
+</figure>
+<figure class="lift" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“She explains all grammar and vocabulary topics very well. She focuses on the student's needs and adapts the lessons accordingly… her lessons are never boring!”</blockquote>
+<figcaption class="btn-pop" style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--cobalt); color: #FFFFFF; border-radius: 50%; font-weight: 800">Ł</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Łukasz</b>leden 2025</span></figcaption>
+</figure>
+<figure class="lift" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“Thanks to her, I have made enormous progress in a short time. If you are looking to learn or improve your Italian, this is the teacher for you!”</blockquote>
+<figcaption class="btn-pop" style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--tomato); border-radius: 50%; font-weight: 800">C</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Chris</b>září 2024</span></figcaption>
+</figure>
+<figure class="lift" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“…she takes the time to break things down in a way that makes them easy to understand and remember.”</blockquote>
+<figcaption class="btn-pop" style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--lemon); border-radius: 50%; font-weight: 800">E</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Eva</b>květen 2025</span></figcaption>
+</figure>
+<figure class="lift" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“Lucia has a fun personality, leads a great conversation and provides very effective tuition. A true superstar.”</blockquote>
+<figcaption class="btn-pop" style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span aria-hidden="true" style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--cobalt); color: #FFFFFF; border-radius: 50%; font-weight: 800">O</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Oliver</b>leden 2025</span></figcaption>
+</figure>
+<figure aria-hidden="true" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“Lucia made so many things clear to me that had confused me until now. She did it easily, clearly and with joy… I highly recommend working with her!”</blockquote>
+<figcaption style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--lemon); border-radius: 50%; font-weight: 800">M</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Meg</b>říjen 2026</span></figcaption>
+</figure>
+<figure aria-hidden="true" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“She's so kind and patient, making learning fun and efficient at the same time. Genuinely the best tutor you'll ever find!!!”</blockquote>
+<figcaption style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--cobalt); color: #FFFFFF; border-radius: 50%; font-weight: 800">A</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Anna</b>srpen 2026</span></figcaption>
+</figure>
+<figure aria-hidden="true" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“After a month, I was able to have conversations with Italians in Italy!”</blockquote>
+<figcaption style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--tomato); border-radius: 50%; font-weight: 800">J</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Jelke</b>leden 2025</span></figcaption>
+</figure>
+<figure aria-hidden="true" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“Great Teacher! Fun and engaging. Very good at adapting to my level (absolute beginner)!”</blockquote>
+<figcaption style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--lemon); border-radius: 50%; font-weight: 800">D</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">David</b>červen 2026</span></figcaption>
+</figure>
+<figure aria-hidden="true" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“She explains all grammar and vocabulary topics very well. She focuses on the student's needs and adapts the lessons accordingly… her lessons are never boring!”</blockquote>
+<figcaption style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--cobalt); color: #FFFFFF; border-radius: 50%; font-weight: 800">Ł</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Łukasz</b>leden 2025</span></figcaption>
+</figure>
+<figure aria-hidden="true" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“Thanks to her, I have made enormous progress in a short time. If you are looking to learn or improve your Italian, this is the teacher for you!”</blockquote>
+<figcaption style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--tomato); border-radius: 50%; font-weight: 800">C</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Chris</b>září 2024</span></figcaption>
+</figure>
+<figure aria-hidden="true" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“…she takes the time to break things down in a way that makes them easy to understand and remember.”</blockquote>
+<figcaption style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--lemon); border-radius: 50%; font-weight: 800">E</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Eva</b>květen 2025</span></figcaption>
+</figure>
+<figure aria-hidden="true" style="margin: 0 16px 0 0; flex: none; width: 320px; padding: 24px; background: #FFFFFF; border: 2px solid var(--ink); border-radius: 28px 28px 28px 6px; box-shadow: 5px 5px 0 var(--ink); display: flex; flex-direction: column; gap: 14px">
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.5">“Lucia has a fun personality, leads a great conversation and provides very effective tuition. A true superstar.”</blockquote>
+<figcaption style="margin-top: auto; display: flex; align-items: center; gap: 10px"><span style="display: grid; place-items: center; width: 38px; height: 38px; background: var(--cobalt); color: #FFFFFF; border-radius: 50%; font-weight: 800">O</span><span style="font-size: 14px"><b style="display: block; font-size: 16px">Oliver</b>leden 2025</span></figcaption>
+</figure>
+</div>
+</div>
+<div class="marquee" tabindex="0" role="group" aria-label="Další krátké recenze" style="padding: 4px 0">
+<div class="track track-rev">
+<p style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Excellent teacher! She makes it fun and interesting.” <b style="color: var(--lemon)">Lynn</b></p>
+<p style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Lucia is so good in explaining Italian grammar! :) book her, she's so much fun!” <b style="color: var(--cobalt)">Kavita</b></p>
+<p style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“It’s just fun with Lucia! She is great!” <b style="color: var(--lemon)">Uschi</b></p>
+<p style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“She is great!! Very patient and clear explanation. I highly recommend!” <b style="color: var(--cobalt)">Jianing</b></p>
+<p style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Lucia is a great Italian teacher. Knowledgeable, fun and patient.” <b style="color: var(--lemon)">Rafael</b></p>
+<p style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“It is always a great pleasure for me to study with Lucia.” <b style="color: var(--cobalt)">Willem</b></p>
+<p style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Lucia has a very fun way of teaching, I enjoyed the lesson.” <b style="color: var(--lemon)">Ondřej</b></p>
+<p style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Learning Italian with Lucia is fun and educational.” <b style="color: var(--cobalt)">Bernat</b></p>
+<p aria-hidden="true" style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Excellent teacher! She makes it fun and interesting.” <b style="color: var(--lemon)">Lynn</b></p>
+<p aria-hidden="true" style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Lucia is so good in explaining Italian grammar! :) book her, she's so much fun!” <b style="color: var(--cobalt)">Kavita</b></p>
+<p aria-hidden="true" style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“It’s just fun with Lucia! She is great!” <b style="color: var(--lemon)">Uschi</b></p>
+<p aria-hidden="true" style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“She is great!! Very patient and clear explanation. I highly recommend!” <b style="color: var(--cobalt)">Jianing</b></p>
+<p aria-hidden="true" style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Lucia is a great Italian teacher. Knowledgeable, fun and patient.” <b style="color: var(--lemon)">Rafael</b></p>
+<p aria-hidden="true" style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“It is always a great pleasure for me to study with Lucia.” <b style="color: var(--cobalt)">Willem</b></p>
+<p aria-hidden="true" style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: var(--ink); color: #FFFFFF; border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Lucia has a very fun way of teaching, I enjoyed the lesson.” <b style="color: var(--lemon)">Ondřej</b></p>
+<p aria-hidden="true" style="margin: 0 12px 0 0; flex: none; padding: 12px 18px; background: #FFFFFF; color: var(--ink); border-radius: 20px 20px 20px 5px; font-size: 15px; white-space: nowrap">“Learning Italian with Lucia is fun and educational.” <b style="color: var(--cobalt)">Bernat</b></p>
+</div>
+</div>
+</div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="s s-tomato s-reviews" id="voices">
-  <div class="wrap reel-head">
-    <div class="head">
-      <h2>Co říkají studenti</h2>
-      <p>29 recenzí od studentů, kteří se učí italsky s Lucií. Recenze ponecháváme v původním znění, v angličtině.</p>
-    </div>
-    <div class="reel-ctl" role="group" aria-label="Ovládání recenzí">
-      <button type="button" class="reel-btn" id="reel-prev" aria-label="Předchozí recenze">&#8592;</button>
-      <button type="button" class="reel-btn reel-pause" id="reel-toggle" aria-pressed="false" aria-label="Zastavit posouvání recenzí"><span class="ic-pause" aria-hidden="true"></span></button>
-      <button type="button" class="reel-btn" id="reel-next" aria-label="Další recenze">&#8594;</button>
-    </div>
-  </div>
-  <div class="reel">
-      <div class="reel-row" tabindex="0" role="group" aria-label="Student reviews, row 1: scroll sideways">
-        <div class="reel-track">
-          <figure class="rv rv-0 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">M</span><span class="rv-who"><b>Meg</b><time datetime="2026-10-13">13 October 2026</time></span></figcaption>
-            <blockquote><p>Lucia made so many things clear to me that had confused me until now. She did it easily, clearly and with joy - while fully engaging with me at my level and supporting me wherever she could. I highly recommend working with her!</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">A</span><span class="rv-who"><b>Anna</b><time datetime="2026-08-06">6 August 2026</time></span></figcaption>
-            <blockquote><p>I can only say good things about Lucia and her teaching style. She's so kind and patient, making learning fun and efficient at the same time. Genuinely the best tutor you'll ever find!!! (And she has lots of tips and tricks that make studying easier) ;)</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">S</span><span class="rv-who"><b>Sevilay</b><time datetime="2026-07-16">16 July 2026</time></span></figcaption>
-            <blockquote><p>Lucia is very helpful and lovely to have lessons with. I have learnt Italian before, and have been talking Italian for 3 years now. Lucia is a fantastic tutor that helps me improve my language by having a tailored-type of lessons. Grazie mille per tutto!! :)</p></blockquote>
-          </figure>
-          <figure class="rv rv-0 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">D</span><span class="rv-who"><b>David</b><time datetime="2026-06-09">9 June 2026</time></span></figcaption>
-            <blockquote><p>Great Teacher! Fun and engaging. Very good at adapting to my level (absolute beginner)! Also after a short gap in my lessons very good at helping me get back in the rhythm of learning Italian!</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">E</span><span class="rv-who"><b>Eda</b><time datetime="2025-12-15">15 December 2025</time></span></figcaption>
-            <blockquote><p>Learning Italian with Lucia is truly a pleasure. feels very warm and friendly, as if I were speaking with a close friend. She is always extremely kind, gentle, and courteous in every lesson</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">S</span><span class="rv-who"><b>Sasha</b><time datetime="2024-11-25">25 November 2024</time></span></figcaption>
-            <blockquote><p>Lucia is the best teacher you can ever ask for. She is encouraging, making learning process look fun and it is always an amazing mood after each class</p></blockquote>
-          </figure>
-          <figure class="rv rv-0 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">L</span><span class="rv-who"><b>Laura</b><time datetime="2024-10-25">25 October 2024</time></span></figcaption>
-            <blockquote><p>I love the Italian lessons with Lucia. She's patient and does really cool exercises that help me a lot with learning the language. She also updates my vocabulary every week so I can learn them when I have time and I absolutely love that. I can only recommend her :)</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">C</span><span class="rv-who"><b>Chris</b><time datetime="2024-09-30">30 September 2024</time></span></figcaption>
-            <blockquote><p>Lucia is very patient, always attentive, and adapts perfectly to your needs. Thanks to her, I have made enormous progress in a short time. If you are looking to learn or improve your Italian, this is the teacher for you !</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">A</span><span class="rv-who"><b>Anonymous</b><time datetime="2024-08-19">19 August 2024</time></span></figcaption>
-            <blockquote><p>Lucia is a great tutor and person! Lessons with her are never boring, and she’s very helpful and patient, I don’t feel pressured learning Italian with her. Best tutor I’ve ever had! 🤩🤩🤩</p></blockquote>
-          </figure>
-          <figure class="rv rv-0 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">Y</span><span class="rv-who"><b>Yun</b><time datetime="2024-08-16">16 August 2024</time></span></figcaption>
-            <blockquote><p>she is a great teacher, in the last few weeks I have made significant progress, she has many learning resources and I am very excited to continue learning the Italian language with her.</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-wide">
-            <figcaption><span class="rv-av" aria-hidden="true">M</span><span class="rv-who"><b>Mo</b><time datetime="2024-07-31">31 July 2024</time></span></figcaption>
-            <blockquote><p>Amazing tutor, always ready and proactive, provide different tools to explain. She understands the learning obstacles for new learner and provide the ways of tackling the issues . She is perfetto, Grazie mille Lucia</p></blockquote>
-          </figure>
-        </div>
-      </div>
-      <div class="reel-row" tabindex="0" role="group" aria-label="Student reviews, row 2: scroll sideways">
-        <div class="reel-track">
-          <figure class="rv rv-1 rv-xl">
-            <figcaption><span class="rv-av" aria-hidden="true">E</span><span class="rv-who"><b>Eva</b><time datetime="2025-05-27">27 May 2025</time></span></figcaption>
-            <blockquote><p>Lucia is a fantastic tutor, she is friendly and encouraging. One of the things I really appreciate is how clearly she explains grammar or vocabulary that I’m confused about – she takes the time to break things down in a way that makes them easy to understand and remember. We're following a textbook, but she gave me the option of whether or not to use one, which I really liked because it made the learning feel more flexible.</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-xl">
-            <figcaption><span class="rv-av" aria-hidden="true">Ł</span><span class="rv-who"><b>Łukasz</b><time datetime="2025-01-29">29 January 2025</time></span></figcaption>
-            <blockquote><p>I recommend Lucia! Lucia is a fantastic teacher, very friendly, and always gives quick feedback. She explains all grammar and vocabulary topics very well. She focuses on the student's needs and adapts the lessons accordingly. She uses a lot of materials and also offers optional exercises to practice between lessons. She has a lot of positive energy, and her lessons are never boring!</p></blockquote>
-          </figure>
-          <figure class="rv rv-0 rv-xl">
-            <figcaption><span class="rv-av" aria-hidden="true">J</span><span class="rv-who"><b>Jelke</b><time datetime="2025-01-21">21 January 2025</time></span></figcaption>
-            <blockquote><p>Lucia is an excellent tutor! She has lesson plans ready for every type of lesson and uses study material to explain various grammar topics. Meanwhile, she is very capable in guiding you through an entire lesson of speaking which is great when the focus needs to be on having conversations in Italiano! After a month, I was able to have conversations with Italians in Italy!</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-xl">
-            <figcaption><span class="rv-av" aria-hidden="true">J</span><span class="rv-who"><b>Julien</b><time datetime="2025-01-02">2 January 2025</time></span></figcaption>
-            <blockquote><p>Lucia is not only a very good teacher but also a wonderful person. Her intelligence, her kindness and, above all, her joyful personality and constant cheerful mood make the time spent with her delightful moments. She uses various tools, always innovates in the way she teaches Italian and makes you progress without pressure. Moreover, her contagious sense of humour makes her lessons efficient but relaxed at the same time. Learning Italian with Lucia is just a great pleasure. Don't hesitate to choose her to learn Italian. Grazie mille Lucia !!!</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-xl">
-            <figcaption><span class="rv-av" aria-hidden="true">S</span><span class="rv-who"><b>Sandy</b><time datetime="2024-08-22">22 August 2024</time></span></figcaption>
-            <blockquote><p>Lucia is truly a breath of fresh air as an Italian tutor. 💚🤍❤️ Her joyful personality is contagious, and she never fails to make me laugh during our lessons. I am learning so much from her, and it’s all thanks to her fantastic teaching style. Lucia is not only incredibly intelligent but also uses a variety of innovative tools that make learning Italian both easy and enjoyable. Her approach is relaxed, with absolutely no pressure, which makes every session something to look forward to. Stop looking—you’ve just found the best tutor on this learning journey! Lucia is simply the best. 🎉 GRAZIE MILLE 😉</p></blockquote>
-          </figure>
-        </div>
-      </div>
-      <div class="reel-row" tabindex="0" role="group" aria-label="Student reviews, row 3: scroll sideways">
-        <div class="reel-track">
-          <figure class="rv rv-2 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">L</span><span class="rv-who"><b>Lynn</b><time datetime="2026-07-04">4 July 2026</time></span></figcaption>
-            <blockquote><p>Excellent teacher! She makes it fun and interesting.</p></blockquote>
-          </figure>
-          <figure class="rv rv-0 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">G</span><span class="rv-who"><b>Gia</b><time datetime="2026-07-01">1 July 2026</time></span></figcaption>
-            <blockquote><p>Very kind and patient teacher, and the pacing is reasonable. Recommend you to book a trail lesson with Lucia~💗</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">K</span><span class="rv-who"><b>Kavita</b><time datetime="2026-06-15">15 June 2026</time></span></figcaption>
-            <blockquote><p>Lucia is so good in explaining Italian grammar! :) book her, she's so much fun!</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">B</span><span class="rv-who"><b>Bernat</b><time datetime="2025-11-07">7 November 2025</time></span></figcaption>
-            <blockquote><p>Learning Italian with Lucia is fun and educational. She’s very professional and makes every lesson enjoyable. Highly recommended!</p></blockquote>
-          </figure>
-          <figure class="rv rv-0 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">J</span><span class="rv-who"><b>Jianing</b><time datetime="2025-09-23">23 September 2025</time></span></figcaption>
-            <blockquote><p>She is great!! Very patient and clear explanation. I highly recommend!</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">O</span><span class="rv-who"><b>Oliver</b><time datetime="2025-01-22">22 January 2025</time></span></figcaption>
-            <blockquote><p>Lucia has a fun personality, leads a great conversation and provides very effective tuition. A true superstar. Optimal progress. Thank you very much!</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">R</span><span class="rv-who"><b>Rafael</b><time datetime="2024-12-18">18 December 2024</time></span></figcaption>
-            <blockquote><p>Lucia is a great Italian teacher. Knowledgeable, fun and patient. I strongly recommend her to every level of Italian students!!!</p></blockquote>
-          </figure>
-          <figure class="rv rv-0 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">U</span><span class="rv-who"><b>Uschi</b><time datetime="2024-09-11">11 September 2024</time></span></figcaption>
-            <blockquote><p>It’s just fun with Lucia! She is great!</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">W</span><span class="rv-who"><b>Wang</b><time datetime="2024-09-07">7 September 2024</time></span></figcaption>
-            <blockquote><p>Lucia is a very good teacher! Her lessons are very fun and she always tries to use new tools. I am very happy 😊</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">H</span><span class="rv-who"><b>Hisashi</b><time datetime="2024-09-03">3 September 2024</time></span></figcaption>
-            <blockquote><p>wonderful</p></blockquote>
-          </figure>
-          <figure class="rv rv-0 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">W</span><span class="rv-who"><b>Willem</b><time datetime="2024-08-30">30 August 2024</time></span></figcaption>
-            <blockquote><p>It is always a great pleasure for me to study with Lucia.</p></blockquote>
-          </figure>
-          <figure class="rv rv-1 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">O</span><span class="rv-who"><b>Ondřej</b><time datetime="2024-08-05">5 August 2024</time></span></figcaption>
-            <blockquote><p>Lucia has a very fun way of teaching, I enjoyed the lesson.</p></blockquote>
-          </figure>
-          <figure class="rv rv-2 rv-slim">
-            <figcaption><span class="rv-av" aria-hidden="true">M</span><span class="rv-who"><b>Marco</b><time datetime="2024-07-28">28 July 2024</time></span></figcaption>
-            <blockquote><p>Had a great experience with her:) calm a kind teacher!</p></blockquote>
-          </figure>
-        </div>
-      </div>
-  </div>
+<section id="how" style="background: var(--paper)">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px)">
+<p style="margin: 0 0 12px; display: inline-block; padding: 5px 12px; background: var(--lemon); border-radius: 12px 12px 12px 3px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase">Vaše lekce</p>
+<h2 style="margin: 0 0 32px; font-size: clamp(34px, 5.6vw, 56px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Na míru vám</h2>
+
+<div class="reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
+<div style="padding: 28px; background: var(--cobalt); color: #FFFFFF; border-radius: 28px 28px 28px 6px; display: flex; flex-direction: column; gap: 10px">
+<svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true" style="color: var(--lemon)"><path d="M24 44s14-12.6 14-24a14 14 0 1 0-28 0c0 11.4 14 24 14 24z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"></path><circle cx="24" cy="20" r="5" fill="currentColor"></circle></svg>
+<h3 style="margin: 0; font-size: 26px; font-weight: 800; font-stretch: 85%">Osobně v Praze</h3>
+<p style="margin: 0; font-size: 16px; color: #E9ECFF">Praha 1, 2 a 3, v kavárnách nebo na jiných místech, na kterých se domluvíte. Ideální, pokud se nejlépe učíte tváří v tvář.</p>
+</div>
+<div style="padding: 28px; background: var(--ink); color: #FFFFFF; border-radius: 28px 28px 28px 6px; display: flex; flex-direction: column; gap: 10px">
+<svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true" style="color: var(--tomato)"><rect x="4" y="8" width="40" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="4"></rect><path d="M16 42h16M24 34v8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path></svg>
+<h3 style="margin: 0; font-size: 26px; font-weight: 800; font-stretch: 85%">Online, odkudkoli</h3>
+<p style="margin: 0; font-size: 16px; color: #D5D8F0">Živé videolekce se sdílenou tabulí a materiály, v čase, který vám vyhovuje. Většina lekcí probíhá právě takto.</p>
+</div>
+</div>
+<div data-gbp hidden style="margin-top: 16px; padding: 20px 24px; background: #FFFFFF; border: 2px solid #0E1240; border-radius: 24px 24px 24px 6px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px">
+<p style="margin: 0; flex: 1 1 320px; font-size: 16px"><b>Italian with Lucia na Googlu</b>: přečtěte si, co píší ostatní studenti, nebo se podělte o vlastní zkušenost.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a class="btn-pop" data-gbp-link="profile" href="#" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 46px; padding: 0 18px; background: #0E1240; color: #FFFFFF; border-radius: 16px 16px 16px 4px; font-weight: 700; font-size: 15px; text-decoration: none">Profil na Googlu</a>
+<a class="btn-pop" data-gbp-link="review" href="#" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 46px; padding: 0 18px; background: #FFD43B; color: #0E1240; border: 2px solid #0E1240; border-radius: 16px 16px 16px 4px; font-weight: 800; font-size: 15px; text-decoration: none">Napsat recenzi na Googlu</a>
+</div>
+</div>
+
+<h3 style="margin: 44px 0 16px; font-size: 22px; font-weight: 800">Na čem můžete pracovat</h3>
+<div class="reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px">
+<div class="lift" style="padding: 22px; background: #FFFFFF; border-radius: 24px 24px 24px 6px; border-top: 6px solid var(--lemon)"><h4 style="margin: 0 0 6px; font-size: 18px; font-weight: 800">Úplní začátečníci</h4><p style="margin: 0; font-size: 15px; color: #4A4E73">Důležitá slovní zásoba, srozumitelná gramatika a mluvení hned od začátku.</p></div>
+<div class="lift" style="padding: 22px; background: #FFFFFF; border-radius: 24px 24px 24px 6px; border-top: 6px solid var(--tomato)"><h4 style="margin: 0 0 6px; font-size: 18px; font-weight: 800">Gramatika a výslovnost</h4><p style="margin: 0; font-size: 15px; color: #4A4E73">Hlásky a stavba vět, aby vám rozuměli hned napoprvé.</p></div>
+<div class="lift" style="padding: 22px; background: #FFFFFF; border-radius: 24px 24px 24px 6px; border-top: 6px solid var(--cobalt)"><h4 style="margin: 0 0 6px; font-size: 18px; font-weight: 800">Konverzace a plynulost</h4><p style="margin: 0; font-size: 15px; color: #4A4E73">Mluvení, kulturní nuance a skutečné situace.</p></div>
+<div class="lift" style="padding: 22px; background: #FFFFFF; border-radius: 24px 24px 24px 6px; border-top: 6px solid var(--ink)"><h4 style="margin: 0 0 6px; font-size: 18px; font-weight: 800">Práce a cestování</h4><p style="margin: 0; font-size: 15px; color: #4A4E73">Formální etiketa, odborná slovní zásoba a situace, které vás opravdu čekají.</p></div>
+</div>
+
+<div style="margin-top: 16px; padding: 24px 28px; background: var(--lemon); border-radius: 28px 28px 28px 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px">
+<div style="flex: 1 1 380px; min-width: 0">
+<h3 style="margin: 0 0 6px; font-size: 22px; font-weight: 800">S učebnicí, nebo bez ní</h3>
+<p style="margin: 0; font-size: 15px">Pokud se rádi učíte z knihy, lekce mohou navazovat na učebnici <em>Nuovo Espresso</em> (ALMA Edizioni). Pokud ne, všechny materiály dostanete od Lucie. Rozhodnete se po lekci zdarma.</p>
+</div>
+<ul aria-label="Úrovně řady učebnic" style="list-style: none; margin: 0; padding: 0; display: flex; gap: 6px">
+<li style="display: grid; place-items: center; width: 46px; height: 46px; background: var(--ink); color: #FFFFFF; border-radius: 14px 14px 14px 3px; font-weight: 800; font-size: 15px">A1</li>
+<li style="display: grid; place-items: center; width: 46px; height: 46px; background: var(--ink); color: #FFFFFF; border-radius: 14px 14px 14px 3px; font-weight: 800; font-size: 15px">A2</li>
+<li style="display: grid; place-items: center; width: 46px; height: 46px; background: var(--ink); color: #FFFFFF; border-radius: 14px 14px 14px 3px; font-weight: 800; font-size: 15px">B1</li>
+<li style="display: grid; place-items: center; width: 46px; height: 46px; background: var(--ink); color: #FFFFFF; border-radius: 14px 14px 14px 3px; font-weight: 800; font-size: 15px">B2</li>
+<li style="display: grid; place-items: center; width: 46px; height: 46px; background: var(--ink); color: #FFFFFF; border-radius: 14px 14px 14px 3px; font-weight: 800; font-size: 15px">C1</li>
+</ul>
+</div>
+</div>
 </section>
 
-<!-- WHAT YOU CAN WORK ON -->
-<section class="s s-white" id="focus">
-  <div class="wrap">
-    <div class="head">
-      <h2>Na čem můžete pracovat</h2>
-    </div>
-    <dl class="rows">
-      <div class="row">
-        <dt>Úplní začátečníci</dt>
-        <dd>Pevné základy od prvního slova: důležitá slovní zásoba, srozumitelná gramatika a mluvení hned od začátku.</dd>
-      </div>
-      <div class="row">
-        <dt>Gramatika a výslovnost</dt>
-        <dd>Italské hlásky a stavba vět, aby vám rozuměli hned napoprvé.</dd>
-      </div>
-      <div class="row">
-        <dt>Konverzace a plynulost</dt>
-        <dd>Mluvení, kulturní nuance a skutečné situace pro mírně pokročilé a pokročilé.</dd>
-      </div>
-      <div class="row">
-        <dt>Italština do práce a na cesty</dt>
-        <dd>Formální etiketa, odborná slovní zásoba a situace, které vás opravdu čekají.</dd>
-      </div>
-    </dl>
-  </div>
+<section style="background: #FFFFFF">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px) 0">
+<h2 style="margin: 0 0 24px; font-size: clamp(30px, 4.6vw, 44px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Najděte si svůj způsob učení</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+<a href="lekce-italstiny-praha.html" class="lift" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 64px; padding: 16px 20px; border: 2px solid var(--ink); border-radius: 20px 20px 20px 5px; color: var(--ink); text-decoration: none; font-weight: 700">Lekce italštiny v Praze<span aria-hidden="true">→</span></a>
+<a href="italstina-online.html" class="lift" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 64px; padding: 16px 20px; border: 2px solid var(--ink); border-radius: 20px 20px 20px 5px; color: var(--ink); text-decoration: none; font-weight: 700">Italština online<span aria-hidden="true">→</span></a>
+<a href="skupinovy-kurz-italstiny.html" class="lift" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 64px; padding: 16px 20px; border: 2px solid var(--ink); border-radius: 20px 20px 20px 5px; color: var(--ink); text-decoration: none; font-weight: 700">Skupinový kurz od ledna<span aria-hidden="true">→</span></a>
+<a href="italstina-pro-zacatecniky.html" class="lift" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 64px; padding: 16px 20px; border: 2px solid var(--ink); border-radius: 20px 20px 20px 5px; color: var(--ink); text-decoration: none; font-weight: 700">Italština pro začátečníky<span aria-hidden="true">→</span></a>
+</div>
+<div style="margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 15px">
+<b style="margin-right: 4px">Články zdarma:</b>
+<a href="how-long-does-it-take-to-clanky.html" style="padding: 7px 14px; background: var(--paper); border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 600">Jak dlouho trvá naučit se italsky?</a>
+<a href="passato-prossimo-vs-imperfetto.html" style="padding: 7px 14px; background: var(--paper); border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 600">Passato prossimo vs imperfetto</a>
+<a href="italske-fraze-na-cesty.html" style="padding: 7px 14px; background: var(--paper); border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 600">Italské fráze na cesty</a>
+<a href="clanky.html" style="padding: 7px 14px; color: var(--cobalt); font-weight: 700">Všechny články →</a>
+</div>
+</div>
 </section>
 
-<!-- WHERE -->
-<section class="s s-paper" id="where">
-  <div class="wrap">
-    <div class="head">
-      <h2>V Praze, nebo online</h2>
-    </div>
-    <div class="where">
-      <div class="where-card where-prague">
-        <h3>Osobně v Praze</h3>
-        <p>Lekce v Praze 1, 2 a 3, v kavárnách nebo na jiných místech, na kterých se domluvíte. Ideální, pokud bydlíte ve městě a nejlépe se učíte tváří v tvář.</p>
-      </div>
-      <div class="where-card where-online">
-        <h3>Online, odkudkoli</h3>
-        <p>Živé videolekce se sdílenou tabulí a materiály, které si můžete projít znovu, v čase, který vám vyhovuje. Většina Luciiných lekcí probíhá právě takto.</p>
-      </div>
-    </div>
-    <div class="gbp" data-gbp hidden>
-      <p><b>Italian with Lucia na Googlu</b>: přečtěte si, co píší ostatní studenti, nebo se podělte o vlastní zkušenost.</p>
-      <div class="gbp-btns">
-        <a class="btn btn-ink btn-sm" data-gbp-link="profile" href="#" target="_blank" rel="noopener">Profil na Googlu</a>
-        <a class="btn btn-lemon btn-sm" data-gbp-link="review" href="#" target="_blank" rel="noopener">Napsat recenzi na Googlu</a>
-      </div>
-    </div>
-  </div>
+<section id="faq" style="background: #FFFFFF">
+<div style="max-width: 820px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px)">
+<h2 style="margin: 0 0 24px; font-size: clamp(34px, 5.6vw, 56px); line-height: 1; font-weight: 800; font-stretch: 75%; letter-spacing: -0.01em">Otázky</h2>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Musím už umět trochu italsky?</summary><p style="margin: 0 0 18px; font-size: 16px">Ne. Lekce se přizpůsobí vaší úrovni, od úplných začátečníků po pokročilé. Od první lekce si budujete pevné základy i sebedůvěru.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">V jakém jazyce výuka probíhá?</summary><p style="margin: 0 0 18px; font-size: 16px">Výuka probíhá v italštině a vysvětlení podle potřeby v angličtině. Lucia mluví trochu česky a má zkušenosti s výukou studentů, kteří mluví jen česky, takže se domluvíte i bez angličtiny. Napsat jí můžete česky, anglicky nebo italsky.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Jsou lekce online, nebo osobně?</summary><p style="margin: 0 0 18px; font-size: 16px">Obojí. Učit se můžete online odkudkoli na světě, nebo se s Lucií potkávat osobně v Praze 1, 2 a 3.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Kde v Praze probíhají osobní lekce?</summary><p style="margin: 0 0 18px; font-size: 16px">V Praze 1, 2 a 3, v kavárnách nebo na jiných místech, na kterých se domluvíte. Přesné místo Lucia potvrdí při rezervaci. Každou lekci lze mít i online.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Jak si domluvím lekci zdarma?</summary><p style="margin: 0 0 18px; font-size: 16px">Pošlete Lucii krátký e-mail se svou úrovní a cíli. Odpoví do 24 hodin a domluvíte si termín. Lekce trvá 30 minut: seznámíte se, Lucia ověří vaši úroveň a probereme plán. Je to nezávazné.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Jak fungují skupinové kurzy?</summary><p style="margin: 0 0 18px; font-size: 16px">Skupina pro začátečníky začíná v lednu: 12 týdenních lekcí, živě online přes video, ve skupině 3 až 5 lidí. Skupiny pro mírně pokročilé a pokročilé se otevřou, jakmile se na čekací listinu zapíšou tři lidé. Přihlásíte se a Lucia s vámi domluví den a čas; platíte až po potvrzení skupiny. Podrobnosti najdete na stránce <a style="color: #2438D6" href="skupinovy-kurz-italstiny.html">skupinového kurzu</a>.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Potřebuji učebnici?</summary><p style="margin: 0 0 18px; font-size: 16px">Ne, učebnice je dobrovolná. Lekce vycházejí z vašich potřeb a cílů. Pokud se rádi učíte z knihy, mohou navazovat na řadu Nuovo Espresso a Lucia vám na lekci zdarma poradí, který díl se hodí.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Můžou se lekce zaměřit na moje cíle?</summary><p style="margin: 0 0 18px; font-size: 16px">Ano. Individuální lekce lze přizpůsobit práci, cestování nebo přípravě na zkoušku.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Jak si rezervuji lekce a kde je pak uvidím?</summary><p style="margin: 0 0 18px; font-size: 16px">Po lekci zdarma si každou lekci domluvíte s Lucií a ke každé rezervaci dostanete potvrzení: uschovejte si ho. Lucia má všechny rezervace ve svém kalendáři. Časy skupinových lekcí Lucia potvrdí při přihlášení.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Můžu lekci zrušit?</summary><p style="margin: 0 0 18px; font-size: 16px">Ano, nejpozději 24 hodin před začátkem: stačí napsat Lucii e-mail. Později už lekci zrušit nelze a počítá se jako odučená. Stejné pravidlo platí pro individuální i skupinové lekce.</p></details>
+<details style="padding: 0 22px; background: #F6F7FC; border-radius: 20px 20px 20px 5px"><summary style="padding: 18px 0; font-weight: 700; font-size: 17px; cursor: pointer">Jak se platí?</summary><p style="margin: 0 0 18px; font-size: 16px">Nejraději přes Revolut, funguje i bankovní převod. Můžete si vybrat balíček 5, 10 nebo 20 lekcí, nebo skupinový kurz.</p></details>
+</div>
+</div>
 </section>
 
-<!-- COURSEBOOK -->
-<section class="s s-lemon" id="coursebook">
-  <div class="wrap book">
-    <div class="book-copy">
-      <h2>S učebnicí, nebo bez ní</h2>
-      <p>Každá lekce vychází z vašich potřeb a cílů. Pokud se rádi učíte z knihy, lekce mohou navazovat na učebnici <em>Nuovo Espresso</em> (ALMA Edizioni): řadu s jedním dílem pro každou úroveň, která spojuje srozumitelnou gramatiku s praktickou konverzací. Pokud si učebnici kupovat nechcete, všechny materiály dostanete od Lucie.</p>
-      <p>Nevíte? Rozhodněte se po lekci zdarma: Lucia vám poradí, který díl by se hodil, pokud o něj budete stát.</p>
-    </div>
-    <ul class="book-levels" aria-label="Úrovně, které řada pokrývá">
-      <li>A1</li>
-      <li>A2</li>
-      <li>B1</li>
-      <li>B2</li>
-      <li>C1</li>
-    </ul>
-  </div>
-</section>
-
-<!-- EXPLORE -->
-<section class="s s-paper" id="explore">
-  <div class="wrap">
-    <div class="head">
-      <h2>Najděte si svůj způsob učení</h2>
-      <p>V Praze, online, sami nebo v malé skupině: vyberte si stránku, která vám sedí.</p>
-    </div>
-    <div class="explore-grid">
-      <a class="rel-card" href="lekce-italstiny-praha.html"><h3>Lekce italštiny v Praze</h3><p>Učte se italsky v Praze s Lucií, kvalifikovanou lektorkou italštiny.</p></a>
-      <a class="rel-card" href="italstina-online.html"><h3>Italština online</h3><p>Živé lekce italštiny online s kvalifikovanou lektorkou.</p></a>
-      <a class="rel-card" href="skupinovy-kurz-italstiny.html"><h3>Skupinový kurz italštiny od ledna</h3><p>12 týdenních lekcí online v malých skupinách po 3 až 5 lidech.</p></a>
-      <a class="rel-card" href="italstina-pro-zacatecniky.html"><h3>Italština pro začátečníky</h3><p>Naučte se italsky od nuly s kvalifikovanou lektorkou.</p></a>
-    </div>
-    <div class="explore-guides"><span>Články zdarma:</span><a href="jak-dlouho-trva-naucit-se-italsky.html">Jak dlouho trvá naučit se italsky?</a><a href="passato-prossimo-vs-imperfetto.html">Passato prossimo vs imperfetto</a><a href="italske-fraze-na-cesty.html">Italské fráze na cesty</a><a href="clanky.html">Všechny články</a></div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="s s-white" id="faq">
-  <div class="wrap faq-wrap">
-    <div class="head">
-      <h2>Otázky</h2>
-    </div>
-    <div class="faq">
-      <details>
-        <summary>Musím už umět trochu italsky?</summary>
-        <p>Ne. Lekce se přizpůsobí vaší úrovni, od úplných začátečníků po pokročilé. Od první lekce si budujete pevné základy i sebedůvěru.</p>
-      </details>
-      <details>
-        <summary>V jakém jazyce výuka probíhá?</summary>
-        <p>Výuka probíhá v italštině a vysvětlení podle potřeby v angličtině. Lucia mluví trochu česky a má zkušenosti s výukou studentů, kteří mluví jen česky, takže se domluvíte i bez angličtiny. Napsat jí můžete česky, anglicky nebo italsky.</p>
-      </details>
-      <details>
-        <summary>Jsou lekce online, nebo osobně?</summary>
-        <p>Obojí. Učit se můžete online odkudkoli na světě, nebo se s Lucií potkávat osobně v Praze 1, 2 a 3.</p>
-      </details>
-      <details>
-        <summary>Kde v Praze probíhají osobní lekce?</summary>
-        <p>V Praze 1, 2 a 3, v kavárnách nebo na jiných místech, na kterých se domluvíte. Přesné místo Lucia potvrdí při rezervaci. Každou lekci lze mít i online.</p>
-      </details>
-      <details>
-        <summary>Jak si domluvím lekci zdarma?</summary>
-        <p>Pošlete Lucii krátký e-mail se svou úrovní a cíli. Odpoví do 24 hodin a domluvíte si termín. Lekce trvá 30 minut: seznámíte se, Lucia ověří vaši úroveň a probereme plán. Je to nezávazné.</p>
-      </details>
-      <details>
-        <summary>Jak fungují skupinové kurzy?</summary>
-        <p>Skupina pro začátečníky začíná v lednu: 12 týdenních lekcí, živě online přes video, ve skupině 3 až 5 lidí. Skupiny pro mírně pokročilé a pokročilé se otevřou, jakmile se na čekací listinu zapíšou tři lidé. Přihlásíte se a Lucia s vámi domluví den a čas; platíte až po potvrzení skupiny. Podrobnosti najdete na stránce <a href="skupinovy-kurz-italstiny.html">skupinového kurzu</a>.</p>
-      </details>
-      <details>
-        <summary>Potřebuji učebnici?</summary>
-        <p>Ne, učebnice je dobrovolná. Lekce vycházejí z vašich potřeb a cílů. Pokud se rádi učíte z knihy, mohou navazovat na řadu Nuovo Espresso a Lucia vám na lekci zdarma poradí, který díl se hodí.</p>
-      </details>
-      <details>
-        <summary>Můžou se lekce zaměřit na moje cíle?</summary>
-        <p>Ano. Individuální lekce lze přizpůsobit práci, cestování nebo přípravě na zkoušku.</p>
-      </details>
-      <details>
-        <summary>Jak si rezervuji lekce a kde je pak uvidím?</summary>
-        <p>Po lekci zdarma si každou lekci domluvíte s Lucií a ke každé rezervaci dostanete potvrzení: uschovejte si ho. Lucia má všechny rezervace ve svém kalendáři. Časy skupinových lekcí Lucia potvrdí při přihlášení.</p>
-      </details>
-      <details>
-        <summary>Můžu lekci zrušit?</summary>
-        <p>Ano, nejpozději 24 hodin před začátkem: stačí napsat Lucii e-mail. Později už lekci zrušit nelze a počítá se jako odučená. Stejné pravidlo platí pro individuální i skupinové lekce.</p>
-      </details>
-      <details>
-        <summary>Jak se platí?</summary>
-        <p>Nejraději přes Revolut, funguje i bankovní převod. Můžete si vybrat balíček 5, 10 nebo 20 lekcí, nebo skupinový kurz.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="s s-cobalt final" id="book">
-  <div class="wrap final-in">
-    <h2>První lekce je zdarma.</h2>
-    <p>Třicet minut s Lucií, online nebo v Praze. Pošlete krátký e-mail a ona odpoví do 24 hodin, abyste si domluvili termín.</p>
-    <a class="btn btn-lemon btn-lg" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Napsat Lucii o lekci zdarma</a>
-    <p class="final-alt">Nemáte v zařízení e-mailovou aplikaci? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Zkopírujte adresu</button> nebo <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma" target="_blank" rel="noopener">napište přes Gmail</a>.</p>
-    <p class="final-mail">lucia.scollo2000@gmail.com</p>
-    <span class="sr-only" id="copy-status" role="status"></span>
-  </div>
+<section id="book" style="background: var(--cobalt); color: #FFFFFF">
+<div style="max-width: 1160px; margin: 0 auto; padding: clamp(56px, 9vw, 100px) clamp(18px, 5vw, 40px)">
+<div class="bob" style="padding: clamp(28px, 5vw, 56px); background: var(--lemon); color: var(--ink); border: 2px solid var(--ink); border-radius: 44px 44px 44px 10px; box-shadow: 10px 10px 0 var(--ink); display: flex; flex-wrap: wrap; align-items: center; gap: 24px 48px">
+<div style="flex: 1 1 400px; min-width: 0">
+<h2 style="margin: 0 0 12px; font-size: clamp(38px, 6.4vw, 68px); line-height: 0.95; font-weight: 800; font-stretch: 75%; letter-spacing: -0.015em">První lekce je <span class="wiggle" style="display: inline-block; color: var(--cobalt)">zdarma.</span></h2>
+<p style="margin: 0; font-size: 18px">Třicet minut s Lucií, online nebo v Praze. Pošlete krátký e-mail a ona odpoví do 24 hodin.</p>
+</div>
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 10px">
+<a class="btn-pop" href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21" style="display: flex; justify-content: center; align-items: center; min-height: 58px; padding: 0 24px; background: var(--ink); color: #FFFFFF; border-radius: 22px 22px 22px 5px; font-weight: 800; font-size: 18px; text-decoration: none">Napsat Lucii o lekci zdarma</a>
+<p style="margin: 0; text-align: center; font-size: 15px">nebo napište na <b>lucia.scollo2000@gmail.com</b> · <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma" style="color: var(--ink); font-weight: 700">otevřít v Gmailu</a></p>
+</div>
+</div>
+</div>
 </section>
 
 </main>
 
-<footer class="foot">
-  <div class="wrap foot-in">
-    <p class="foot-brand">Italian with Lucia</p>
-    <p>Lekce italštiny v Praze a online. Působnost: Praha 1, 2 a 3 a online po celém světě.</p>
-    <ul class="foot-nav" aria-label="Další stránky">
-      <li><a href="./#lessons">Individuální lekce a ceny</a></li>
-      <li><a href="lekce-italstiny-praha.html">Lekce italštiny v Praze</a></li>
-      <li><a href="italstina-online.html">Italština online</a></li>
-      <li><a href="skupinovy-kurz-italstiny.html">Skupinový kurz italštiny</a></li>
-      <li><a href="italstina-pro-firmy.html">Italština pro firmy</a></li>
-      <li><a href="italstina-pro-zacatecniky.html">Italština pro začátečníky</a></li>
-      <li><a href="clanky.html">Články o italštině</a></li>
-      <li><a href="o-lucii.html">O Lucii</a></li>
-      <li><a href="./#faq">Otázky</a></li>
-    </ul>
-    <p><a href="mailto:lucia.scollo2000@gmail.com">lucia.scollo2000@gmail.com</a></p>
-    <p><a href="https://www.linkedin.com/in/lucia-scollo/" target="_blank" rel="me noopener">LinkedIn</a></p>
-    <p>Lekci lze zrušit nejpozději 24 hodin před začátkem.</p>
-    <p data-portal hidden>Už k Lucii chodíte? <a href="../portal.html">Zobrazit moje lekce</a></p>
-    <p class="foot-fine">© 2026 Italian with Lucia, Praha · <a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a></p>
-  </div>
+<footer style="background: var(--ink); color: #D5D8F0">
+<div style="max-width: 1160px; margin: 0 auto; padding: 48px clamp(18px, 5vw, 40px) 32px; display: flex; flex-wrap: wrap; gap: 32px 64px">
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 10px; font-size: 15px">
+<p style="margin: 0; color: #FFFFFF; font-size: 24px; font-weight: 800; font-stretch: 80%">Italian with Lucia</p>
+<p style="margin: 0">Lekce italštiny v Praze a online. Působnost: Praha 1, 2 a 3 a online po celém světě.</p>
+<p style="margin: 0"><a href="mailto:lucia.scollo2000@gmail.com" style="color: var(--lemon)">lucia.scollo2000@gmail.com</a> · <a href="https://www.linkedin.com/in/lucia-scollo/" rel="me noopener" style="color: var(--lemon)">LinkedIn</a></p>
+<p style="margin: 0">Lekci lze zrušit nejpozději 24 hodin před začátkem.</p>
+</div>
+<ul aria-label="Další stránky" style="flex: 1 1 360px; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px 20px; font-size: 15px">
+<li><a href="#prices" style="color: #FFFFFF; text-decoration: none">Individuální lekce a ceny</a></li>
+<li><a href="lekce-italstiny-praha.html" style="color: #FFFFFF; text-decoration: none">Lekce italštiny v Praze</a></li>
+<li><a href="italstina-online.html" style="color: #FFFFFF; text-decoration: none">Italština online</a></li>
+<li><a href="skupinovy-kurz-italstiny.html" style="color: #FFFFFF; text-decoration: none">Skupinový kurz</a></li>
+<li><a href="italstina-pro-firmy.html" style="color: #FFFFFF; text-decoration: none">Italština pro firmy</a></li>
+<li><a href="italstina-pro-zacatecniky.html" style="color: #FFFFFF; text-decoration: none">Italština pro začátečníky</a></li>
+<li><a href="clanky.html" style="color: #FFFFFF; text-decoration: none">Články o italštině</a></li>
+<li><a href="o-lucii.html" style="color: #FFFFFF; text-decoration: none">O Lucii</a></li>
+<li><a href="#faq" style="color: #FFFFFF; text-decoration: none">Otázky</a></li>
+</ul>
+</div>
+<p style="max-width: 1160px; margin: 0 auto; padding: 18px clamp(18px, 5vw, 40px) 32px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 14px">© 2026 Italian with Lucia, Praha · <a href="ochrana-osobnich-udaju.html" style="color: #D5D8F0">Ochrana osobních údajů</a></p>
 </footer>
 
-<div class="dock" id="dock">
-  <a class="btn btn-lemon" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Lekce zdarma</a>
-  <a class="btn btn-line" href="./#lessons">Ceny</a>
 </div>
 
 <script src="../config.js"></script>
-<script src="../script.js"></script>
+<script src="../home.js"></script>
 </body>
 </html>

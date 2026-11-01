@@ -4,6 +4,9 @@
    Google Business block and visit statistics.
    ========================================================== */
 
+var CS = document.documentElement.lang === "cs";          // Czech homepage lives in /cs/
+var GROUP_PAGE = CS ? "skupinovy-kurz-italstiny.html" : "italian-group-course.html";
+
 /* ---------- 1. Currency switch ----------
    Prices are written once, in EUR, as data-eur="..." in index.html.
    Update the indicative exchange rates here when you want. */
@@ -32,9 +35,14 @@ function setCurrency(code) {
 document.querySelectorAll(".cur").forEach(function (b) {
   b.addEventListener("click", function () { setCurrency(b.dataset.currency); });
 });
+if (CS && document.querySelector("[data-eur]")) setCurrency("CZK"); // Czech visitors see crowns first
 
 /* ---------- 2. Level finder ---------- */
-var LEVELS = {
+var LEVELS = CS ? {
+  beginner:     { name: "Začátečníci (A1–A2)", text: "Postavíte si základy a mluvit budete od první lekce. Hodí se skupina pro začátečníky i individuální lekce.", cta: "Přihlásit se do lednové skupiny" },
+  intermediate: { name: "Mírně pokročilí (B1)", text: "Domluvíte se, takže se zaměříte na přesnost a rozsah: minulé časy, slovní zásobu a plynulou konverzaci. Skupina se otevře, jakmile se přihlásí tři lidé.", cta: "Zapsat se na čekací listinu" },
+  advanced:     { name: "Pokročilí (B2–C1)", text: "Mluvíte plynule, takže pracujete na nuancích, idiomech a stylu, s přesnou zpětnou vazbou. Skupina se otevře, jakmile se přihlásí tři lidé.", cta: "Zapsat se na čekací listinu" }
+} : {
   beginner:     { name: "Beginner (A1–A2)", text: "You build your base with plenty of speaking from day one. The Beginner group or private lessons both fit.", cta: "Reserve a place in the January group" },
   intermediate: { name: "Intermediate (B1)", text: "You can already talk, so the work is accuracy and range: past tenses, vocabulary and fluent conversation. This group opens as soon as three people sign up.", cta: "Join the waiting list" },
   advanced:     { name: "Advanced (B2–C1)", text: "You are fluent, so the work is nuance, idioms and register, with precise feedback. This group opens as soon as three people sign up.", cta: "Join the waiting list" }
@@ -48,7 +56,7 @@ document.querySelectorAll(".opt").forEach(function (b) {
     document.getElementById("level-text").textContent = l.text;
     var reserve = document.getElementById("level-reserve");
     reserve.textContent = l.cta;
-    reserve.href = "italian-group-course.html?level=" + key + "#reserve";
+    reserve.href = GROUP_PAGE + "?level=" + key + "#reserve";
     result.hidden = false;
     result.classList.remove("pop-in"); void result.offsetWidth; result.classList.add("pop-in");
   });
@@ -64,7 +72,8 @@ document.querySelectorAll(".opt").forEach(function (b) {
   function tick(now) {
     var k = Math.max(0, Math.min(1, (now - t0) / dur)), e = 1 - Math.pow(1 - k, 3);
     els.forEach(function (el) {
-      el.textContent = Math.round(parseFloat(el.dataset.count) * e).toLocaleString("en-US");
+      var v = Math.round(parseFloat(el.dataset.count) * e).toLocaleString("en-US");
+      el.textContent = CS ? v.replace(/,/g, "\u00a0") : v;
     });
     if (k < 1) requestAnimationFrame(tick);
   }
@@ -78,7 +87,7 @@ if (window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
 var BOOKING_URL = (window.PORTAL && window.PORTAL.booking) || "";
 var lessonBtn = document.getElementById("lesson-book");
 if (lessonBtn && window.PORTAL && window.PORTAL.url && window.PORTAL.key) {
-  lessonBtn.href = "portal.html";
+  lessonBtn.href = (CS ? "../" : "") + "portal.html";
 } else if (lessonBtn && BOOKING_URL) {
   lessonBtn.href = BOOKING_URL;
   lessonBtn.target = "_blank";
