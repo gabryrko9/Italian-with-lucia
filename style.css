@@ -541,3 +541,86 @@ body.menu-open .dock { transform: translateY(110%); }
 /* Companies page */
 .biz-notes { margin-top: 2.2rem; }
 .biz-notes p { margin-top: 0.5rem; }
+
+/* ==========================================================
+   New look (November 2026): every page now matches the homepage.
+   White top bar with pill menu, buttons with an ink outline and a
+   hard shadow, cards that lift, a two-column footer.
+   ========================================================== */
+@keyframes iwl-drift { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(14px, -18px) rotate(10deg); } }
+html { scroll-padding-top: 120px; }
+
+/* Top bar: logo + "Free trial" on the first row, pill menu on the second */
+.bar { background: var(--white); color: var(--ink); border-bottom: 2px solid var(--ink); }
+.bar :focus-visible { outline-color: var(--lemon); }
+.bar-in { flex-wrap: wrap; justify-content: flex-start; gap: 10px 12px; min-height: 0; padding-block: 12px; }
+.bar-in::after { content: ""; order: 3; flex-basis: 100%; height: 0; }
+.mark { order: 1; flex: 1 1 auto; min-width: 0; gap: 10px; font-size: 21px; font-stretch: 80%; }
+.mark-icon { width: 38px; height: 38px; padding: 9px; background: var(--cobalt); color: var(--lemon); border-radius: 12px 12px 12px 3px; }
+.bar-cta { order: 2; display: inline-flex !important; min-height: 44px; padding: 0 18px; font-size: 15px; font-weight: 800; border: 2px solid var(--ink); border-radius: 16px 16px 16px 4px; box-shadow: none; }
+.bar-nav { order: 4; display: flex !important; flex: 0 1 auto; min-width: 0; gap: 8px; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; white-space: nowrap; }
+@media (max-width: 879px) { .bar-nav { flex: 1 1 0; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; } }
+.bar-nav::-webkit-scrollbar { display: none; }
+.bar-nav a { padding: 8px 14px; border: 0; border-radius: 999px; background: var(--paper); font-weight: 600; font-size: 15px; line-height: 1.4; transition: background-color 0.15s ease; }
+.bar-nav a:hover { background: var(--lemon); }
+.bar-nav a[aria-current="page"] { background: var(--ink); color: var(--white); }
+.bar-nav .portal-link { background: var(--ink); color: var(--white); }
+.lang { order: 5; margin: 0; min-width: 0; min-height: 37px; padding: 0 14px; border: 1.5px solid var(--ink); color: var(--ink); font-size: 15px; font-weight: 600; letter-spacing: 0; }
+.lang:hover { border-color: var(--ink); background: var(--lemon); color: var(--ink); }
+.menu-btn, .menu { display: none !important; }
+@media (min-width: 880px) { .lang { margin-left: 0; min-height: 37px; } }
+
+/* Buttons: bubble shape, ink outline, hard shadow, springy press */
+.btn { border-radius: 22px 22px 22px 5px; font-weight: 800; transition: transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.4), box-shadow 0.18s ease, background-color 0.15s ease; }
+.btn:hover { transform: translate(-2px, -3px); }
+.btn:active { transform: translate(3px, 3px); box-shadow: none !important; }
+.btn-lemon, .btn-ink { border-color: var(--ink); }
+.btn-lg.btn-lemon, .btn-lg.btn-ink { box-shadow: 5px 5px 0 var(--ink); }
+.btn-lemon:hover, .btn-ink:hover { box-shadow: 5px 5px 0 var(--ink); }
+.s-ink .btn-lg.btn-ink, .s-ink .btn-ink:hover { box-shadow: 5px 5px 0 var(--lemon); border-color: var(--lemon); }
+
+/* Page heroes: the same floating shapes as the homepage */
+.page-hero { position: relative; overflow: hidden; }
+.page-hero > .wrap { position: relative; z-index: 1; }
+.page-hero::before, .page-hero::after { content: ""; position: absolute; pointer-events: none; animation: iwl-drift 9s ease-in-out infinite; }
+.page-hero::before { top: 16px; right: -24px; width: 90px; height: 90px; border-radius: 50%; background: var(--lemon); opacity: 0.18; }
+.page-hero::after { bottom: 24px; right: 18%; width: 54px; height: 54px; border-radius: 50%; border: 6px solid var(--lemon); opacity: 0.25; animation-delay: -2s; animation-duration: 12s; }
+.page-hero h1 { line-height: 0.95; letter-spacing: -0.015em; }
+
+/* Headings: same scale as the homepage */
+h2 { font-size: clamp(2.125rem, 5.6vw, 3.5rem); line-height: 1; letter-spacing: -0.01em; }
+.prose h2 { line-height: 1.02; }
+
+/* Cards lift like the homepage cards */
+.rel-card { border-radius: 28px 28px 28px 6px; transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.3), box-shadow 0.2s ease; }
+.rel-card:hover { transform: translateY(-6px) rotate(-0.5deg); box-shadow: none; }
+.prose .promo { border-radius: 28px 28px 28px 6px; box-shadow: 8px 8px 0 var(--lemon); }
+.tbl { border-radius: 20px 20px 20px 5px; }
+/* Final call to action: the yellow card from the homepage */
+.final-in { padding: clamp(28px, 5vw, 56px); background: var(--lemon); color: var(--ink); border: 2px solid var(--ink); border-radius: 44px 44px 44px 10px; box-shadow: 10px 10px 0 var(--ink); }
+.final h2 { font-size: clamp(2.4rem, 6.4vw, 4.25rem); line-height: 0.95; }
+.final .btn-lemon { background: var(--ink); color: var(--white); box-shadow: none; }
+.final .btn-lemon:hover { box-shadow: 5px 5px 0 var(--cobalt); }
+.final :focus-visible { outline-color: var(--cobalt); }
+
+/* Footer: two columns, like the homepage */
+.foot { color: #D5D8F0; padding-block: 48px 32px; }
+.foot-in { grid-template-columns: minmax(0, 1fr); gap: 10px; font-size: 15px; }
+.foot-brand { color: var(--white); font-size: 24px; font-stretch: 80%; }
+.foot a { font-weight: 600; color: var(--white); text-decoration: none; }
+.foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.foot p a[href^="mailto"], .foot p a[href*="linkedin"] { color: var(--lemon); }
+.foot-nav a { min-height: 2.4rem; }
+.foot-fine { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.15); opacity: 1; font-size: 14px; max-width: none; }
+.foot-fine a { color: #D5D8F0; font-weight: 400; text-decoration: underline; }
+@media (min-width: 760px) {
+  .foot-in:has(.foot-nav) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); column-gap: 64px; }
+  .foot-nav { grid-column: 2; grid-row: 1 / span 8; align-self: start; margin: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; }
+  .foot-fine { grid-column: 1 / -1; }
+}
+
+/* Mobile bottom bar */
+.dock .btn { border-radius: 16px 16px 16px 4px; padding-inline: 0.6rem; font-size: 0.97rem; white-space: nowrap; }
+.dock .btn-lemon { border-color: var(--lemon); }
+
+@media (prefers-reduced-motion: reduce) { .page-hero::before, .page-hero::after { animation: none; } }
