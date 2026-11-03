@@ -262,8 +262,8 @@ META = {
         description="Naučte se italsky s Lucií: individuální lekce a skupinové kurzy online nebo osobně v Praze. Postgraduální Master v didaktice italštiny, přes 2 000 hodin výuky a 150 studentů. Lekce zdarma.",
         skip=("#prices", "Přejít na lekce"), dock=DOCK_TRIAL),
     "lekce-italstiny-praha.html": dict(
-        title="Lekce italštiny v Praze | Soukromá lektorka, lekce zdarma",
-        description="Lekce italštiny v Praze s Lucií, kvalifikovanou lektorkou z Itálie. Individuálně v Praze 1, 2 a 3 nebo online. Začněte 30minutovou lekcí zdarma.",
+        title="Lekce a doučování italštiny v Praze | Soukromá lektorka",
+        description="Soukromé lekce a doučování italštiny v Praze s Lucií, kvalifikovanou lektorkou z Itálie. Individuálně v Praze 1, 2 a 3 nebo online. Začněte 30minutovou lekcí zdarma.",
         crumb="Lekce italštiny v Praze", service="Individuální lekce italštiny v Praze"),
     "italstina-online.html": dict(
         title="Italština online | Živé lekce s lektorkou z Itálie",
@@ -292,9 +292,9 @@ META = {
         description="Passato prossimo a imperfetto jednoduše a česky: kdy použít který čas, jak je tvořit, příklady a krátké cvičení s řešením.",
         crumb="Passato prossimo vs imperfetto", parent=True, og_type="article"),
     "italske-fraze-na-cesty.html": dict(
-        title="Italské fráze na cesty (s výslovností)",
-        h1="Nejdůležitější italské fráze na cesty",
-        description="Italské fráze na cesty a do běžného života s jednoduchou výslovností: pozdravy, kavárna, restaurace, cesta a nákupy. A 5 pravidel výslovnosti.",
+        title="Italské fráze na dovolenou a na cesty (s výslovností)",
+        h1="Nejdůležitější italské fráze na dovolenou",
+        description="Italské fráze a slovíčka na dovolenou s jednoduchou výslovností: pozdravy (dobrý den, dobré ráno), kavárna, restaurace, placení a cesta. A 5 pravidel výslovnosti.",
         crumb="Italské fráze na cesty", parent=True, og_type="article"),
     "italstina-pro-firmy.html": dict(
         title="Italština pro firmy v Praze | Kurzy pro týmy",
