@@ -117,13 +117,13 @@ document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
   });
 });
 
-/* ---------- 4b. Group course reservation form ----------
-   Sends the form to Lucia's Gmail through FormSubmit (formsubmit.co) without
+/* ---------- 4b. Forms: group course reservation and free trial request ----------
+   Each form goes to Lucia's Gmail through FormSubmit (formsubmit.co) without
    leaving the page. Without JavaScript the form still posts normally and
    FormSubmit brings the visitor back here with ?sent=1. If sending fails,
    the visitor gets a pre-filled email to Lucia instead, so no request is lost. */
-(function () {
-  const form = document.getElementById("reserve-form");
+function setupForm(id, txt) {
+  const form = document.getElementById(id);
   if (!form) return;
   const params = new URLSearchParams(location.search);
   const status = form.querySelector(".reserve-status");
@@ -138,10 +138,7 @@ document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
   } catch (e) { /* old browser: the visitor types it */ }
 
   const done = function () {
-    form.innerHTML = "<div class=\"reserve-done\"><p class=\"reserve-done-title\">" +
-      t("Thank you! Your reservation is on its way.", "Děkujeme! Přihláška je odeslaná.") + "</p><p>" +
-      t("Lucia replies within 24 hours to confirm your level and the day and time of your group. Check your spam folder if you do not hear from her.",
-        "Lucia odpoví do 24 hodin a potvrdí vaši úroveň a den a čas skupiny. Pokud odpověď nepřijde, podívejte se do složky se spamem.") + "</p></div>";
+    form.innerHTML = "<div class=\"reserve-done\"><p class=\"reserve-done-title\">" + txt.title + "</p><p>" + txt.text + "</p></div>";
     form.scrollIntoView({ block: "center" });
   };
   if (params.get("sent")) { done(); return; }
@@ -152,7 +149,7 @@ document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
     const data = {};
     new FormData(form).forEach(function (v, k) { data[k] = v; });
     delete data._next; delete data._honey;
-    data._subject = t("Group course reservation", "Přihláška do skupinového kurzu") + ": " + data.level + " – " + data.name;
+    data._subject = txt.subject + ": " + data.level + " – " + data.name;
     data._replyto = data.email;
     btn.disabled = true;
     status.textContent = t("Sending…", "Odesílám…");
@@ -172,7 +169,19 @@ document.querySelectorAll('input[name="lvl"]').forEach(function (r) {
       .then(function (res) { if (String(res.success) === "true") done(); else fail(); })
       .catch(fail);
   });
-})();
+}
+setupForm("reserve-form", {
+  subject: t("Group course reservation", "Přihláška do skupinového kurzu"),
+  title: t("Thank you! Your reservation is on its way.", "Děkujeme! Přihláška je odeslaná."),
+  text: t("Lucia replies within 24 hours to confirm your level and the day and time of your group. Check your spam folder if you do not hear from her.",
+          "Lucia odpoví do 24 hodin a potvrdí vaši úroveň a den a čas skupiny. Pokud odpověď nepřijde, podívejte se do složky se spamem.")
+});
+setupForm("trial-form", {
+  subject: t("Free trial request", "Žádost o lekci zdarma"),
+  title: t("Thank you! Your request is on its way.", "Děkujeme! Žádost je odeslaná."),
+  text: t("Lucia replies within 24 hours to agree the day and time of your free trial. Check your spam folder if you do not hear from her.",
+          "Lucia odpoví do 24 hodin a domluví s vámi den a čas lekce zdarma. Pokud odpověď nepřijde, podívejte se do složky se spamem.")
+});
 
 /* ---------- 5. Copy the email address ---------- */
 const copyBtn = document.getElementById("copy-mail");
