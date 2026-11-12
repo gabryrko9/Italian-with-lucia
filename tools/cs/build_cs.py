@@ -22,8 +22,10 @@ PAGES = {
     "how-long-does-it-take-to-learn-italian.html": "jak-dlouho-trva-naucit-se-italsky.html",
     "passato-prossimo-vs-imperfetto.html": "passato-prossimo-vs-imperfetto.html",
     "italian-phrases-for-travellers.html": "italske-fraze-na-cesty.html",
+    "italian-greetings.html": "italske-pozdravy.html",
     "italian-for-companies.html": "italstina-pro-firmy.html",
     "about-lucia.html": "o-lucii.html",
+    "free-trial.html": "lekce-zdarma.html",
     "privacy.html": "ochrana-osobnich-udaju.html",
 }
 EN_OF = {v: k for k, v in PAGES.items()}
@@ -49,8 +51,7 @@ def mail(subject, body):
 HI = "Dobrý den,\n\n"
 BYE = "\n\nDěkuji!"
 MAILS = {
-    "TRIAL": mail("Zkušební lekce zdarma", HI + "rád/a bych si domluvil/a 30minutovou zkušební lekci zdarma.\n\n"
-                  "Moje úroveň: \nMoje cíle: \nOnline, nebo v Praze: \nVyhovující dny a časy: " + BYE),
+    "TRIAL": "lekce-zdarma.html",   # the free-trial form page (was a pre-filled email)
     "PKG5": mail("Balíček 5 lekcí", HI + "rád/a bych začal/a s balíčkem 5 lekcí.\n\nMoje úroveň: \nOnline, nebo v Praze: " + BYE),
     "PKG10": mail("Balíček 10 lekcí", HI + "rád/a bych začal/a s balíčkem 10 lekcí.\n\nMoje úroveň: \nOnline, nebo v Praze: " + BYE),
     "PKG20": mail("Balíček 20 lekcí", HI + "rád/a bych začal/a s balíčkem 20 lekcí.\n\nMoje úroveň: \nOnline, nebo v Praze: " + BYE),
@@ -71,7 +72,6 @@ NAV = [  # (cs file or anchor, short label, menu label): same order as the homep
     ("clanky.html", "Články", "Články o italštině"),
 ]
 
-FONT = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap"
 
 
 def head(cs, meta, ld):
@@ -80,7 +80,7 @@ def head(cs, meta, ld):
     robots = meta.get("robots", "index, follow, max-image-preview:large")
     esc = lambda s: s.replace("&", "&amp;").replace('"', "&quot;")
     t, d = esc(meta["title"]), esc(meta["description"])
-    pre = '  <link rel="preload" as="image" href="../lucia-cafe.jpg" fetchpriority="high">\n' if cs == "index.html" else ""
+    pre = '  <link rel="preload" as="image" href="../lucia-cafe.webp" type="image/webp" fetchpriority="high">\n' if cs == "index.html" else ""
     return f"""<!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -110,9 +110,8 @@ def head(cs, meta, ld):
   <meta name="twitter:title" content="{t}">
   <meta name="twitter:description" content="{d}">
   <meta name="twitter:image" content="{BASE}og.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="{FONT}" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/bricolage-grotesque-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/bricolage-grotesque-latin-ext.woff2" crossorigin>
 {pre}  <link rel="stylesheet" href="../style.css">
   <link rel="icon" href="../favicon.ico" sizes="48x48">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -157,7 +156,7 @@ def header(cs, skip):
     <a class="portal-link" href="../portal.html" data-portal hidden>Moje lekce (studentská sekce)</a>
     <a href="{en_rel}" hreflang="en" lang="en">English version</a>
   </nav>
-  <div class="wrap menu-cta"><a class="btn btn-lemon btn-lg" data-trial href="{MAILS['TRIAL']}">Napsat Lucii o lekci zdarma</a></div>
+  <div class="wrap menu-cta"><a class="btn btn-lemon btn-lg" data-trial href="{MAILS['TRIAL']}">Rezervovat lekci zdarma</a></div>
 </div>
 """
 
@@ -166,7 +165,7 @@ def footer(dock):
     return f"""<footer class="foot">
   <div class="wrap foot-in">
     <p class="foot-brand">Italian with Lucia</p>
-    <p>Lekce italštiny v Praze a online. Působnost: Praha 1, 2 a 3 a online po celém světě.</p>
+    <p>Lekce a doučování italštiny v Praze a online s rodilou mluvčí. Působnost: Praha 1, 2 a 3 a online po celém světě.</p>
     <ul class="foot-nav" aria-label="Další stránky">
       <li><a href="./#prices">Individuální lekce a ceny</a></li>
       <li><a href="lekce-italstiny-praha.html">Lekce italštiny v Praze</a></li>
@@ -179,7 +178,7 @@ def footer(dock):
       <li><a href="./#faq">Otázky</a></li>
     </ul>
     <p><a href="{MAILS['PLAIN']}">{EMAIL}</a></p>
-    <p><a href="https://www.linkedin.com/in/lucia-scollo/" target="_blank" rel="me noopener">LinkedIn</a></p>
+    <p><a href="https://www.linkedin.com/in/lucia-scollo/" target="_blank" rel="me noopener">LinkedIn</a> · <a href="https://maps.app.goo.gl/mP7VrprirfnPiXVZ7" target="_blank" rel="noopener">Najdete nás na Googlu</a></p>
     <p>Lekci lze zrušit nejpozději 24 hodin před začátkem.</p>
     <p data-portal hidden>Už k Lucii chodíte? <a href="../portal.html">Zobrazit moje lekce</a></p>
     <p class="foot-fine">© 2026 Italian with Lucia, Praha · <a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a></p>
@@ -200,9 +199,9 @@ def footer(dock):
 FINAL = """<section class="s s-cobalt final" id="book">
   <div class="wrap final-in">
     <h2>První lekce je zdarma.</h2>
-    <p>Třicet minut s Lucií, online nebo v Praze. Pošlete krátký e-mail a ona odpoví do 24 hodin, abyste si domluvili termín.</p>
-    <a class="btn btn-lemon btn-lg" data-trial href="{{TRIAL}}">Napsat Lucii o lekci zdarma</a>
-    <p class="final-alt">Nemáte v zařízení e-mailovou aplikaci? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Zkopírujte adresu</button> nebo <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma" target="_blank" rel="noopener">napište přes Gmail</a>.</p>
+    <p>Třicet minut s Lucií, online nebo v Praze. Vyplňte krátký formulář a Lucia odpoví do 24 hodin, abyste si domluvili termín.</p>
+    <a class="btn btn-lemon btn-lg" data-trial href="{{TRIAL}}">Rezervovat lekci zdarma</a>
+    <p class="final-alt">Raději e-mailem? <button type="button" class="linkbtn" id="copy-mail" data-email="lucia.scollo2000@gmail.com">Zkopírujte adresu</button> nebo <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=lucia.scollo2000@gmail.com&amp;su=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma" target="_blank" rel="noopener">napište přes Gmail</a>.</p>
     <p class="final-mail">lucia.scollo2000@gmail.com</p>
     <span class="sr-only" id="copy-status" role="status"></span>
   </div>
@@ -233,8 +232,8 @@ def faq_ld(main):
 
 def article(cs, meta):
     return {"@type": "Article", "headline": meta["h1"], "description": meta["description"],
-            "inLanguage": "cs", "image": BASE + "og.jpg", "datePublished": "2026-10-15", "dateModified": "2026-10-15",
-            "mainEntityOfPage": cs_url(cs), "author": {"@type": "Person", "name": "Lucia", "jobTitle": "Lektorka italštiny"},
+            "inLanguage": "cs", "image": BASE + "og.jpg", "datePublished": meta.get("published", "2026-10-15"), "dateModified": "2026-11-11",
+            "mainEntityOfPage": cs_url(cs), "author": {"@type": "Person", "@id": BASE + "#lucia", "name": "Lucia", "jobTitle": "Lektorka italštiny", "url": cs_url("o-lucii.html")},
             "publisher": {"@id": BASE + "#business"}}
 
 
@@ -262,12 +261,12 @@ META = {
         description="Naučte se italsky s Lucií: individuální lekce a skupinové kurzy online nebo osobně v Praze. Postgraduální Master v didaktice italštiny, přes 2 000 hodin výuky a 150 studentů. Lekce zdarma.",
         skip=("#prices", "Přejít na lekce"), dock=DOCK_TRIAL),
     "lekce-italstiny-praha.html": dict(
-        title="Lekce a doučování italštiny v Praze | Soukromá lektorka",
-        description="Soukromé lekce a doučování italštiny v Praze s Lucií, kvalifikovanou lektorkou z Itálie. Individuálně v Praze 1, 2 a 3 nebo online. Začněte 30minutovou lekcí zdarma.",
+        title="Lekce a doučování italštiny v Praze | Rodilá mluvčí",
+        description="Soukromé lekce a doučování italštiny v Praze s Lucií, rodilou mluvčí a kvalifikovanou lektorkou. Individuálně v Praze 1, 2 a 3 nebo online. První lekce zdarma.",
         crumb="Lekce italštiny v Praze", service="Individuální lekce italštiny v Praze"),
     "italstina-online.html": dict(
-        title="Italština online | Živé lekce s lektorkou z Itálie",
-        description="Lekce italštiny online s Lucií, kvalifikovanou lektorkou. Živé individuální lekce přes video, všechny úrovně. 30 minut zdarma, balíčky od 25 € za lekci.",
+        title="Italština online | Živé lekce s rodilou mluvčí",
+        description="Lekce a doučování italštiny online s Lucií, rodilou mluvčí a lektorkou. Živé individuální lekce přes video, všechny úrovně. 30 minut zdarma, od 25 € za lekci.",
         crumb="Italština online", service="Individuální lekce italštiny online"),
     "skupinovy-kurz-italstiny.html": dict(
         title="Skupinový kurz italštiny pro začátečníky online | Od ledna",
@@ -279,7 +278,7 @@ META = {
         crumb="Italština pro začátečníky", service="Italština pro začátečníky"),
     "clanky.html": dict(
         title="Články o italštině: tipy a návody zdarma | Italian with Lucia",
-        description="Články o italštině od kvalifikované lektorky: jak dlouho trvá naučit se italsky, passato prossimo vs imperfetto a nejdůležitější fráze na cesty s výslovností.",
+        description="Články o italštině od rodilé mluvčí a lektorky: italské pozdravy, fráze na dovolenou s výslovností, passato prossimo vs imperfetto a jak dlouho trvá naučit se italsky.",
         crumb="Články o italštině", collection=True),
     "jak-dlouho-trva-naucit-se-italsky.html": dict(
         title="Jak dlouho trvá naučit se italsky? Realistický plán",
@@ -296,13 +295,22 @@ META = {
         h1="Nejdůležitější italské fráze na dovolenou",
         description="Italské fráze a slovíčka na dovolenou s jednoduchou výslovností: pozdravy (dobrý den, dobré ráno), kavárna, restaurace, placení a cesta. A 5 pravidel výslovnosti.",
         crumb="Italské fráze na cesty", parent=True, og_type="article"),
+    "italske-pozdravy.html": dict(
+        title="Italské pozdravy: dobrý den, děkuji a prosím italsky",
+        h1="Italské pozdravy a základní fráze",
+        description="Jak se řekne italsky dobrý den, dobré ráno, děkuji, prosím a na shledanou? Italské pozdravy s výslovností a kdy použít ciao, buongiorno a buonasera.",
+        crumb="Italské pozdravy", parent=True, og_type="article", published="2026-11-11"),
     "italstina-pro-firmy.html": dict(
         title="Italština pro firmy v Praze | Kurzy pro týmy",
-        description="Kurzy italštiny pro firmy a týmy v Praze: individuálně nebo v malých skupinách, online nebo u vás v kanceláři, zaměřené na schůzky, e-maily a pracovní cesty. Od 35 € za lekci.",
+        description="Kurzy italštiny pro firmy a týmy v Praze s rodilou mluvčí: individuálně nebo v malých skupinách, online nebo u vás v kanceláři. Od 35 € za lekci.",
         crumb="Italština pro firmy", service="Kurzy italštiny pro firmy", dock=DOCK_BIZ),
+    "lekce-zdarma.html": dict(
+        title="Lekce italštiny zdarma | 30 minut s Lucií, online nebo v Praze",
+        description="Domluvte si 30minutovou lekci italštiny zdarma s Lucií, rodilou mluvčí a lektorkou: online nebo osobně v Praze. Vyplňte krátký formulář, odpoví do 24 hodin.",
+        crumb="Lekce zdarma", skip=("#trial", "Přeskočit na formulář")),
     "o-lucii.html": dict(
         title="O Lucii | Italian with Lucia, lektorka italštiny v Praze",
-        description="Seznamte se s Lucií: postgraduální Master v didaktice italštiny, přes 2 000 hodin výuky a 150 studentů, lekce v Praze a online. Mluví trochu česky a učí i studenty, kteří mluví jen česky.",
+        description="Seznamte se s Lucií, rodilou mluvčí a lektorkou italštiny v Praze: Master v didaktice italštiny, přes 2 000 hodin výuky a 150 studentů. Mluví trochu česky.",
         crumb="O Lucii", about=True),
     "ochrana-osobnich-udaju.html": dict(
         title="Ochrana osobních údajů | Italian with Lucia",
@@ -352,6 +360,8 @@ def build(cs):
     ld = {"@context": "https://schema.org", "@graph": graph}
     skip = meta.get("skip", ("#content", "Přeskočit na obsah"))
     html = head(cs, meta, ld) + header(cs, skip) + "\n" + main.rstrip("\n") + "\n\n" + footer(meta.get("dock", DOCK_TRIAL))
+    if cs == "lekce-zdarma.html":   # on the form page the buttons scroll to the form
+        html = html.replace('href="lekce-zdarma.html"', 'href="#trial"')
     os.makedirs(os.path.join(SITE, "cs"), exist_ok=True)
     open(os.path.join(SITE, "cs", cs), "w").write(html)
 

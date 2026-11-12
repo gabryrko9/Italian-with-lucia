@@ -27,9 +27,8 @@
   <meta name="twitter:title" content="Ochrana osobních údajů | Italian with Lucia">
   <meta name="twitter:description" content="Jak Italian with Lucia nakládá s vašimi osobními údaji: co se ukládá, proč a jak požádat o přístup nebo výmaz.">
   <meta name="twitter:image" content="https://italianwithlucia.com/og.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;display=swap" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/bricolage-grotesque-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/bricolage-grotesque-latin-ext.woff2" crossorigin>
   <link rel="stylesheet" href="../style.css">
   <link rel="icon" href="../favicon.ico" sizes="48x48">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -79,7 +78,7 @@
       <a class="portal-link" href="../portal.html" data-portal hidden>Moje lekce</a>
     </nav>
     <a class="lang" href="../privacy.html" hreflang="en" lang="en" aria-label="English version">English</a>
-    <a class="btn btn-lemon btn-sm bar-cta" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Lekce zdarma</a>
+    <a class="btn btn-lemon btn-sm bar-cta" data-trial href="lekce-zdarma.html">Lekce zdarma</a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Otevřít menu"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -99,7 +98,7 @@
     <a class="portal-link" href="../portal.html" data-portal hidden>Moje lekce (studentská sekce)</a>
     <a href="../privacy.html" hreflang="en" lang="en">English version</a>
   </nav>
-  <div class="wrap menu-cta"><a class="btn btn-lemon btn-lg" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Napsat Lucii o lekci zdarma</a></div>
+  <div class="wrap menu-cta"><a class="btn btn-lemon btn-lg" data-trial href="lekce-zdarma.html">Rezervovat lekci zdarma</a></div>
 </div>
 
 <main id="main">
@@ -121,14 +120,15 @@
 <ul>
   <li><b>Když si rezervujete lekci nebo se přihlásíte:</b> vaše jméno, e-mail, úroveň, k čemu italštinu potřebujete, časové pásmo a vaše lekce (data, poznámky, domácí úkoly, balíček). Slouží to jen k organizaci a výuce vašich lekcí a ke kontaktu ohledně nich.</li>
   <li><b>Když Lucii napíšete e-mail:</b> vaše zpráva a adresa, abyste dostali odpověď.</li>
+  <li><b>Když požádáte o lekci zdarma:</b> to, co vyplníte ve formuláři (jméno, e-mail, úroveň, online nebo Praha, vyhovující časy, časové pásmo a proč se italsky učíte), jen k domluvě lekce zdarma a k odpovědi. Formulář doručuje Lucii do e-mailu služba FormSubmit (formsubmit.co).</li>
   <li><b>Když se přihlásíte do skupinového kurzu:</b> to, co vyplníte ve formuláři (jméno, e-mail, úroveň, časové pásmo, vyhovující časy a vaše zpráva), jen k organizaci skupin a ke kontaktu ohledně nich. Formulář doručuje Lucii do e-mailu služba FormSubmit (formsubmit.co).</li>
   <li><b>Platby:</b> probíhají přímo mezi vámi a Lucií (například přes Revolut nebo bankovním převodem). Web žádné platby nezpracovává.</li>
 </ul>
-<p>Právním základem je vaše žádost o lekce a u formuláře pro lekci zdarma váš souhlas (políčko, které zaškrtnete).</p>
+<p>Právním základem je vaše žádost o lekce a tam, kde má formulář políčko se souhlasem, váš souhlas (políčko, které zaškrtnete).</p>
 <h2>Kdo údaje vidí</h2>
 <p>Jen vy (po přihlášení svým e-mailem) a Lucia. Údaje jsou uložené u poskytovatele databáze (Supabase), který pracuje pro Lucii. Nikdy se neprodávají ani nepoužívají k reklamě.</p>
 <h2>Cookies a další služby</h2>
-<p>Web nepoužívá reklamní ani sledovací cookies. Návštěvy se počítají přes Cloudflare Web Analytics, které nepoužívá cookies a nezjišťuje, kdo jste: ukazuje jen souhrnná čísla, například kolik lidí otevřelo stránku a odkud přišli. Písma se načítají z Google Fonts, náhled videa (volitelně) z YouTube a přihlášení ukládá do prohlížeče malý token, abyste zůstali přihlášení. Tyto služby mohou při načtení stránky získat vaši IP adresu.</p>
+<p>Web nepoužívá reklamní ani sledovací cookies. Návštěvy se počítají přes Cloudflare Web Analytics, které nepoužívá cookies a nezjišťuje, kdo jste: ukazuje jen souhrnná čísla, například kolik lidí otevřelo stránku a odkud přišli. Písma jsou uložená přímo na tomto webu, takže se nenačítají z žádné cizí služby. Náhled videa (volitelně) pochází z YouTube, které může při jeho načtení získat vaši IP adresu, a přihlášení ukládá do prohlížeče malý token, abyste zůstali přihlášení.</p>
 <h2>Jak dlouho a vaše práva</h2>
 <p>Údaje se uchovávají, dokud jste studentem, a poté tak dlouho, jak je potřeba pro evidenci lekcí a účetnictví. Kdykoli můžete požádat o přístup ke svým údajům, jejich opravu nebo výmaz e-mailem na <a href="mailto:lucia.scollo2000@gmail.com">lucia.scollo2000@gmail.com</a>. Máte také právo podat stížnost u Úřadu pro ochranu osobních údajů (<a href="https://uoou.gov.cz" rel="noopener">uoou.gov.cz</a>).</p>
 <p class="muted">Poslední aktualizace: 15. října 2026. Pokud by se česká a anglická verze lišily, platí <a href="../privacy.html" hreflang="en" lang="en">anglická verze</a>.</p>
@@ -139,7 +139,7 @@
 <footer class="foot">
   <div class="wrap foot-in">
     <p class="foot-brand">Italian with Lucia</p>
-    <p>Lekce italštiny v Praze a online. Působnost: Praha 1, 2 a 3 a online po celém světě.</p>
+    <p>Lekce a doučování italštiny v Praze a online s rodilou mluvčí. Působnost: Praha 1, 2 a 3 a online po celém světě.</p>
     <ul class="foot-nav" aria-label="Další stránky">
       <li><a href="./#prices">Individuální lekce a ceny</a></li>
       <li><a href="lekce-italstiny-praha.html">Lekce italštiny v Praze</a></li>
@@ -152,7 +152,7 @@
       <li><a href="./#faq">Otázky</a></li>
     </ul>
     <p><a href="mailto:lucia.scollo2000@gmail.com">lucia.scollo2000@gmail.com</a></p>
-    <p><a href="https://www.linkedin.com/in/lucia-scollo/" target="_blank" rel="me noopener">LinkedIn</a></p>
+    <p><a href="https://www.linkedin.com/in/lucia-scollo/" target="_blank" rel="me noopener">LinkedIn</a> · <a href="https://maps.app.goo.gl/mP7VrprirfnPiXVZ7" target="_blank" rel="noopener">Najdete nás na Googlu</a></p>
     <p>Lekci lze zrušit nejpozději 24 hodin před začátkem.</p>
     <p data-portal hidden>Už k Lucii chodíte? <a href="../portal.html">Zobrazit moje lekce</a></p>
     <p class="foot-fine">© 2026 Italian with Lucia, Praha · <a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a></p>
@@ -160,7 +160,7 @@
 </footer>
 
 <div class="dock" id="dock">
-  <a class="btn btn-lemon" data-trial href="mailto:lucia.scollo2000@gmail.com?subject=Zku%C5%A1ebn%C3%AD%20lekce%20zdarma&amp;body=Dobr%C3%BD%20den%2C%0A%0Ar%C3%A1d%2Fa%20bych%20si%20domluvil%2Fa%2030minutovou%20zku%C5%A1ebn%C3%AD%20lekci%20zdarma.%0A%0AMoje%20%C3%BArove%C5%88%3A%20%0AMoje%20c%C3%ADle%3A%20%0AOnline%2C%20nebo%20v%20Praze%3A%20%0AVyhovuj%C3%ADc%C3%AD%20dny%20a%20%C4%8Dasy%3A%20%0A%0AD%C4%9Bkuji%21">Lekce zdarma</a>
+  <a class="btn btn-lemon" data-trial href="lekce-zdarma.html">Lekce zdarma</a>
   <a class="btn btn-line" href="./#prices">Ceny</a>
 </div>
 
