@@ -120,7 +120,8 @@ on conflict (code) do nothing;
 
 alter table public.package_plans enable row level security;
 drop policy if exists package_plans_read on public.package_plans;
-create policy package_plans_read on public.package_plans for select to anon, authenticated using (active or public.is_admin());
+-- everyone sees the active plans; Lucia sees all of them through package_plans_admin
+create policy package_plans_read on public.package_plans for select to anon, authenticated using (active);
 drop policy if exists package_plans_admin on public.package_plans;
 create policy package_plans_admin on public.package_plans for all to authenticated
   using (public.is_admin()) with check (public.is_admin());

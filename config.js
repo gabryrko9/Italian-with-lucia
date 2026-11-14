@@ -6,9 +6,9 @@
    ========================================================== */
 window.PORTAL = {
   // Supabase > Project Settings > API > Project URL
-  url: "",
+  url: "https://fzorpizjmwonsgeomcwc.supabase.co",
   // Supabase > Project Settings > API > "anon public" key (it is safe to publish)
-  key: "",
+  key: "sb_publishable_fNjOTQ9gpw5RTpls9zCq5Q_Pkhi3UFB",
   // Optional: Lucia's Google Calendar appointment page, e.g. "https://calendar.app.google/xxxx"
   // While empty, "book a lesson" opens an email to Lucia.
   booking: "",
