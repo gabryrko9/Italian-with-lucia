@@ -38,11 +38,6 @@
     const bi = await sb.rpc("booking_info");
     if (bi.data) info = bi.data;
     const credit = packages.reduce((n, p) => n + Math.max(A.balance(p, lessons).left, 0), 0);
-    const bookBtn = (cls) => credit > 0
-      ? '<button class="btn ' + (cls || "btn-ink") + '" data-open-book type="button">Book a lesson</button>'
-      : canBuy
-        ? '<span class="note">You have no lessons left to book.</span> <a class="btn ' + (cls || "btn-ink") + '" href="#buy">Buy lessons</a>'
-        : '<span class="note">You have no lessons left to book. <a href="mailto:' + A.LUCIA + '?subject=' + encodeURIComponent("New lesson package") + '"><b>Write to Lucia</b></a> for a new package.</span>';
     const upcoming = lessons.filter((l) => l.status === "scheduled" && new Date(l.starts_at).getTime() + l.duration_min * 60000 > now);
     const history = lessons.filter((l) => upcoming.indexOf(l) < 0).reverse();
     const first = esc((student.full_name || "").split(" ")[0]);
@@ -69,40 +64,38 @@
       );
     };
 
-    let h = '<div class="wrap ap-top"><h1>Ciao, ' + first + "!</h1><p>Your lessons with Lucia, in one place.</p>" +
-      '<p class="tzhint">Times are shown in your time zone' + (A.tz ? " (" + esc(A.tz) + ")" : "") + ".</p></div>";
+    const next = upcoming[0];
+    const live = packages.filter((p) => A.balance(p, lessons).left > 0);
+    const cur = live[0] || packages[packages.length - 1];
+    const bk = cur ? A.balance(cur, lessons) : null;
+    const buyLink = canBuy ? '<a class="btn btn-quiet" href="#buy">Buy lessons</a>' : "";
 
-    // next lesson
-    h += '<section class="wrap ap-sec">';
+    // header: greeting + the two actions people come here for
+    let h = '<div class="wrap pt-head"><div><p class="pt-eyebrow">My lessons</p><h1>Ciao, ' + first + "!</h1>" +
+      '<p class="tzhint">Times are shown in your time zone' + (A.tz ? " (" + esc(A.tz) + ")" : "") + ".</p></div>" +
+      (credit > 0 ? '<div class="btns"><button class="btn btn-ink" data-open-book type="button">Book a lesson</button>' + buyLink + "</div>" : "") + "</div>";
+
+    // summary: next lesson + lessons left
+    h += '<section class="wrap pt-dash">';
+    h += '<article class="pt-tile pt-next"><p class="pt-label">Next lesson</p>' + (next
+      ? '<p class="pt-big">' + A.dayLong(next.starts_at) + '</p><p class="pt-sub">' + A.time(next.starts_at) + " · " + [A.KIND[next.kind], A.MODE[next.mode], next.duration_min + " min"].map(esc).join(" · ") + "</p>" +
+        '<div class="btns"><a class="btn btn-quiet btn-sm" download="italian-lesson.ics" href="' + A.icsFor(next) + '">Add to calendar</a>' + (credit > 0 ? '<button class="btn btn-ink btn-sm" data-open-book type="button">Book another</button>' : "") + "</div>"
+      : '<p class="pt-big">Nothing booked yet</p><p class="pt-sub">' + (credit > 0 ? "Pick a time that suits you." : canBuy ? "Buy a package, then book your lessons yourself." : "After your free trial, Lucia adds your package here.") + "</p>" +
+        '<div class="btns">' + (credit > 0 ? '<button class="btn btn-ink btn-sm" data-open-book type="button">Book a lesson</button>' : buyLink.replace("btn btn-quiet", "btn btn-ink btn-sm")) + "</div>") + "</article>";
+    h += '<article class="pt-tile"><p class="pt-label">Lessons left to book</p>' + (cur
+      ? '<p class="pt-big">' + credit + '</p><div class="pt-dots">' + A.dots(bk) + '</div><p class="pt-sub">' + esc(cur.title) + " · " + bk.used + " taken · " + bk.booked + " booked" +
+        (cur.paid ? "" : ' · <span class="pill pill-warn">Payment pending</span>') + "</p>"
+      : '<p class="pt-big">0</p><p class="pt-sub">' + (canBuy ? "No package yet." : "No package yet. Lucia adds it after your free trial.") + "</p>") + "</article>";
+    h += "</section>";
+    h += '<div class="wrap"><div class="picker" id="book-panel" hidden></div></div>';
+    if (credit === 0 && upcoming.length) h += '<p class="wrap note">All the lessons in your package are booked. ' + (canBuy ? '<a href="#buy"><b>Buy more lessons</b></a> to book the next ones.' : '<a href="mailto:' + A.LUCIA + '?subject=' + encodeURIComponent("New lesson package") + '"><b>Write to Lucia</b></a> for a new package.') + "</p>";
+
+    // upcoming
     if (upcoming.length) {
-      const n = upcoming[0];
-      h += '<div class="card-next"><div class="meta">Your next lesson</div><div class="when">' + A.dayLong(n.starts_at) + " at " + A.time(n.starts_at) + "</div>" +
-        '<div class="meta">' + [A.KIND[n.kind], A.MODE[n.mode], n.duration_min + " min"].map(esc).join(" · ") + "</div></div>";
-    } else {
-      h += '<div class="empty"><b>No lesson booked yet.</b><p style="margin-top:.4rem">' + (credit > 0 ? "Pick a time and it shows up here." : canBuy ? "Buy a package below, then book your lessons yourself." : "After your free trial, Lucia adds your package here. Then you can book your lessons yourself.") + '</p>' +
-        '<p style="margin-top:1rem">' + bookBtn() + "</p></div>";
+      h += '<section class="wrap ap-sec"><h2>Upcoming <small>' + upcoming.length + "</small></h2>" +
+        '<div class="list">' + upcoming.map((l) => lessonCard(l, true)).join("") + "</div>" +
+        '<p class="note">You can move or cancel a lesson up to 24 hours before it starts. After that it counts as taken: write to Lucia if something comes up.</p></section>';
     }
-    h += "</section>";
-
-    // packages
-    h += '<section class="wrap ap-sec"><h2>My package</h2>';
-    if (packages.length) {
-      h += '<div class="grid grid-2">';
-      packages.slice().reverse().forEach((p) => {
-        const b = A.balance(p, lessons);
-        h += '<article class="card"><div class="ln"><h3>' + esc(p.title) + '</h3>' +
-          (p.paid ? "" : '<span class="pill pill-warn">Payment pending</span>') + "</div>" +
-          '<div style="margin:.8rem 0"><span class="pk-left">' + Math.max(b.left, 0) + '</span> <b>to book</b></div>' +
-          A.dots(b) + '<p class="pk-nums">' + b.used + " taken · " + b.booked + " booked · " + b.total + " in total</p></article>";
-      });
-      h += "</div>";
-      if (!canBuy && packages.some((p) => A.balance(p, lessons).left <= 0)) {
-        h += '<p style="margin-top:1rem">Need more lessons? <a href="mailto:' + A.LUCIA + '?subject=' + encodeURIComponent("New lesson package") + '"><b>Write to Lucia</b></a>.</p>';
-      }
-    } else {
-      h += '<div class="empty">' + (canBuy ? "No package yet. Choose one below: it appears here as soon as you have paid." : "No package yet. After your free trial, Lucia adds your package here.") + "</div>";
-    }
-    h += "</section>";
 
     // buy a package by card (Stripe)
     if (canBuy) {
@@ -110,28 +103,24 @@
         const per = Math.round((Number(p.price_eur) / p.lessons) * 100) / 100;
         return '<article class="card buy-card"><h3>' + esc(p.title) + '</h3><p class="buy-price">€' + Number(p.price_eur).toLocaleString("en-US") + '</p>' +
           '<p class="pk-nums">€' + per.toLocaleString("en-US") + " per lesson · 60 minutes each</p>" +
-          '<button class="btn btn-ink" data-buy="' + esc(p.code) + '" type="button">Pay by card</button></article>';
+          '<button class="btn btn-ink btn-sm" data-buy="' + esc(p.code) + '" type="button">Pay by card</button></article>';
       }).join("") + "</div>" +
-        '<p class="note">Secure payment with Stripe: card, Apple Pay or Google Pay. Your lessons appear here right after paying and you can book them straight away. Each lesson is taken from your package when it is booked.</p></section>';
+        '<p class="note">Secure payment with Stripe: card, Apple Pay or Google Pay. The lessons appear here right after paying. Each lesson is taken from your package when it is booked.</p></section>';
     }
 
-    // upcoming
-    h += '<section class="wrap ap-sec"><h2>Upcoming <small>' + upcoming.length + "</small></h2>";
-    if (upcoming.length) {
-      h += '<div class="list">' + upcoming.map((l) => lessonCard(l, true)).join("") + "</div>" +
-        '<p class="note">You can move or cancel a lesson up to 24 hours before it starts. After that the lesson counts as taken. To change a lesson that is less than 24 hours away, write to Lucia.</p>' +
-        '<p style="margin-top:1rem">' + bookBtn("btn-ink btn-sm") + "</p>";
-    } else {
-      h += '<div class="empty">Nothing booked at the moment.</div>';
+    // all packages, only when there is more than one
+    if (packages.length > 1) {
+      h += '<section class="wrap ap-sec"><h2>My packages</h2><div class="grid grid-3">' + packages.slice().reverse().map((p) => {
+        const b = A.balance(p, lessons);
+        return '<article class="card"><div class="ln"><h3>' + esc(p.title) + "</h3>" + (p.paid ? "" : '<span class="pill pill-warn">Payment pending</span>') + "</div>" +
+          '<p class="pk-nums"><b>' + Math.max(b.left, 0) + " left</b> · " + b.used + " taken · " + b.booked + " booked · " + b.total + " in total</p></article>";
+      }).join("") + "</div></section>";
     }
-    h += '<div class="picker" id="book-panel" hidden></div></section>';
 
-    // history
-    h += '<section class="wrap ap-sec"><h2>Past lessons <small>' + history.length + "</small></h2>";
-    h += history.length
-      ? '<div class="list">' + history.map((l) => lessonCard(l, false)).join("") + "</div>"
-      : '<div class="empty">Your finished lessons and Lucia\'s homework will appear here.</div>';
-    h += "</section>";
+    // history, folded
+    h += '<section class="wrap ap-sec"><details class="pt-past"' + (upcoming.length ? "" : " open") + '><summary><h2>Past lessons <small>' + history.length + "</small></h2></summary>" +
+      (history.length ? '<div class="list">' + history.map((l) => lessonCard(l, false)).join("") + "</div>" : '<div class="empty">Your finished lessons and Lucia\'s homework will appear here.</div>') +
+      "</details></section>";
 
     root.innerHTML = h;
   }
