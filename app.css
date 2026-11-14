@@ -135,3 +135,29 @@ dialog h3 { margin-bottom: 1rem; }
 .buy-price { font-size: 2.2rem; font-weight: 800; font-stretch: 75%; line-height: 1.1; margin: .2rem 0 0; }
 .buy-card .btn { margin-top: auto; align-self: flex-start; }
 .win-lucia { opacity: .75; border-style: dashed !important; }
+
+/* ---------- student area (portal) ---------- */
+body.portal .signout { background: transparent; border: 2px solid var(--ink); color: var(--ink); box-shadow: none; }
+body.portal .signout:hover { background: var(--ink); color: #fff; }
+.pt-head { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: flex-end; justify-content: space-between; padding-block: clamp(1.4rem, 4vw, 2.2rem) 1rem; }
+.pt-eyebrow { font-size: .85rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--cobalt); }
+.pt-head h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.05; margin-top: .2rem; }
+.pt-head .tzhint { margin-top: .35rem; }
+.pt-dash { display: grid; gap: .9rem; padding-bottom: 1rem; }
+@media (min-width: 760px) { .pt-dash { grid-template-columns: 1.4fr 1fr; } }
+.pt-tile { background: var(--white); border-radius: var(--bubble); padding: 1.2rem 1.4rem; display: flex; flex-direction: column; gap: .35rem; box-shadow: 0 2px 0 rgba(14,18,64,.08); }
+.pt-tile .btns { margin-top: auto; padding-top: .6rem; }
+.pt-next { background: var(--lemon); }
+.pt-label { font-size: .8rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+.pt-big { font-size: clamp(1.4rem, 4vw, 1.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -.01em; }
+.pt-sub { font-size: .95rem; opacity: .85; }
+.pt-dots { margin: .2rem 0; }
+body.portal .ap-sec { padding-block: 1rem; }
+body.portal .ap-sec h2 { font-size: clamp(1.2rem, 3.5vw, 1.45rem); margin-bottom: .8rem; }
+body.portal #book-panel { margin-bottom: 1rem; }
+.pt-past summary { cursor: pointer; list-style: none; }
+.pt-past summary::-webkit-details-marker { display: none; }
+.pt-past summary h2 { display: inline; }
+.pt-past summary::after { content: " ▾"; font-weight: 800; }
+.pt-past[open] summary::after { content: " ▴"; }
+.pt-past[open] summary { margin-bottom: .8rem; }
