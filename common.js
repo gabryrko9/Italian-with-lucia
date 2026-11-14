@@ -94,8 +94,35 @@
       btn.disabled = false;
       if (error) { msg.className = "note bad"; msg.textContent = App.errText(error); return; }
       msg.className = "note ok";
-      msg.textContent = "Check your inbox: we sent a sign-in link to " + email + ". It can take a minute. Look in spam too.";
+      msg.textContent = "Check your inbox: we sent an email to " + email + ". It can take a minute. Look in spam too.";
+      showCode(email);
     });
+
+    /* The email has a link AND a short code. Typing the code signs in right here,
+       without opening a new tab or another browser (as happens on phones). */
+    const showCode = (email) => {
+      let box = $("code-form");
+      if (!box) {
+        box = document.createElement("form");
+        box.id = "code-form"; box.className = "f"; box.style.marginTop = "1rem";
+        box.innerHTML = '<label>Code from the email<input id="login-code" inputmode="numeric" autocomplete="one-time-code" maxlength="12" required placeholder="123456"></label>' +
+          '<button class="btn btn-ink" type="submit">Sign in</button><p class="note">Or tap the button in the email.</p>';
+        msg.after(box);
+        box.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = box.querySelector("button"), token = $("login-code").value.replace(/\D/g, "");
+          btn.disabled = true;
+          const { error } = await sb.auth.verifyOtp({ email: box.dataset.email, token, type: "email" });
+          btn.disabled = false;
+          if (error) { msg.className = "note bad"; msg.textContent = "That code did not work. Check it, or ask for a new email."; return; }
+          const { data } = await sb.auth.getSession();
+          apply(data.session);
+        });
+      }
+      box.dataset.email = email;
+      $("login-code").value = "";
+      $("login-code").focus();
+    };
 
     out.addEventListener("click", async () => { await sb.auth.signOut(); });
 
@@ -111,6 +138,11 @@
       try { await render(user); } catch (e) { $("view-app").innerHTML = '<div class="wrap"><p class="note bad">' + App.esc(App.errText(e)) + "</p></div>"; }
     };
     sb.auth.onAuthStateChange((_ev, session) => { setTimeout(() => apply(session), 0); });
+    // signed in from the email link in another tab of this browser: pick it up here too
+    const recheck = () => { if (!current) sb.auth.getSession().then(({ data }) => data.session && apply(data.session)); };
+    window.addEventListener("storage", recheck);
+    window.addEventListener("focus", recheck);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) recheck(); });
     sb.auth.getSession().then(({ data }) => apply(data.session));
   };
 })();
