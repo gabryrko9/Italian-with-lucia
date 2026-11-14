@@ -162,19 +162,23 @@
       return shell("availability", '<div class="wrap ap-top"><h1>My hours</h1><p>The booking update is not in your database yet. Run the latest <b>supabase-setup.sql</b> (see GUIDA-AREA-STUDENTI.md).</p></div>');
     }
     const st = S.settings;
-    let h = '<div class="wrap ap-top"><h1>My hours</h1><p>Students can book only inside these windows. Times are Prague time (Europe/Prague).</p></div>';
+    let h = '<div class="wrap ap-top"><h1>My hours</h1><p>Students can book only inside these windows. Times are Prague time (Europe/Prague).</p>' +
+      (S.avail.some((a) => a.student_bookable !== undefined) ? '<p>👥 = students can book it themselves. 🔒 = Lucia only: students do not see it, you add lessons there from the student page. Tap the icon to switch.</p>' : "") + "</div>";
     h += '<section class="ap-sec"><div class="wrap"><h2>Weekly hours</h2><div class="card"><div class="wk">';
     DAYS.forEach((d, i) => {
       const ws = S.avail.filter((a) => a.weekday === i + 1).sort((a, b) => String(a.start_time).localeCompare(String(b.start_time)));
       h += '<div class="wk-day"><b>' + d + '</b><div class="wk-wins">' + (ws.length ? ws.map((a) =>
-        '<span class="win">' + hhmm(a.start_time) + "–" + hhmm(a.end_time) + (a.mode !== "both" ? " <small>" + WHERE[a.mode] + "</small>" : "") +
+        '<span class="win' + (a.student_bookable === false ? " win-lucia" : "") + '">' + hhmm(a.start_time) + "–" + hhmm(a.end_time) + (a.mode !== "both" ? " <small>" + WHERE[a.mode] + "</small>" : "") +
+        (a.student_bookable === false ? " <small>Lucia only</small>" : "") +
+        (a.student_bookable === undefined ? "" : '<button type="button" data-togwin="' + a.id + '" title="' + (a.student_bookable === false ? "Let students book this window" : "Make this window Lucia only") + '" aria-label="' + (a.student_bookable === false ? "Let students book " : "Make Lucia only: ") + d + " " + hhmm(a.start_time) + '">' + (a.student_bookable === false ? "🔒" : "👥") + "</button>") +
         '<button type="button" data-delwin="' + a.id + '" aria-label="Remove ' + d + " " + hhmm(a.start_time) + '">×</button></span>').join("") : '<span class="l-meta" style="padding-top:.45rem">Not available</span>') + "</div></div>";
     });
     h += '</div></div>' +
       '<details class="add" style="margin-top:1rem"><summary>Add a window</summary><form class="f" id="f-win"><div class="f-row">' +
       '<label>Day<select name="weekday">' + DAYS.map((d, i) => '<option value="' + (i + 1) + '">' + d + "</option>").join("") + "</select></label>" +
       '<label>From<input name="from" type="time" step="900" required value="09:00"></label><label>To<input name="to" type="time" step="900" required value="12:00"></label>' +
-      '<label>Where<select name="mode"><option value="both">Online or Prague</option><option value="online">Online only</option><option value="prague">Prague only</option></select></label></div>' +
+      '<label>Where<select name="mode"><option value="both">Online or Prague</option><option value="online">Online only</option><option value="prague">Prague only</option></select></label>' +
+      (S.avail.length === 0 || S.avail.some((a) => a.student_bookable !== undefined) ? '<label>Who books<select name="who"><option value="students">Students can book</option><option value="lucia">Lucia only</option></select></label>' : "") + '</div>' +
       '<div><button class="btn btn-ink" type="submit">Add window</button></div></form></details></div></section>';
 
     h += '<section class="ap-sec"><div class="wrap"><h2>Days off <small>' + S.off.length + "</small></h2>" +
@@ -195,14 +199,18 @@
   }
 
   function lessonFormFields(l, pkgs) {
+    const isNew = !l || !l.id;
     l = l || {};
+    // a new lesson uses the oldest package with lessons left, like a lesson the student books
+    const auto = isNew ? pkgs.find((p) => A.balance(p, S.lessons).left > 0) : null;
+    const chosen = isNew ? (auto ? auto.id : "") : l.package_id;
     return '<div class="f-row"><label>Date and time<input name="starts" type="datetime-local" required value="' + (l.starts_at ? A.toInput(l.starts_at) : "") + '"></label>' +
       '<label>Minutes<input name="duration" type="number" min="15" max="240" step="5" required value="' + (l.duration_min || 60) + '"></label></div>' +
       '<div class="f-row"><label>Type<select name="kind">' + Object.keys(A.KIND).map((k) => '<option value="' + k + '"' + ((l.kind || "private") === k ? " selected" : "") + ">" + A.KIND[k] + "</option>").join("") + "</select></label>" +
       '<label>Where<select name="mode">' + Object.keys(A.MODE).map((k) => '<option value="' + k + '"' + ((l.mode || "online") === k ? " selected" : "") + ">" + A.MODE[k] + "</option>").join("") + "</select></label>" +
       '<label>Package<select name="package_id"><option value="">None (trial or single)</option>' + pkgs.map((p) => {
         const b = A.balance(p, S.lessons);
-        return '<option value="' + p.id + '"' + (l.package_id === p.id ? " selected" : "") + ">" + esc(p.title) + " (" + b.left + " left)</option>";
+        return '<option value="' + p.id + '"' + (chosen === p.id ? " selected" : "") + ">" + esc(p.title) + " (" + b.left + " left)</option>";
       }).join("") + "</select></label></div>";
   }
   const notesField = (v) => '<label>Notes and homework (the student can read this)<textarea name="notes" placeholder="Homework, what you covered, links…">' + esc(v || "") + "</textarea></label>";
@@ -225,7 +233,7 @@
       '<div><button class="btn btn-ink" type="submit">Add package</button></div></form></details>';
     h += ps.length ? '<div class="grid grid-2">' + ps.slice().reverse().map((p) => {
       const b = A.balance(p, S.lessons);
-      return '<article class="card"><div class="ln"><h3>' + esc(p.title) + '</h3><span class="pill ' + (p.paid ? "pill-done" : "pill-missed") + '">' + (p.paid ? "Paid" : "Unpaid") + "</span></div>" +
+      return '<article class="card"><div class="ln"><h3>' + esc(p.title) + '</h3><span class="pill ' + (p.paid ? "pill-done" : "pill-missed") + '">' + (p.paid ? (p.source === "stripe" ? "Paid online" : "Paid") : "Unpaid") + "</span></div>" +
         '<div style="margin:.6rem 0"><span class="pk-left">' + b.left + '</span> <b>to book</b></div>' + A.dots(b) +
         '<p class="pk-nums">' + b.used + " taken · " + b.booked + " booked · " + b.total + " total" + (p.price_eur != null ? " · €" + p.price_eur : "") + "</p>" +
         '<div class="btns" style="margin-top:.8rem"><button class="btn btn-quiet btn-sm" data-paid="' + p.id + '" type="button">Mark ' + (p.paid ? "unpaid" : "paid") + "</button>" +
@@ -317,7 +325,9 @@
       e.preventDefault();
       const f = e.target;
       if (f.to.value <= f.from.value) { A.toast("The end time must be after the start time.", true); return; }
-      if (await run(A.sb.from("availability").insert({ weekday: parseInt(f.weekday.value, 10), start_time: f.from.value, end_time: f.to.value, mode: f.mode.value }), "Window added.")) await refresh();
+      const row = { weekday: parseInt(f.weekday.value, 10), start_time: f.from.value, end_time: f.to.value, mode: f.mode.value };
+      if (f.who) row.student_bookable = f.who.value !== "lucia";
+      if (await run(A.sb.from("availability").insert(row), "Window added.")) await refresh();
     });
     if ($("f-off")) $("f-off").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -345,7 +355,12 @@
 
   /* ---------- clicks: status buttons, paid, package delete, edit dialog ---------- */
   root.addEventListener("click", async (e) => {
-    const dw = e.target.closest("[data-delwin]"), dof = e.target.closest("[data-deloff]");
+    const dw = e.target.closest("[data-delwin]"), dof = e.target.closest("[data-deloff]"), tw = e.target.closest("[data-togwin]");
+    if (tw) {
+      const w = S.avail.find((x) => x.id === tw.dataset.togwin);
+      if (w && await run(A.sb.from("availability").update({ student_bookable: !w.student_bookable }).eq("id", w.id), w.student_bookable ? "Now Lucia only." : "Students can book it now.")) await refresh();
+      return;
+    }
     if (dw) { if (await run(A.sb.from("availability").delete().eq("id", dw.dataset.delwin), "Window removed.")) await refresh(); return; }
     if (dof) { if (await run(A.sb.from("time_off").delete().eq("id", dof.dataset.deloff), "Removed.")) await refresh(); return; }
     const set = e.target.closest("[data-set]"), paid = e.target.closest("[data-paid]"), dp = e.target.closest("[data-delpkg]"), ed = e.target.closest("[data-edit]");
