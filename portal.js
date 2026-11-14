@@ -10,11 +10,15 @@
 
   async function render(user) {
     const sb = A.sb;
-    const [st, pk, ls] = await Promise.all([
+    const [st, pk, ls, pl] = await Promise.all([
       sb.from("students").select("*"),
       sb.from("packages").select("*").order("created_at"),
-      sb.from("lessons").select("*").order("starts_at")
+      sb.from("lessons").select("*").order("starts_at"),
+      P.payments ? sb.from("package_plans").select("*").order("sort") : Promise.resolve({ data: [] })
     ]);
+    // card payments arrive with 2-pacchetti-e-pagamenti.sql; without it the page works as before
+    const plans = (pl && !pl.error && pl.data) || [];
+    const canBuy = plans.length > 0;
     const err = st.error || pk.error || ls.error;
     if (err) throw err;
     const student = st.data[0];
@@ -36,7 +40,9 @@
     const credit = packages.reduce((n, p) => n + Math.max(A.balance(p, lessons).left, 0), 0);
     const bookBtn = (cls) => credit > 0
       ? '<button class="btn ' + (cls || "btn-ink") + '" data-open-book type="button">Book a lesson</button>'
-      : '<span class="note">You have no lessons left to book. <a href="mailto:' + A.LUCIA + '?subject=' + encodeURIComponent("New lesson package") + '"><b>Write to Lucia</b></a> for a new package.</span>';
+      : canBuy
+        ? '<span class="note">You have no lessons left to book.</span> <a class="btn ' + (cls || "btn-ink") + '" href="#buy">Buy lessons</a>'
+        : '<span class="note">You have no lessons left to book. <a href="mailto:' + A.LUCIA + '?subject=' + encodeURIComponent("New lesson package") + '"><b>Write to Lucia</b></a> for a new package.</span>';
     const upcoming = lessons.filter((l) => l.status === "scheduled" && new Date(l.starts_at).getTime() + l.duration_min * 60000 > now);
     const history = lessons.filter((l) => upcoming.indexOf(l) < 0).reverse();
     const first = esc((student.full_name || "").split(" ")[0]);
@@ -73,7 +79,7 @@
       h += '<div class="card-next"><div class="meta">Your next lesson</div><div class="when">' + A.dayLong(n.starts_at) + " at " + A.time(n.starts_at) + "</div>" +
         '<div class="meta">' + [A.KIND[n.kind], A.MODE[n.mode], n.duration_min + " min"].map(esc).join(" · ") + "</div></div>";
     } else {
-      h += '<div class="empty"><b>No lesson booked yet.</b><p style="margin-top:.4rem">' + (credit > 0 ? "Pick a time and it shows up here." : "After your free trial, Lucia adds your package here. Then you can book your lessons yourself.") + '</p>' +
+      h += '<div class="empty"><b>No lesson booked yet.</b><p style="margin-top:.4rem">' + (credit > 0 ? "Pick a time and it shows up here." : canBuy ? "Buy a package below, then book your lessons yourself." : "After your free trial, Lucia adds your package here. Then you can book your lessons yourself.") + '</p>' +
         '<p style="margin-top:1rem">' + bookBtn() + "</p></div>";
     }
     h += "</section>";
@@ -90,13 +96,24 @@
           A.dots(b) + '<p class="pk-nums">' + b.used + " taken · " + b.booked + " booked · " + b.total + " in total</p></article>";
       });
       h += "</div>";
-      if (packages.some((p) => A.balance(p, lessons).left <= 0)) {
+      if (!canBuy && packages.some((p) => A.balance(p, lessons).left <= 0)) {
         h += '<p style="margin-top:1rem">Need more lessons? <a href="mailto:' + A.LUCIA + '?subject=' + encodeURIComponent("New lesson package") + '"><b>Write to Lucia</b></a>.</p>';
       }
     } else {
-      h += '<div class="empty">No package yet. After your free trial, Lucia adds your package here.</div>';
+      h += '<div class="empty">' + (canBuy ? "No package yet. Choose one below: it appears here as soon as you have paid." : "No package yet. After your free trial, Lucia adds your package here.") + "</div>";
     }
     h += "</section>";
+
+    // buy a package by card (Stripe)
+    if (canBuy) {
+      h += '<section class="wrap ap-sec" id="buy"><h2>Buy lessons</h2><div class="grid grid-3">' + plans.map((p) => {
+        const per = Math.round((Number(p.price_eur) / p.lessons) * 100) / 100;
+        return '<article class="card buy-card"><h3>' + esc(p.title) + '</h3><p class="buy-price">€' + Number(p.price_eur).toLocaleString("en-US") + '</p>' +
+          '<p class="pk-nums">€' + per.toLocaleString("en-US") + " per lesson · 60 minutes each</p>" +
+          '<button class="btn btn-ink" data-buy="' + esc(p.code) + '" type="button">Pay by card</button></article>';
+      }).join("") + "</div>" +
+        '<p class="note">Secure payment with Stripe: card, Apple Pay or Google Pay. Your lessons appear here right after paying and you can book them straight away. Each lesson is taken from your package when it is booked.</p></section>';
+    }
 
     // upcoming
     h += '<section class="wrap ap-sec"><h2>Upcoming <small>' + upcoming.length + "</small></h2>";
@@ -140,6 +157,22 @@
     });
     host.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
+  root.addEventListener("click", async (e) => {
+    const buy = e.target.closest("[data-buy]");
+    if (buy) {
+      buy.disabled = true;
+      const old = buy.textContent;
+      buy.textContent = "Opening the payment page…";
+      const { data, error } = await A.sb.functions.invoke("create-checkout", { body: { plan: buy.dataset.buy } });
+      let msg = data && data.error;
+      if (!msg && error) {
+        try { msg = (await error.context.json()).error; } catch (_) { msg = error.message; }
+      }
+      if (data && data.url) { location.href = data.url; return; }
+      A.toast(msg || "The payment page could not be opened. Please try again.", true);
+      buy.disabled = false; buy.textContent = old;
+    }
+  });
   root.addEventListener("click", (e) => {
     const ob = e.target.closest("[data-open-book]"), mv = e.target.closest("[data-move]");
     if (ob) {
@@ -174,6 +207,18 @@
       A.reload();
     }
   });
+
+  // back from Stripe: the package is added by the server a few seconds after paying
+  const paid = new URLSearchParams(location.search).get("paid");
+  if (paid) {
+    history.replaceState(null, "", location.pathname + location.hash);
+    if (paid === "1") {
+      setTimeout(() => A.toast("Thank you! Your payment went through. Your new lessons appear in a few seconds."), 600);
+      [4000, 10000, 20000].forEach((ms) => setTimeout(() => A.reload(), ms));
+    } else {
+      setTimeout(() => A.toast("Payment cancelled. Nothing was charged."), 600);
+    }
+  }
 
   A.reload = async () => { const { data } = await A.sb.auth.getUser(); if (data && data.user) { try { await render(data.user); } catch (e) { A.toast(A.errText(e), true); } } };
   A.start(render);
