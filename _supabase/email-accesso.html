@@ -1,0 +1,27 @@
+<!-- Supabase > Authentication > Emails > Templates
+     Paste this same HTML into BOTH "Magic Link" and "Confirm signup".
+     Subject for both: Your link to sign in · Váš odkaz pro přihlášení -->
+<div style="margin:0;padding:24px 12px;background:#F6F7FC;font-family:Arial,Helvetica,sans-serif;color:#0E1240">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;margin:0 auto;background:#FFFFFF;border:2px solid #0E1240;border-radius:22px 22px 22px 6px">
+    <tr><td style="padding:28px 28px 8px">
+      <p style="margin:0;font-size:15px;font-weight:bold;color:#2438D6">Italian with Lucia</p>
+      <h1 style="margin:14px 0 0;font-size:26px;line-height:1.15;color:#0E1240">Ciao! Here is your link</h1>
+      <p style="margin:12px 0 0;font-size:16px;line-height:1.5">Tap the button to open your student area: your lessons, your package and Lucia's homework.</p>
+    </td></tr>
+    <tr><td style="padding:20px 28px 8px">
+      <a href="{{ .ConfirmationURL }}" style="display:inline-block;background:#FFD43B;color:#0E1240;border:2px solid #0E1240;border-radius:16px 16px 16px 4px;padding:14px 26px;font-size:17px;font-weight:bold;text-decoration:none">Open my lessons</a>
+    </td></tr>
+    <tr><td style="padding:14px 28px 4px">
+      <p style="margin:0;font-size:14px;line-height:1.5;color:#585E86">The link works once and expires after one hour. If it has expired, ask for a new one on the sign-in page.</p>
+    </td></tr>
+    <tr><td style="padding:18px 28px 0"><hr style="border:0;border-top:1px solid #DDE0EF;margin:0"></td></tr>
+    <tr><td style="padding:18px 28px 8px">
+      <p style="margin:0;font-size:18px;font-weight:bold">Česky</p>
+      <p style="margin:8px 0 0;font-size:15px;line-height:1.5">Klepněte na tlačítko výše a otevře se vaše studentská sekce: lekce, balíček a domácí úkoly od Lucie. Odkaz funguje jednou a platí jednu hodinu.</p>
+    </td></tr>
+    <tr><td style="padding:18px 28px 26px">
+      <p style="margin:0;font-size:13px;line-height:1.5;color:#585E86">Didn't ask for this email? You can ignore it: nobody can sign in without this link.<br>Nežádali jste o tento e-mail? Klidně ho ignorujte.</p>
+      <p style="margin:14px 0 0;font-size:13px;color:#585E86">Lucia · Italian teacher in Prague · <a href="https://italianwithlucia.com" style="color:#2438D6">italianwithlucia.com</a></p>
+    </td></tr>
+  </table>
+</div>
